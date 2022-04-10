@@ -1,0 +1,6 @@
+So you can still see how i was unsuccessfully trying to do the question, in the comments of the solution of this question.
+tbh I haven't dry run, just thhoda understood.
+ 
+What I was having issues with, was that repetitive node ho, to while chalake repetitive se next node pe move kr skte hain. but new next node bhi agar repetitive hua, to that wont get dealt with, cuz while loop to khatm hogya chalke, jbki idk how many times ek k bad ek repetitive nodes aayenge. Hence i was failing.
+Turns out i was failing because if nhi laga rha tha for when curr.val==head.val 
+if else krna tha, aur else wala code if(curr.val==head.val) k liye run hi nhi krna tha

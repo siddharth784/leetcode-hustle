@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isSameAfterReversals(int num) {
+        if(num==0)
+            return true;
+        if(num%10==0)
+            return false;
+        return true;
+    }
+}
+        
+//         int reversed1=reverse(num);
+//         int reversed2=reverse(reversed1);
+//         return (reversed1==reversed2);
+//     }
+//     int reverse(int n){
+//         int temp=n;
+//         int digits=0;
+//         while(temp!=0){
+//             digits++;
+//             temp/=10;
+//         }
+//         int base=(int)Math.pow(10,digits-1);
+//         int rbase=10;
+//         int ans=0;
+//         while(n!=0){
+//             ans+=(base)*(n%rbase);
+//             rbase*=10;
+//             base/=10;
+//             n/=10;
+//         }
+//         return ans;
+//     }
+// }

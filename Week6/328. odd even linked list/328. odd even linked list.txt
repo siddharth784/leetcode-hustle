@@ -1,0 +1,101 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head==null || head.next==null ||head.next.next==null)
+            return head;
+        
+        
+        ListNode curr=head;
+        ListNode odd=new ListNode();
+        ListNode oddhead=odd;
+        ListNode even=new ListNode();
+        ListNode evenhead=even;
+        ListNode i=head;
+        int j=0;
+        while(curr!=null){
+            if(j%2==0){
+                odd.next=curr;
+                odd=odd.next;
+            }
+            else{
+                even.next=curr;
+                even=even.next;
+            }
+            curr=curr.next;
+            j++;
+        }
+        even.next=null;
+        odd.next=evenhead.next;
+        return oddhead.next;
+        // return head;
+    }
+}
+    
+//     void swap(ListNode a, ListNode b){
+//         int temp=a.val;
+//         a.val=b.val;
+//         b.val=temp;
+//     }
+// }
+        
+        
+//         ListNode ans=new ListNode();
+//         ListNode dummy=ans;
+//         ListNode eveni=head;
+//         ListNode oddi=head.next;
+//         while(eveni!=null){
+//             ans.next=eveni;
+//             ans=ans.next;
+//             eveni=eveni.next;
+//         }
+//         while(oddi!=null){
+//             ans.next=oddi;
+//             ans=ans.next;
+//             oddi=oddi.next;
+//         }
+//         return dummy.next;
+//     }
+// }
+        
+        
+//         //ATTEMPTING BY SWAPPING THE VALUES
+//         ListNode i=head;
+//         ListNode j=head;
+//         while(j!=null){
+//             if(j.val%2)
+//             if(j!=i && j.val%2==0){
+//                 int temp
+//                 j=j.next;
+                
+//         }
+        
+//         //TRIED TO ATTEMPT THE QUESTION BY CHANGING HOW NODES CONNECT.
+//         ListNode lastodd=head;
+//         //FIRST ODD
+//         for(var p=head;p!=null;p=p.next){
+//             ListNode temp=p;
+//             while(temp!=null && temp.val%2==0)
+//                 temp=temp.next;
+//             p.next=temp;
+//             lastodd=temp;
+//         }
+        
+//         //NOW ADD EVEN
+//         for(var p=lastodd;p!=null;p=p.next){
+//             ListNode temp=p;
+//             while(temp!=null && temp.val%2!=0)
+//                 temp=temp.next;
+//             p.next=temp;
+//         }
+//         return head;
+//     }
+// }

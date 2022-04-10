@@ -1,0 +1,13 @@
+the following code is invalid and gives out errors. this is most likely because temp is a string and not a char array. so ch can't just modularly intake temp's elements in the iterations. the alternative of the code is below the following code.
+
+//wrong way
+for(char ch:temp){	//where temp is a String
+    if(ch==' ')
+    counter++;
+}
+
+//right way
+for(int i=0;i<temp.length();i++){
+	if(temp.charAt(i)==' ')
+      counter++;
+}

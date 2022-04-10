@@ -1,0 +1,1 @@
+though it's fairly obvious, it still needs to be reiterated out loud, that FOR DELETING A PARTICULAR NODE FROM A LINKED LIST, WE NEED ACCESS TO ITS PRECEDING NODE. ELSE IT'S NOT POSSIBLE.

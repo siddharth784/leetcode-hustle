@@ -1,0 +1,2 @@
+https://www.geeksforgeeks.org/array-copy-in-java/#:~:text=The%20array%20can%20be%20copied,the%20same%20size%2C%20but%20System.
+open this link

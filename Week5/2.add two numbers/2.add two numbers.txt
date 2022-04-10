@@ -1,0 +1,97 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+//carry towards the right hoga in this question, unlike usual addition where carry is forwarded to the left side.
+class Solution{
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2){
+        int carry=0;
+        ListNode ans=new ListNode();
+        ListNode hold=ans;
+        while(l1!=null || l2!=null || carry!=0){
+            int sum=0;
+            if(l1!=null){
+                sum+=l1.val;
+                l1=l1.next;
+            }
+            if(l2!=null){
+                sum+=l2.val;
+                l2=l2.next;
+            }
+            sum+=carry;
+            carry=sum/10;
+            ListNode next=new ListNode(sum%10);
+            ans.next=next;
+            ans=ans.next;            
+        }
+        return hold.next;
+    }
+}    
+
+    
+// SO MY APPROACH OF FINDING FIRST GIVEN LL KA NUMBER, SECOND NUMBER, THEN LEECHING OUT THE DIGITS OF THEIR SUM AND ADDING THEM AS NODES IN A NEW LL, HAS FAILED. IT FAILED FOR LEETCODE HAS SUCH BIG NUMBERS IN THE CASES OF THIS QUESTION, THAT EVEN USING LONG OR BIGINTEGER WON'T HELP. THEY PURPOSELY DID SO, SO THAT MY APPROACH FAILS. THEY WANT THE QUESTION TO BE DONE IN A PROFESSIONAL(MODIFYING ANSWER LL NODE BY NODE) AND NOT A BRUTE FORCE LIKE METHOD.
+// import java.math.BigInteger;
+// class Solution {
+//     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//         if(l1==null||l2==null)
+//             return null;
+        
+//         BigInteger a=0,b=0;
+//         //int x=1,y=1;
+//        //ListNode temp1=l1;
+//        // ListNode temp2=l2;
+//        // while(temp1!=null){
+//        // x*=10;
+//        // temp1=temp1.next;
+//        // }
+//        // while(temp2!=null){
+//        // y*=10;
+//        // temp2=temp2.next;      
+//        //}
+//         BigInteger exp=1;
+        
+//         while(l1!=null){
+//             //x/=10;
+//             if(l1.val!=0)   //I hadn't done this earlier, but not doing this will result in errors in edge cases,where 0 appears in the nodes
+//             a+=l1.val*exp;
+//             exp*=10;
+//             l1=l1.next;
+//         }
+//         exp=1;
+//         while(l2!=null){
+//            // y/=10;
+//             if(l2.val!=0)
+//             b+=l2.val*exp;
+//             System.out.println("b: "+b);
+//             System.out.println(l2.val);
+//             System.out.println("exp: "+exp);
+//             exp*=10;
+//             l2=l2.next;
+//         }
+//         System.out.println("a:"+a+" b:"+b);
+//         BigInteger sum=a+b;
+//         System.out.println("long sum="+sum);
+//         long div=Long.toString(sum).length();    //Integer.toString(); Long.toString();
+
+//         ListNode answer = new ListNode();
+//         ListNode lastans=answer;
+//         while(div!=0){
+//             answer.next=new ListNode();
+//             answer=answer.next;
+//             System.out.println("upcoming answer node value: "+(int)sum%10);
+//             BigInteger store=sum%10;  //pehle maine inn do lines ki jagah sirf answer.val=(int)sum%10; kiya tha, usse wrong answer aa rha tha for when sum was a long value. this might be because jab hum long value pe operate krte hain, long pe sum/quotient/modulo krte hain, toh long hi aata hai first of all, bhale hi wo long hote hue bhi int ki range mein lie kare.  
+//             answer.val=(int)store;
+//             sum=sum/10;
+//             div--;
+//         }
+        
+//         return lastans.next;
+          
+//     }
+// }

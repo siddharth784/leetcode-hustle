@@ -1,0 +1,6 @@
+in linked list questions, always consider null cases.
+also keep in mind edge cases for when you are accessing memories.
+for example, i was doing 
+ListNode ans=new ListNode(pq.remove());
+but this printed wrong answer for the edge case where pq is empty.
+so keep that in mind.

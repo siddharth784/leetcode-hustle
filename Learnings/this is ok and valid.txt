@@ -1,0 +1,3 @@
+int[] dummy=nums;
+
+to create a new array and simply copy an array into it is valid

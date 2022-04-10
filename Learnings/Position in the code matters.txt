@@ -1,0 +1,45 @@
+in codeforces 124 div2 question B, my code kept getting refused cuz of ill positioning of if condition.
+here's the code and question toh you can look up on the site.
+
+import java.util.*;
+public class cfB{
+    public static void main(String[] args) throws Exception{
+        Scanner scn=new Scanner(System.in);
+        int t=scn.nextInt();
+        while(t-->0){
+            int n=scn.nextInt();
+            int[] arr=new int[n];
+            int prod=1;
+            int maxallowed=(int)Math.pow(10,9);
+            boolean possible=true;
+            // for(int i=0;i<n;i++){
+            //     arr[i]=prod;
+            //     prod*=3;
+            //     // prod+=1;
+            //     if(prod>maxallowed){
+            //         possible=false;
+            //         break;
+            //     }
+            // }
+            
+            // above approach was wrong, because we run the if condition after updating prod variable.so what it means is that it will check if prod*3 exceeds maxallowed(10 raised to 9), not the prod for that particular iteration. This may seem to be insignificant, but let's take a case. where n=18. now, when i will reach 17(n-1), the prod will be multiplied by 3, which corresponds to i=18. But i will never even run for i=18. But still possible will be rendered false. Which is a fallacy, because the false making condition(i=18) will never actually execute. 
+            // hence, we must check prod first, cuz that's what is going to be put in arr in that iteration, not prod*3... the latter will run for next iteration, if next iteration even gets executed.
+            for(int i=0;i<n;i++){
+                if(prod>maxallowed){
+                    possible=false;
+                    break;
+                }
+                arr[i]=prod;
+                prod*=3;
+            }
+            if(possible==true){
+            System.out.println("YES");
+            for(int i=0;i<arr.length;i++)
+            System.out.print(arr[i]+" ");
+            System.out.println();
+            }
+            else
+            System.out.println("NO");
+        }
+    }
+}

@@ -1,0 +1,27 @@
+// IN THIS FOLLOWING CODE, REPLACE ALL THE 'ans' WITH 'temp' AND THEN RUN THE CODE(QUES. 82 LEETCODE). IT WONT RUN CORRECTLY KYUKI TEMP ANS KO REFERENCE KR RHA HAI, WHICH MEANS KI TEMP.NEXT RETURN KRNE SE ANS KA PATH AA JAEGA, BUT ANS TEMP KO REFERENCE NHI DE RHA. ANS IS INDEPENDENTLY MOVING AHEAD. SO DON'T CONFUSE. TEMP=ANS MEANS SIRF TEMP ANS KO POINT KR RHA H, NAKI DONO EK DUSRE KO.
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // if(head==null)
+        //     return null;
+        
+        
+        ListNode ans=new ListNode();
+        ListNode temp=ans;
+        ListNode curr;
+        while(head!=null){
+            curr=head.next;
+            if(curr!=null && curr.val==head.val){
+                while(curr!=null && curr.val==head.val){
+                    curr=curr.next;
+                }
+                ans.next=curr;
+            }
+            else{
+                ans.next=head;
+                ans=ans.next;
+            }
+            head=curr;
+        }
+        return temp.next;
+    }
+}

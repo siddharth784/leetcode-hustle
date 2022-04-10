@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        if(head==null||head.next==null)
+            return null;
+        if(head.next.next==null){
+            head.next=null;
+            return head;
+        }
+//dealing with cases when linked list's length is 0,1,2 is important because the prev.next=prev.next.next; will show null pointer exception in these cases, so they need to be dealt with seperately. This is precisely what samriddhii maam told. in ll questions, consider 0,1,2,odd,even,null cases always.
+        
+        ListNode ans=head;
+        ListNode fast=head;
+        ListNode slow=head;
+        
+        if(fast.next!=null && fast.next.next!=null)
+            fast=fast.next.next;
+        while(fast!=null && fast.next!=null && fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        
+        ListNode prev=new ListNode();
+        //for odd
+        if(fast!=null && fast.next==null)
+        slow.next=slow.next.next;
+        //for even
+        else
+        // slow.next.next=slow.next.next.next;
+        {
+        prev=slow.next;
+        prev.next=prev.next.next;
+        }
+        return ans;
+    }
+}
+        
+//         boolean toggle=true;
+//         while(fast.next!=null){
+//             fast=fast.next;
+//             if(toggle==true)
+//             slow=slow.next;
+//             toggle=(toggle==true)?false:true;
+//             // head=head.next;
+//         }
+//         //if even, return right away
+//         slow.next=slow.next.next;
+        
+//         return ans;
+        
+    // }
+// }

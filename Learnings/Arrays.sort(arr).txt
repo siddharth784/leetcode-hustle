@@ -1,0 +1,1 @@
+using Arrays.sort(arr); is an easy way to sort an array. It requires java.util.Arrays; class and if the interviewer isn't wicked, they'll allow you to use it.

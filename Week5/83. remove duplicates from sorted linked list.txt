@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        for(var p=head;p!=null;p=p.next){
+            ListNode temp2=p;
+            while(temp2!=null && temp2.val==p.val){
+                temp2=temp2.next;
+            }
+            p.next=temp2;
+        }
+        return head;
+    }
+}
+        
+        
+//         ListNode temp=head;
+// //         while(head!=null){
+// //             if(head.next!=null && head.val=head.next.val) //reverse the order of the two conditions and you'll get null pointer exception
+// //             ListNode 
+// //             head.next=head.next.next;
+            
+// //             head=head.next;
+// //         }
+// //         return temp;
+//         while(head!=null){
+//         ListNode tempo=head;
+//         int ival=head.val;
+//         //we want while loop to STOP when we encounter either null node or !=ival 
+//         //which means the loop has to RUN when we aren't finding null or ==ival
+//         while(tempo!=null?tempo.val==ival:false)
+//         tempo=tempo.next;
+//         head.next=tempo;
+//         }
+        
+//         return temp;
+        
+//     }
+// }

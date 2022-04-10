@@ -1,0 +1,46 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null)
+        return null;
+        
+        ListNode dummy=head;
+        ListNode curr=head;
+        k=k%size(head);
+        for(int i=0;i<k && dummy!=null;i++)
+        dummy=dummy.next;
+        
+        while(dummy.next!=null){
+            curr=curr.next;
+            dummy=dummy.next;
+        }
+        //         System.out.println(dummy.val);
+        // System.out.println(curr.val);
+
+        dummy.next=head;
+        ListNode pres=curr.next;
+        curr.next=null;
+        
+        return pres ;      
+        //NOTE:dummy node is first made to reach kth node. then using dummy, we make curr reach n-kth node. so that we can (i)link head node to the end of dummy (ii)return curr.next node since that will be the new starting point.
+    }
+    
+    int size(ListNode head){
+        ListNode temp=head;
+        int count=0;
+        while(temp!=null){
+            temp=temp.next;
+            count++;
+        }
+        return count;        
+    }
+}

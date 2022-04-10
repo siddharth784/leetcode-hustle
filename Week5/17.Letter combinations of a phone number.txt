@@ -1,0 +1,53 @@
+//I fucking did this myself after so many fails
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        return backtracking(digits);
+    }
+    
+    String letterstokey[]={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+
+    public ArrayList<String> backtracking(String digits){
+        if(digits.equals("")){
+            return new ArrayList<String>();           
+        }
+        ArrayList<String> ans=new ArrayList<String>();
+        ArrayList<String> asf=backtracking(digits.substring(1));
+        String temp=letterstokey[digits.charAt(0)-'2'];
+        if(asf.size()!=0){
+        for(int i=0;i<temp.length();i++){
+            for(int j=0;j<asf.size();j++)
+            ans.add(temp.charAt(i)+asf.get(j));
+        }
+            System.out.println(ans);
+        }
+        else if(asf.size()==0){
+            for(int i=0;i<temp.length();i++)
+                ans.add(""+temp.charAt(i));
+        }
+        return ans;
+    }
+}
+        // }
+        
+        // else if(asf.size()==0){
+        //     for(int i=0;i<temp.length();i++)
+        //         asf.add(temp.charAt(i));
+        // }
+        
+        // int k=0;
+        // while(k<digits.length()){
+        // char ch=digits.charAt(k);
+        // k++;
+        // String temp=letterstokey[ch-'2'];
+        // for(int i=0;i<temp.length();i++){
+        //     if(asf.size()==0)
+        //     asf.add(""+temp.charAt(i));
+        //     else{
+        //     for(int j=0;j<asf.size();j++)
+        //     asf.set(j,asf.get(j)+temp.charAt(i));
+        //     }
+        // }
+//         }
+//     }
+// }

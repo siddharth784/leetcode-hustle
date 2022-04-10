@@ -1,0 +1,24 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int maxlen=0;
+        for(int i=0;i<s.length();i++){
+            HashMap<Character,Boolean> hm=new HashMap<>();
+            int count=0;
+            for(int j=i;j<=s.length();j++){ //=s.length() is intentional. since we do want to consider count's value also when we run through the whole string but dont find repetition.
+                if(j==s.length()){
+                    maxlen=Math.max(maxlen,count);
+                    break;
+                }
+                char ch=s.charAt(j);
+                if(hm.containsKey(ch)==true){
+                    maxlen=Math.max(maxlen,count);
+                    break;
+                }else{
+                    hm.put(ch,true);
+                    count++;
+                }
+            }
+        }
+        return maxlen;
+    }
+}

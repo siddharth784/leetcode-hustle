@@ -1,0 +1,2 @@
+In linked list, as we can see in kanha sir's approach, we can intialise a Node with its value predecided/initialised.
+e.g. ListNode ans=new ListNode(sum);

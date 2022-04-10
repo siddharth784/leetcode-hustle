@@ -1,0 +1,19 @@
+class Solution {
+    public int countConsistentStrings(String allowed, String[] words) {
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(int i=0;i<allowed.length();i++)
+            hm.put(allowed.charAt(i),hm.getOrDefault(allowed.charAt(i),0)+1);
+        int inconsistent=0;
+        
+        for(int i=0;i<words.length;i++){
+            // HashMap<Character,Boolean> temp=hm.clone();
+            String str=words[i];
+            for(int j=0;j<str.length();j++){
+                if(hm.containsKey(str.charAt(j))==false){   //it's much convinient and sensible to check an inconsistency point and break the iteration and declare the string as inconsistent, than checking if the string is consistent and further processes
+                    inconsistent++;
+                    break;
+                }
+            }
+        }
+        return (words.length-inconsistent);
+    }}

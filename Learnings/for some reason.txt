@@ -1,0 +1,6 @@
+for some reason, taking input this way: 
+
+for(int i:arr)
+arr[i]=scn.nextInt();
+
+is invalid and fucks with the code

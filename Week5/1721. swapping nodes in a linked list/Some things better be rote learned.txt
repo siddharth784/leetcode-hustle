@@ -1,0 +1,5 @@
+Some things better be rote learned, like how to reach (n-k)th node,in a 1-indexed linked list
+how to reach kth node in a 1-index linked list(this I have rote learned: 
+for(int i=1;i<k;i++)
+head=head.next;
+)

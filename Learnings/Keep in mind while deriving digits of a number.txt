@@ -1,0 +1,4 @@
+keep in mind while deriving digits of a number, the edge case of this question,, that sumeet sir has discussed in solution video(mid digits being zero), and how to deal with it: 
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/digits-of-a-number-official/ojquestion
+
+this concept also came into use in the leetcode question add two numbers.

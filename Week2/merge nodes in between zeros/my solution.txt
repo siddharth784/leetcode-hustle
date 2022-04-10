@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+    //     ListNode temp=head.next;
+    //     ListNode curr=head.next;
+    //     int idx=0;
+    //     while(curr.next!=null){
+    //         if(curr.next.val==0){
+    //             // removeNodeAt(temp,idx);
+    //             temp.val+=curr.val;
+    //             curr.next=curr.next.next;
+    //             temp=temp.next;
+    //         }
+    //         else{
+    //             temp.val+=curr.val;
+    //             temp=temp.next;
+    //             curr=curr.next;
+    //             }
+    //         // idx++;
+    //     }
+    //     return head;
+        ListNode ans=new ListNode();
+        ListNode ansd=ans;
+        ListNode curr=head;
+        while(curr.next!=null){ //not curr!=null otherwise loop will also run for curr at last zero of the linked list. And so a new node will be added to the linked list which will get printed in output and disrupt the otherwise right answer
+            if(curr.val==0){
+                ans.next=new ListNode();
+                ans=ans.next;
+                curr=curr.next;
+            }
+            else{
+                ans.val+=curr.val;
+                curr=curr.next;
+            }
+        }
+        return ansd.next;
+    }
+}

@@ -1,0 +1,35 @@
+//shortcut solution:
+// public int[] sumZero(int n) {
+//         int[] A = new int[n];
+//         for (int i = 0; i < n; ++i)
+//             A[i] = i * 2 - n + 1;
+//         return A;
+//     }
+
+//my solution:
+class Solution {
+    public int[] sumZero(int n) {
+        int[] ans=new int[n];
+        if(n%2==0){
+            int a=n-2*n-1;
+            int d=2;
+            for(int i=0;i<ans.length;i++){
+                ans[i]=a+d;
+                d+=2;
+            }
+        }
+        
+        else{
+            int temp=n/2;
+            int a=temp-2*temp-1;
+            int d=1;
+            System.out.println("a: "+a);
+            System.out.println(d);
+            for(int i=0;i<ans.length;i++){
+                ans[i]=a+d;
+                d++;
+            }
+        }
+        return ans;
+    }
+}

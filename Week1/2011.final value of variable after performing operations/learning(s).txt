@@ -1,0 +1,4 @@
+as I even pointed out in the comments of the solution code of this question, == operator is useless for comparing the equality of two strings. == operator compares addresses and in the case of char datatype it compares their respective ascii values. While for strings it's useless. 
+For strings, we have to use string method of java: str1.equals(str2);	//returns boolean
+e.g.	if(strarr[i].equals("yes it was"))
+	System.out.print("Y");

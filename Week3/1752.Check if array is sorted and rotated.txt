@@ -1,0 +1,45 @@
+class Solution {
+    public boolean check(int[] nums) {
+        // int brkpt=0;
+        // for(int i=0;i<nums.length-1;i++){
+        //     if(nums[i]>nums[i+1]){
+        //         brkpt=i+1;
+        //         break;
+        //     }                
+        // }
+        
+        
+        // System.out.println("breakpoint index: "+brkpt);
+        
+//         for(int i=1;i<brkpt;i++){
+//             System.out.println(i);
+//             if(nums[i]<nums[i-1])
+//                 return false;
+//         }
+        
+//         for(int i=brkpt;i<brkpt+nums.length;i++){
+//             System.out.println(i);
+//             if(i<nums.length-1){
+//                 if(nums[i]>nums[i+1])
+//                     return false;
+//             }
+//             if(i==nums.length-1){
+//                 if(nums[i]>nums[0])
+//                     return false;
+//             }
+//             else if(i>=nums.length){
+//                 if(nums[i-nums.length]>nums[i+1-nums.length])
+//                     return false;
+//             }
+//         }
+        
+//         return true;        
+        
+        int twists=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>nums[(i+1)%nums.length])
+                twists++;
+        }
+        return twists<=1;
+    }
+}

@@ -1,0 +1,14 @@
+class Solution {
+    public String restoreString(String s, int[] indices) {
+        String ans=new String("");
+        HashMap<Integer, Character> hm=new HashMap<>();
+        for(int i=0;i<s.length();i++)
+            hm.put(indices[i],s.charAt(i));
+        
+        for(int i=0;i<indices.length;i++){
+            char ch=hm.get(i);
+            ans+=ch;
+        }
+        return ans;
+    }
+}

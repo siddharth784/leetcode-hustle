@@ -1,0 +1,11 @@
+// n odd h maan lo, e.g. arr=[1,3,5] or [1,3,5,7,9]. toh middle element(3 & 5 resp.) tak hi sabko pahuchna hoga that much I figured out. aur ye hoga middle element se left walo ko ++ kr krke. toh middle element se just left wale element ko +2 krna hoga. uske left wale ko +4, aur zeroth element ko +(n-1) krna hoga. (right wale elements bhi accordingly - hote jayenge, dont worry about them since the array has pattern). to dekhne pe pta lagega ki total increments krne ka answer hoga: 2+4+..+(n-1). ab iss A.P. ka sum nikal lenge. 
+
+//n even hoga to bhi same approach but different formula because ap different form hoga
+class Solution {
+    public int minOperations(int n) {
+        if(n%2!=0)
+            return ((n-1)*(n+1)/4);
+        else
+            return (n*n/4);
+    }
+}

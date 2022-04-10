@@ -1,0 +1,56 @@
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int[] ans=new int[nums.length];
+        int idx=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>0){
+                ans[idx]=nums[i];
+                idx+=2;
+            }
+        }
+        idx=1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                ans[idx]=nums[i];
+                idx+=2;
+            }
+        }
+        return ans;
+    }
+}
+//        MY TLE APPROACH        
+//         int[] ans=new int[nums.length];
+//         boolean toggle=true;
+//         int idx=0;
+//         for(int i=0;i<nums.length;i++){
+//             if(toggle==true && nums[i]>0){
+//                 ans[idx++]=nums[i];
+//             }
+//             else if(toggle==false && nums[i]<0){
+//                 ans[idx++]=nums[i];
+//             }
+//             else if(toggle==false&&nums[i]>0){
+//                 int k=1;
+//                 while(nums[i+k]>0)
+//                     k++;          
+//                 swap(nums,i,i+k);
+//             }
+//             else if(toggle==true && nums[i]<0){
+//                 int k=1;
+//                 while(nums[i+k]<0)
+//                     k++;
+//                 swap(nums,i,i+k);
+//             }
+//         }
+//         return ans;
+//     }
+    
+//     int[] swap(int[] arr, int l, int r){
+//         for(int j=r;j>l;j++){
+//             int temp=arr[l];
+//             arr[l]=arr[r];
+//             arr[r]=temp;
+//         }
+//         return arr;
+//     }
+// }

@@ -1,0 +1,25 @@
+class Solution {
+    public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
+        int standarddiff=nums[1]-nums[0];
+        List<Boolean> list=new ArrayList<>();
+        for(int i=0;i<l.length;i++){
+            ArrayList<Integer> temp=new ArrayList<>();
+            for(int j=l[i];j<=r[i];j++)
+                temp.add(nums[j]);
+            System.out.println(temp);
+            list.add(isArithematic(temp));
+            
+        }
+        return list;
+    }
+    
+    boolean isArithematic(ArrayList<Integer> al){
+        Collections.sort(al);
+        int diff=al.get(1)-al.get(0);
+        for(int i=0;i<al.size()-1;i++){
+            if(al.get(i+1)-al.get(i)!=diff)
+                return false;
+        }
+        return true;
+    }
+}

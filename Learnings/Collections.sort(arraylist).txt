@@ -1,0 +1,3 @@
+https://www.javatpoint.com/how-to-sort-arraylist-in-java
+
+and there is something related to 'comparator' in this topic that needs to be studied

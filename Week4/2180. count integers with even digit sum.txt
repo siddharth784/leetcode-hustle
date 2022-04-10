@@ -1,0 +1,20 @@
+class Solution {
+    public int countEven(int num) {
+        int count=0;
+        for(int i=1;i<=num;i++){
+            if(digitsum(i)%2==0)
+                count++;
+        }
+        return count;
+    }
+    
+    int digitsum(int num){
+        int temp=num;
+        int sum=0;
+        while(temp!=0){
+            sum+=temp%10;
+            temp/=10;
+        }
+        return sum;
+    }
+}

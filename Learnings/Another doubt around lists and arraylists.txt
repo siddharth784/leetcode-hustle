@@ -1,0 +1,6 @@
+so I used this to initialise in n queens problem:
+List<List<String>> ans=new ArrayList<ArrayList<String>>();
+
+and I got an error saying 
+incompatible types: ArrayList<ArrayList<String>> cannot be converted to List<List<String>>
+they two and their difference is confusing

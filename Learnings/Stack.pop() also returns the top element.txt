@@ -1,0 +1,8 @@
+Stack pop() Method in Java
+pop() method in Java is used to pop an element from the stack. The element is popped from the top of the stack and is removed from the same. Parameters: The method does not take any parameters. Return Value: This method returns the element present at the top of the stack and then removes it.
+
+BASICALLY WE CAN POP THE TOPMOST ELEMENT WHILE AT THE SAME TIME USE IT FOR THE LAST TIME.
+E.G. INT TEMP=ST.POP();
+NOW IF THE TOP ELEMENT OF THE STACK WAS 20, TEMP=20 AND THAT ELEMENT WILL ALSO BE REMOVED FROM THE STACK.
+
+HENCE, STACK.POP()=STACK.PEEK()+STACK.POP()

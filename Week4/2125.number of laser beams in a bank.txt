@@ -1,0 +1,23 @@
+class Solution {
+    public int numberOfBeams(String[] bank) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<bank.length;i++){
+            String str=bank[i];
+            int ones=0;
+            for(int j=0;j<str.length();j++){
+                if(str.charAt(j)=='1')
+                ones++;
+            }
+            hm.put(i,ones);
+        }
+        int ans=0;
+        System.out.println(hm);
+        for(int i=0;i<bank.length-1;i++){
+            int k=1;
+            while(i+k<bank.length-1&&hm.get(i+k)==0)
+                k++;
+            ans+=hm.get(i)*hm.get(i+k);
+        }
+        return ans;        
+    }
+}

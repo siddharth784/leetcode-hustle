@@ -1,0 +1,40 @@
+class Solution {
+    public int maximumScore(int a, int b, int c) {
+        if( (a==0&&b==0&&c==0)||(a==0&&b==0&&c!=0)||(a==0&&b!=0&&c==0)||(a!=0&&b==0&&c==0)){
+            // System.out.println("a:"+a+"b:"+b+"c:"+c+" and return 0");
+            return 0;
+        }
+        
+        if(a==0){
+            // System.out.println("a:"+a+"b:"+b+"c:"+c+" and run case a==0");
+            return (1+maximumScore(a,b-1,c-1));
+        }
+        if(b==0){
+            // System.out.println("a:"+a+"b:"+b+"c:"+c+" and run case b==0");
+            return (1+maximumScore(a-1,b,c-1));
+        }
+        if(c==0){
+            // System.out.println("a:"+a+"b:"+b+"c:"+c+" and run case c==0");          
+            return (1+maximumScore(a-1,b-1,c));
+        }
+        else{
+            // System.out.println("a:"+a+"b:"+b+"c:"+c+" and run case all non zero");              
+            if(minimum(a,b,c)==a) 
+                return (1+maximumScore(a,b-1,c-1));
+            if(minimum(a,b,c)==b)
+                return (1+maximumScore(a-1,b,c-1));
+            if(minimum(a,b,c)==c)
+                return (1+maximumScore(a-1,b-1,c));
+        }
+        return 0;
+    }
+    
+    int minimum(int a, int b, int c){
+        if(a<=b&&a<=c)
+            return a;
+        else if(b<=c)
+            return b;
+        else
+            return c;
+    }
+}

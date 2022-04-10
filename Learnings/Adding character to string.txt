@@ -1,0 +1,4 @@
+temp+=st.charAt(i);	//where temp is a String
+
+//this works sometimes, but to be on safer side, always do 
+temp+=""+st.charAt(i);

@@ -1,0 +1,45 @@
+class Solution {
+    public int maximum69Number (int num) {
+        int temp=num;
+        int div=1;
+        while(temp!=0){
+            temp/=10;
+            div*=10;
+        }
+        div/=10;
+        temp=num;
+        while(div!=0){  //firstly I did temp!=0 then I remembered the edge case where digits of temp can be all zero 
+            int digit=temp/div;
+            temp%=div;  //I forgot this and tend to forget this often. but always remember that number ke digits ko leech krne k liye number ko /div krne k sath number k left digits ko delete bhi krte jana h otherwise digits mein pura multi digit quotient store hoga
+            System.out.println(digit);
+            if(digit==6){
+                return (num+(3*div));
+            }
+            div/=10;
+        }
+        return num;
+    }
+}
+        
+        
+        
+        
+//         int temp=num;
+//         int ndigits=0;
+//         while(temp!=0){
+//             ndigits++;
+//             temp/=10;
+//         }
+//         int base=(int)Math.pow(10,ndigits-1);
+//         int temp2=num;
+//         // System.out.println(base);
+//         while(base!=1 && temp2/base!=6){
+//             // System.out.println("temp2/base = "+temp2/base);
+//             // System.out.println(base);
+//             temp2%=base;
+//             base/=10;
+//         }
+//         temp2+=3*base;
+//         return (temp2>num?temp2:num);
+//     }
+// }

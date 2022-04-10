@@ -1,0 +1,22 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] grid=new int[m][n];
+        int[][] memo=new int[m][n];
+        for(int i=0;i<m;i++)
+        Arrays.fill(memo[i],-1);
+        return paths(grid,0,0,memo);
+    }
+    
+    int paths(int[][] arr, int row, int col, int[][] memo){
+        if(row>=arr.length || col>=arr[0].length)
+            return 0;
+        if(memo[row][col]!=-1)
+            return memo[row][col];
+        if(row==arr.length-1 && col==arr[0].length-1)
+            return 1;
+        int d=paths(arr,row+1,col,memo);
+        int r=paths(arr,row,col+1,memo);
+        return memo[row][col]=(r+d);
+    }
+    
+}

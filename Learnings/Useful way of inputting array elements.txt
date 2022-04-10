@@ -1,0 +1,1 @@
+String[] values1 = scn.nextLine().split(" ");

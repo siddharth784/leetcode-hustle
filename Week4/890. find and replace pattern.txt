@@ -1,0 +1,30 @@
+class Solution {
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        List<String> ans=new ArrayList<>();
+        for(int i=0;i<words.length;i++){
+            boolean flag=true;
+            HashMap<Character,Character> equivalent=new HashMap<>();
+            String temp=words[i];
+            for(int j=0;j<temp.length();j++){
+                char ch=pattern.charAt(j);
+                if(equivalent.containsKey(ch)==true){
+                    if(equivalent.get(ch)!=temp.charAt(j)){ //this checks if repetition within the String temp/words[i] is like in String pattern
+                        flag=false;
+                    }
+                }
+                else if(equivalent.containsKey(ch)==false){
+                    if(equivalent.containsValue(temp.charAt(j))==true)  //this checks thatt String temp/words[i] better have strictly different characters when there are different characters in String pattern. basically check that there shouldnt be repetition when there shouldnt be so,acc. to pattern string.
+                        flag=false;
+                    equivalent.put(ch,temp.charAt(j));
+                }
+                    
+            if(flag==false)
+                continue;
+            if(j==temp.length()-1 && flag==true)
+                ans.add(words[i]);
+            }
+        }
+        
+        return ans;
+    }
+}

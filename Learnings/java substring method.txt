@@ -1,0 +1,8 @@
+public class SubstringExample{  
+public static void main(String args[]){  
+String s1="javatpoint";  
+System.out.println(s1.substring(2,4));//returns va  
+System.out.println(s1.substring(2));//returns vatpoint  
+}}  
+
+//so str.substring(i,j); where the substring starts from character at ith position and stops before character at jth position.

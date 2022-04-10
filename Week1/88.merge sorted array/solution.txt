@@ -1,0 +1,45 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+//         int[] arr=new int[n+m];
+//         int i=0,j=0,k=0;
+        
+//         while(k!=n+m){
+//         if(i<m && nums1[i]<nums2[j]){
+//             arr[k]=nums1[i];
+//             i++;k++;
+//         }
+//         else if(j<n && nums1[j]>nums2[j]){
+//             arr[k]=nums2[j];
+//             j++;k++;
+//         }
+//         }
+        
+//         for(int a=0;a<m+n;a++){
+//             nums1[a]=arr[a];
+//         }
+// class Solution {
+    // public void merge(int[] nums1, int m, int[] nums2, int n) {
+//         int i=0,j=0,k=0;
+//         while(k!=n+m){
+//             if(nums1[i]<nums2[j]){
+//                 continue;
+//                 i++;k++;
+//             else if(nums1[i]>nums2[j]){
+//                 swap(nums1,)
+                
+//             }
+//         }
+        int i=m-1,j=n-1,k=m+n-1;
+        while(j>=0){    //I first did while(k>=0) and then did while(i>=0). both gave wrong results. why? it can't be k because if we just keep running the loop and its body until k exhausts into zero, there definitely gonna be times when we will run invalid value of i and j. because j would've become -1 and we will be putting it as index within nums2. 
+            //also, it can't be while(i--) because i>j. so j will go -ve at some iteration. plus, we don't need to change the position of nums1 elements which are already small enough(when j becomes zero, all nums2 elements have been shifted to nums1. there's no further need to rearrange shit.)
+            if(i>=0 && nums1[i]>nums2[j]){  //i>=0 for edge case {0},0,{2},1
+                nums1[k--]=nums1[i--];
+                
+            }
+            else{
+                nums1[k--]=nums2[j--];                   
+            }
+        }
+        
+    }
+}

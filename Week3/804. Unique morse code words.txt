@@ -1,0 +1,19 @@
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] morsecode={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        int count=0;
+        HashMap<String,Boolean> hm=new HashMap<>();
+        for(String word:words){
+            String translation="";
+            for(int j=0;j<word.length();j++){
+                translation+=morsecode[word.charAt(j)-'a'];
+            }   
+            if(hm.containsKey(translation)==false){
+                count++;
+                hm.put(translation,true);
+            }       
+        }
+        
+        return count;
+    }
+}

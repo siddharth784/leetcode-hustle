@@ -1,0 +1,40 @@
+class Solution {
+    public int[][] diagonalSort(int[][] mat) {
+        int[][] newmat=new int[mat.length][mat[0].length];
+        int lsp=mat.length-1;
+        for(int sp=lsp;sp>=0;sp--){
+            ArrayList<Integer>diag=new ArrayList<>();
+            int i=sp,j=0;
+            while(i<mat.length && j<mat[0].length){
+                diag.add(mat[i][j]);
+                i++;j++;
+            }
+            Collections.sort(diag);
+            i=sp;j=0;
+            int k=0;
+            while(i<mat.length && j<mat[0].length){
+                newmat[i][j]=diag.get(k);
+                i++;j++;k++;
+            }
+        }
+        
+        int tsp=1;
+        for(int sp=tsp;sp<mat[0].length;sp++){
+            ArrayList<Integer> diag=new ArrayList<>();
+            int i=0,j=sp;
+            while(i<mat.length && j<mat[0].length){
+                diag.add(mat[i][j]);
+                i++;j++;
+            }
+            Collections.sort(diag);
+            i=0;j=sp;
+            int k=0;
+            while(i<mat.length && j<mat[0].length){
+                newmat[i][j]=diag.get(k);
+                i++;j++;k++;
+            }
+        }
+        
+        return newmat;
+    }
+}

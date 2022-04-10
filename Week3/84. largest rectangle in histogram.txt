@@ -1,0 +1,37 @@
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        //creating a 'left' array which, for each element of the array,will store "the last includeable element towards its left" ka index. So that this stack, and similar stack 'right' can be used together to calculate the maximum area for each index of heights array.
+        int[] left=new int[heights.length];
+        Stack<Integer> st=new Stack<>();
+        for(int i=0;i<heights.length;i++){
+            while(st.size()!=0 && heights[st.peek()]>=heights[i])
+                st.pop();
+            if(st.size()==0)
+                left[i]=0;
+            else
+                left[i]=st.peek()+1;
+            st.push(i);
+        }
+        
+        int[] right=new int[heights.length];
+        Stack<Integer> st2=new Stack<>();
+        for(int i=heights.length-1;i>=0;i--){
+            while(st2.size()!=0 && heights[st2.peek()]>=heights[i])
+                st2.pop();
+            if(st2.size()==0)
+                right[i]=heights.length-1;
+            else
+                right[i]=st2.peek()-1;
+            st2.push(i);
+        }
+        
+        int maxarea=0;
+        // System.out.println(left[3]);
+        // System.out.println(right[3]);
+        for(int i=0;i<heights.length;i++){
+            int temparea=(right[i]-left[i]+1)*heights[i];
+            maxarea=Math.max(maxarea,temparea);
+        }
+        return maxarea;
+    }
+}

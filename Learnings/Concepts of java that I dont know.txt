@@ -1,0 +1,5 @@
+https://leetcode.com/problems/k-closest-points-to-origin/discuss/220235/Java-Three-solutions-to-this-classical-K-th-problem.
+
+There are 3 solutions of this question, as given in the link.
+But I don't know any of them and cant understand what's done in them.
+Please refer and learn them.

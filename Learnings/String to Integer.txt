@@ -1,0 +1,3 @@
+https://www.javatpoint.com/java-string-to-int
+
+in short, Integer.parseInt(str); or Integer.valueOf(str);

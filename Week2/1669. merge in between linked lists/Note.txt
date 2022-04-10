@@ -1,0 +1,2 @@
+the indexing in this question is very tricky. 
+As in how much we have to run the loops for. Especially because for temp we have to reach the node behind ith node, and for nodebeforeb we have to reach the node after node at bth index.

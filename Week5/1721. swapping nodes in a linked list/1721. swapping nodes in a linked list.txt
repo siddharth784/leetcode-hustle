@@ -1,0 +1,65 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode dummy=head;
+        ListNode temp1=head;
+        ListNode temp2=head;
+        for(int i=1;i<k;i++)
+            temp1=temp1.next;
+        while(temp1.next!=null){
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        //temp2 has reached n-k th node
+        int nmk=temp2.val;
+        ListNode temp3=head;
+        for(int i=1;i<k;i++)
+            temp3=temp3.next;
+        int knode=temp3.val;
+        
+        int temp=temp2.val;
+        temp2.val=temp3.val;
+        temp3.val=temp;
+        
+        return dummy;
+    }
+}
+        
+        
+        
+//         ListNode dummy=head;
+//         for(int i=1;i<k-1;i++)
+//             dummy=dummy.next;
+//         ListNode swap1prev=dummy;   //
+//         ListNode swap1=dummy.next;   //
+//         ListNode swap1next=dummy.next.next;  //
+        
+//         ListNode dummy2=head;
+//         ListNode temp=head;
+//         for(int i=1;i<k-1;i++)
+//         temp=temp.next;
+//         while(temp.next!=null){
+//             temp=temp.next;
+//             dummy2=dummy2.next;
+//         }
+//         ListNode swap2prev=dummy2;  //
+//         ListNode swap2=dummy2.next; //  
+//         ListNode swap2next=swap2.next;  //
+        
+//         //SHOWTIME
+//         swap1prev.next=swap2;
+//         swap2.next=swap1next;
+//         swap2prev.next=swap1;
+//         swap1.next=swap2next;
+//         return head;
+//     }
+// }

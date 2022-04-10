@@ -1,0 +1,70 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        //first of all note that the leetcode just some way or the other doesn't allow you to find or process size of the linked list, even if the least time consuming algo do we use to find it. so the solution/explanation is: We just need to go to the node before the one to be removed  and to maintain the distance n from last we can take two-pointers and maintain the same distance between them, when one reaches null other reaches the required position and gets the job done.
+        // if(head.next==null)
+        //     return null;
+        // ListNode temp1=new ListNode();
+        // temp1.next=head;
+        // ListNode temp2=temp1;
+        // for(int i=0;i<n;i++)
+        //     temp1=temp1.next;
+        // while(temp1.next!=null){
+        //     temp1=temp1.next;
+        //     temp2=temp2.next;
+        // }
+        // temp2.next=temp2.next.next;
+        // return head;    
+        ListNode temp=head;
+        int size=size(head);
+        for(int i=0;i<size-n-1;i++){
+            temp=temp.next;
+        }
+        head=removeNodeAt(head, size-n);
+        return head;
+    }
+    
+    ListNode removeNodeAt(ListNode head, int idx){
+        if(idx==0){
+            return head.next;
+        }
+        else if(idx==size(head)-1){
+            ListNode curr=head;
+            for(int i=0;i<idx-1;i++)
+                curr=curr.next;
+            curr.next=null;
+            return head;
+        }
+        else{
+            ListNode curr=head;
+            for(int i=0;i<idx-1;i++){
+                curr=curr.next;
+            }
+            curr.next=curr.next.next;
+            return head;
+        }
+            
+            
+    }
+    
+    int size(ListNode head){
+        ListNode curr=new ListNode();
+        curr.next=head;
+        int size=-1;
+        while(curr!=null){
+            size++;
+            curr=curr.next;
+        }
+        return size;
+    }
+}

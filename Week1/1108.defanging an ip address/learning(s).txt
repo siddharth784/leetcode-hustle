@@ -1,0 +1,6 @@
+1. I reminded myself that to append a character or string to a string, we can simply use the '+' operator. no hassle.
+
+2.String ans;	//this will show error that ans was not intialised. so apparently strings can and should only be declared these ways:
+String ans=new String();
+String ans=new String("");
+String ans="";

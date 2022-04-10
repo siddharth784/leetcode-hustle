@@ -1,0 +1,12 @@
+class Solution {
+    public String defangIPaddr(String address) {
+        String ans="";  //here I initially did String ans; and on running error showed up "ans might not have initialized". this means for declaring a string, we need to do it like either this: String ans=new String(); or String ans=new String(""); or String ans="";
+        for(int i=0;i<address.length();i++){
+            if(address.charAt(i)=='.')
+                ans+="[.]"; //we can simply append string or character to strings by using + operator.
+            else
+                ans+=address.charAt(i);
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,25 @@
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        //solution/explanation: We just need to go to the node before the one to be removed  and to maintain the distance n from last we can take two-pointers and maintain the same distance between them, when one reaches null other reaches the required position and gets the job done.
+        if(head.next==null)
+            return null;
+        ListNode temp1=new ListNode();
+        temp1.next=head;
+        ListNode temp2=temp1;
+        ListNode dummy=temp1;
+        for(int i=0;i<n;i++)
+            temp1=temp1.next;
+        while(temp1.next!=null){
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        temp2.next=temp2.next.next;
+        return dummy.next;    
+    }
+}
+
+For anyone wondering WHY this approach works. Here is a quick explanation:
+
+When you move the fast pointer to nth node, the remaining nodes to traverse is (size_of_linked_list - n). After that, when you start moving slow pointer and fast pointer by 1 node each, it is guaranteed that slow pointer will cover a distance of (size_of_linked_list - n) nodes. And that's node we want to remove.

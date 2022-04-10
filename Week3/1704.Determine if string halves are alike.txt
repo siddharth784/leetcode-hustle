@@ -1,0 +1,16 @@
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        int lcount=0,rcount=0,l=0,r=s.length()-1;
+        while(l<r){
+            char a=s.charAt(l);
+            char b=s.charAt(r);
+            if(a=='a'||a=='e'||a=='i'||a=='o'||a=='u'||a=='A'||a=='E'||a=='I'||a=='O'||a=='U')
+                lcount++;
+            if(b=='a'||b=='e'||b=='i'||b=='o'||b=='u'||b=='A'||b=='E'||b=='I'||b=='O'||b=='U')
+                rcount++;
+            l++;
+            r--;
+        }
+        return (rcount==lcount);
+    }
+}

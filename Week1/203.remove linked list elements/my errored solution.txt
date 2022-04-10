@@ -1,0 +1,45 @@
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+         ListNode curr=head;
+         int i=0;
+         while(curr!=null){
+             if(curr.val==val)
+                 removeNodeAt(curr, i);
+             curr=curr.next;
+             i++;
+         }
+         return head;        
+     }
+    
+     int size(ListNode head){
+         ListNode curr=head;
+         int size=1;
+         while(curr!=null){
+             size++;
+             curr=curr.next;
+         }
+         return size;
+     }
+    
+     ListNode removeNodeAt(ListNode head, int idx){
+         if(size(head)==0)
+             return null;        
+         if(head==null)
+             return null;
+         if(idx==0)
+             return head.next;
+         else{
+         ListNode curr=head;
+         for(int i=0;i<idx-1 && curr.next!=null;i++){
+             curr=curr.next;
+         }
+             if(curr.next!=null){
+                 if(curr.next.next!=null)
+                  curr.next=curr.next.next;
+            }
+             else
+                 curr.next=null;
+             return curr;
+         }
+     }
+}

@@ -1,0 +1,10 @@
+java.lang.Math contains very useful mathematical methods/functions. java.util.*; library package prolly contains it already.some of functions it contains are:
+
+Math.abs(int a); or Math.abs(float c)
+best thing is that it will return the absolute/mod value in same datatype as the argument, whether int or float or long or short or double
+
+Math.pow(a,b) 
+it prolly returns float even if a and b are int. so it becomes necessary to do narrowing casting on it by putting (int) in the beginning.
+
+Math.sqrt()
+it probably returns in double(remember double is more precise than float). so do narrowing casting as need be.

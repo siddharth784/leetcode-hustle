@@ -1,0 +1,7 @@
+the order of conditions when using logical operators matters. a lot.
+like let's say we're checking 2 conditions to be true and in b/w them is && operator. But say the 1st condition is accessing something that can only be accessed when 2nd is true, so the order must be reversed else error will pop up.. something like out of bounds error.
+
+SUMMARY/EXAMPLE:
+if(hm.containsKey(a2[i])==true && hm.get(a2[i])!=0){
+
+//if I reverse the order of them 2 conditions then error will pop.

@@ -1,0 +1,35 @@
+//NOTE!!!!!!!!!!!!!!I HAVE DONE THIS QUESTION USING VAGUE ARRAYLIST APPROACH, WHICH COMPLETELY FAILS THE PURPOSE OF EVEN USING LINKED LIST AS A DATA STRUCTURE(I.E.TO REDUCE THE SPACE USAGE). THE APPROACH I HAVE USED IS SUPER CHUTIYA, AND I NEED TO AGAIN SOLVE THIS QUESTION BY SEEING ITS SOLUTION SOMEWHERE, THIS DOESN'T COUNT.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ArrayList<Integer> al=new ArrayList<>();
+        ListNode dummy=head;
+        while(dummy!=null){
+            al.add(dummy.val);
+            dummy=dummy.next;
+        }
+        return isPalindrome(al);        
+    }
+    
+    boolean isPalindrome(ArrayList<Integer> al){
+        int x=0;
+        int y=al.size()-1;
+        while(x<y){
+            if(al.get(x)!=al.get(y))
+                return false;
+            x++;
+            y--;
+        }
+        return true;
+    }
+}

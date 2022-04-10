@@ -1,0 +1,4 @@
+https://www.w3resource.com/java-exercises/math/java-math-exercise-3.php
+note that this resource helped me do cf question INTEGER MOVES
+
+btw apart from this,I also need to learn a lot about double/float variables, how to operate on them, what they return on which method etc.

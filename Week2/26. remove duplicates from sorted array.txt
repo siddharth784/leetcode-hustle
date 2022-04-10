@@ -1,0 +1,38 @@
+class Solution {
+    public static int removeDuplicates(int[] nums) {
+        int k=1;
+        int temp=nums[0];
+        for(int i=1;i<nums.length;i++){
+                if(nums[i]!=temp){
+                    nums[k]=nums[i];
+                    temp=nums[i];
+                    k++;
+                }
+        }
+        return k;
+    }
+}
+        
+//          TIME LIMIT EXCEEDED APPROACH
+//
+//         int k=0;
+//         for(int i=0;i<nums.length-1;i++){
+//             while(nums[i]==nums[i+1]){
+//                 k++;
+//                 for(int j=i+1;j<nums.length-k;j++)
+//                     swap(nums,j,j+1);
+//             }
+//         }
+//         // System.out.print("array");
+//         // for(int i=0;i<nums.length;i++)
+//         // System.out.print(nums[i]+" ");
+//         return (nums.length - k);
+//     }
+            
+            
+//     private static void swap(int[] nums, int l, int r){
+//         int temp=nums[l];
+//         nums[l]=nums[r];
+//         nums[r]=temp;
+//     }
+// }

@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch=='(' || ch=='[' ||  ch=='{')  //ki agar opening bracket hai to first of all push it into the stack..rest we'll see 
+                st.push(ch);
+            else{
+                // below case for if the string is getting started with a closing bracket(which makes it unbalanced obviously). so cuz the control has went to else, it means that ch isn't opening bracket. so if it's closing bracket and at the same time stack hasn't anything till yet, it means that it is the first element and that we need to return false;
+                if(st.size()==0)
+                    return false;
+                //below 3 else if cases for checking, ki if ch is a closing bracket, it must be specifically closing the corresponding opening bracket. If not, return false instantly for the string is unbalanced.
+                else if(ch=='}' && st.peek()!='{')
+                    return false;
+                else if(ch==']' && st.peek()!='[')
+                    return false;
+                else if(ch==')' && st.peek()!='(')
+                    return false;
+                // below case for if above cases don't apply, i.e.the closing bracket is pairing with the last opening bracket of the stack. Which implies we must pop the opening bracket 
+                else
+                    st.pop();                    
+            }
+        }
+            //below case for if the stack has unbalanced opening brackets which have not been countered/paired with closing brackets, it means n implies that the string is unbalanced.
+            if(st.size()!=0)
+                return false;
+            else
+                return true;
+    }
+}

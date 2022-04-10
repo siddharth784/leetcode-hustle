@@ -1,0 +1,53 @@
+class Solution {
+    public String sortSentence(String s) {
+        String ans=new String("");
+        HashMap<Integer,String> hm=new HashMap<>();
+        String temp="";
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                hm.put(Character.getNumericValue(s.charAt(i-1)),temp.substring(0,temp.length()-1));
+                temp="";
+            }
+            else if(i==s.length()-1){
+                hm.put(Character.getNumericValue(s.charAt(i)),temp);
+            }
+            else
+            temp+=s.charAt(i);
+        }
+        for(int i=1;hm.containsKey(i)==true;i++){
+            ans+=hm.get(i)+" ";
+        }
+        System.out.println(hm);
+        return ans.substring(0,ans.length()-1);
+    }
+}
+//      MY TLE APPROACH        
+//         String ans=new String("");
+//         int j=1;
+//         boolean flag=false;
+//         while(true){
+//         for(int i=0;i<s.length();i++){
+           
+//             if(s==""){
+//                 flag=true;
+//                 break;
+//             }
+           
+//             if(s.charAt(i)==j){
+//                 int k=i;
+//                 while(s.charAt(k)!=' ')
+//                     k--;
+//                 ans+=s.substring(k+1,i)+" ";
+//                 s=s.substring(0,k)+s.substring(i+1);
+//             }
+//             j++;
+//         }
+//             if(flag)
+//                 break;
+//             else
+//                 continue;
+//         }
+//         s=s.substring(0,s.length()-1);
+//         return s;
+//     }
+// }

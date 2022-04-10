@@ -1,0 +1,41 @@
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int[] nextgreater=new int[nums.length];
+        Stack<Integer> st=new Stack<>();
+        for(int i=nums.length-1;i>=0;i--){
+            while(st.size()!=0 && nums[st.peek()]<=nums[i])
+                st.pop();
+            if(st.size()==0)
+                nextgreater[i]=nums.length;
+            else
+                nextgreater[i]=st.peek();
+            
+            st.push(i);
+        }
+        
+        int[] ans=new int[nums.length-k+1];
+        for(int i=0;i<nums.length-k+1;i++){
+            int j=i;
+            while(nextgreater[j]<i+k)
+                j=nextgreater[j];
+            
+            ans[i]=nums[j];
+        }
+        
+        return ans;
+    }
+}
+//          SORRY GALTI SE NEARLY K SORTED ARRAY KA CODE CHHAP DIYA, THEY ARE VERY CONFUSING AFTER ALL        
+//         PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+//         for(int i=0;i<k;i++)
+//             pq.add(nums[i]);
+//         int[] ans=new int[nums.length-k+1];
+//         int j=0;
+//         for(int i=k;i<nums.length;i++){
+//             ans[j]=pq.remove();
+//             pq.add(nums[i]);
+//             j++;
+//         }
+//         return ans;
+//     }
+// }

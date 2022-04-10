@@ -1,0 +1,13 @@
+class Solution {
+    public int finalValueAfterOperations(String[] operations) {
+        int x=0;
+        for(int i=0;i<operations.length;i++){
+            // String temp=operations[i];
+            if(operations[i].equals("--X") || operations[i].equals("X--"))  //I first did operations[i]=="--X"||operations[i]=="X--" and it wasn't functioning because as doubt support told me, to compare strings we can't use ==. == compares addresses, and in case of characters it compares their ascii values. but in strings == doesn't do shit. hence, str.equals(str') is to be used for strings.
+                --x;
+            else
+                ++x;                
+        }
+        return x;
+    }
+}

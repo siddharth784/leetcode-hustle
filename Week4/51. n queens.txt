@@ -1,0 +1,58 @@
+class Solution {
+    // List<List<String>> ans2=new ArrayList<List<String>>();
+    
+    public List<List<String>> solveNQueens(int n) {
+        int[][] chessboard=new int[n][n];
+        List<String> template=new ArrayList<String>();
+        List<List<String>> ans=new ArrayList<List<String>>();
+        nQueens(chessboard,0,template,ans);
+        // System.out.println(ans2);
+        return ans;
+    }   
+    
+    
+    void nQueens(int[][] chessboard, int row,List<String> lsf,List<List<String>> ans){
+        if(row==chessboard.length){
+            System.out.println("reached the bottom row ");
+            System.out.println(lsf);
+            // System.out.println(ans2);
+            
+            ans.add(new ArrayList<String>(lsf));
+            System.out.println(ans);
+            return;
+        }
+        for(int j=0;j<chessboard[row].length;j++){
+            if(isSafe(chessboard,row,j)==true){
+                String rowconfig="";
+                for(int i=0;i<j;i++)
+                    rowconfig+=".";
+                rowconfig+="Q";
+                for(int i=j+1;i<chessboard[row].length;i++)
+                    rowconfig+=".";
+                lsf.add(rowconfig);
+                chessboard[row][j]=1;
+                nQueens(chessboard,row+1,lsf,ans);
+                lsf.remove(rowconfig);
+                chessboard[row][j]=0;
+            }
+        }
+    }
+    
+     boolean isSafe(int[][] chess, int row, int col){
+        for(int i=row-1,j=col;i>=0;i--){
+            if(chess[i][j]==1)
+                return false;
+        }
+        for(int i=row-1,j=col-1;i>=0&&j>=0;i--,j--){
+            if(chess[i][j]==1)
+                return false;
+        }
+        for(int i=row-1,j=col+1;i>=0 && j<chess.length;i--,j++){
+            if(chess[i][j]==1)
+                return false;
+        }
+        return true;
+    }
+    
+    
+}

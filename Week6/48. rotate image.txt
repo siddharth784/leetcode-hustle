@@ -1,0 +1,20 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+        //Solution is to transpose, then flip horizontally
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<i;j++)
+                swap(matrix,i,j,j,i);
+        }
+        
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length/2;j++)
+                swap(matrix,i,j,i,matrix[0].length-1-j);
+        }
+    }
+    
+    void swap(int[][] matrix, int i, int j, int x, int y){
+        int temp=matrix[i][j];
+        matrix[i][j]=matrix[x][y];
+        matrix[x][y]=temp;
+    }
+}

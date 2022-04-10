@@ -1,0 +1,16 @@
+class Solution {
+    public int maxCoins(int[] piles) {
+        Arrays.sort(piles);
+        int mine=0;
+        int aliceidx=piles.length-1;
+        int mineidx=piles.length-2;
+        int bobidx=0;
+        for(int round=1;round<=piles.length/3;round++){
+            mine+=piles[mineidx];
+            mineidx-=2;
+            aliceidx-=2;
+            bobidx+=1;
+        }
+        return mine;        
+    }
+}

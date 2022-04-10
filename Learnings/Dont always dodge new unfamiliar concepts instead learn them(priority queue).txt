@@ -1,0 +1,41 @@
+https://www.youtube.com/watch?v=2kNeNVIdrQY	watch this.
+
+So I looked up the solution of leetcode 1387, and came across some incomprehensible new conceps and syntaxes, like the right side of creation of new priority queue, and the new approach of if(maxheap.size()>k)maxHeap.remove(); 
+But now I understand after asking about them in doubt support.
+
+See, maxHeap declaration ke right side mein, within the paranthesis, we are defining ki kis basis pe heap/priorityqueue ke andar priotitise/sort honge elements. and to be specific, iss priorityqueue/heap mein hoga ye, ki added items ki power compare hogi. then if power equal hui, toh dono ki num values k basis pe prioritise honge, nhi to unke powers k basis pe
+
+class Solution {
+    public int getKth(int lo, int hi, int k) {
+        PriorityQueue<Item> Heap = new PriorityQueue<Item>((a, b) -> (a.power == b.power) ? (b.num - a.num) : (b.power - a.power));
+        int idx=0;
+        for(int i=lo;i<=hi;i++){
+            int temppower=nosteps(i);
+            Item temp=new Item(i,temppower);
+            maxHeap.add(temp);
+            if(Heap.size()>k)
+                Heap.remove();
+        }
+        return Heap.remove().num;
+    }
+        
+    
+    int nosteps(int i){
+        if(i==1)
+            return 0;
+        if(i%2==0)
+            return (1+nosteps(i/2));
+        if(i%2==1)
+            return (1+nosteps(3*i+1));
+        return 0;
+    }
+}
+
+class Item{
+    int num;
+    int power;
+    public Item(int num, int power){    //(constructor)
+        this.num=num;
+        this.power=power;
+    } 
+}

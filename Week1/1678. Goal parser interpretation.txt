@@ -1,0 +1,21 @@
+class Solution {
+    public String interpret(String command) {
+        String ans=new String("");
+        int i=0;
+        while(i<command.length()){
+            if(command.charAt(i)=='G'){
+                ans+='G';
+                i++;
+            }
+            else if(command.charAt(i)=='(' && command.charAt(i+1)==')'){
+                ans+='o';
+                i+=2;    //confusion if after updation i will be i+=2 or do we have to update i in this line itself by i+=2 such that it directly reached desired position.
+            }
+            else{
+                ans+="al";
+                i+=4;
+            }
+        }
+        return ans;
+    }
+}

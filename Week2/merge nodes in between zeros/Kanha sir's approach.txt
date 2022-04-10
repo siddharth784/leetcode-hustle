@@ -1,0 +1,16 @@
+  ListNode dummy = new ListNode(-1), curr = head, ptr = dummy;
+        while(curr != null){
+            if(curr.val != 0){
+                int sum = 0;
+                while(curr.val != 0){
+                    sum += curr.val;
+                    curr = curr.next;
+                }
+                ptr.next = new ListNode(sum);
+                ptr = ptr.next;
+            }
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+}
