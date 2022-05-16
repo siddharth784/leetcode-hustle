@@ -1,0 +1,4 @@
+did this question myself n am proud of it.
+principle is similar to nge, but exception is that we will have to have already existing stack in left of array to right of array order, to find nge for last element of the array.
+Then in the iteration for this last element, we would've eliminated the smaller irrelevant values for the upcoming elements. but also we have to push this last element/current element since this can be the relevant answer for upcoming elements of the array.
+The array btw, is traversed from right to left.

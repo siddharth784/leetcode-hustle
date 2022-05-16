@@ -1,0 +1,49 @@
+class Solution {
+    public int calPoints(String[] ops) {
+        Stack<Integer> st=new Stack<>();
+        for(int i=0;i<ops.length;i++){
+            // if(Character.isDigit(ops[i].charAt(0))==true)
+                // st.push(Integer.parseInt(ops[i]));
+                // st.push(Character.getNumericValue(ops[i].charAt(0)));
+            if(ops[i].equals("+")){
+                int hold=st.pop();
+                int sum=hold+st.peek();
+                st.push(hold);
+                st.push(sum);
+                // st.push(st.peek()+st.peek());
+            }
+            else if(ops[i].equals("D"))
+                st.push(st.peek()*2);
+            else if(ops[i].equals("C"))
+                st.pop();
+            else
+                st.push(Integer.parseInt(ops[i]));
+            // System.out.println(st);
+        }
+        int sum=0;
+        while(st.size()!=0){
+            sum+=st.pop();
+        }
+        return sum;
+    }
+}
+// Deque<Integer> stack = new LinkedList<>();
+//         for(String val:ops) {
+//             if("+".equals(val)) {
+//                 int op1 = stack.pop();
+//                 int op2 = op1 + stack.peek();
+//                 stack.push(op1);
+//                 stack.push(op2);
+//             } else if("C".equals(val)) {
+//                 stack.pop();
+//             } else if("D".equals(val)) {
+//                 stack.push(2*stack.peek());
+//             } else {
+//                 stack.push(Integer.parseInt(val));
+//             }
+//         }
+//         int res=0;
+//         while(!stack.isEmpty()) {
+//             res+=stack.pop();
+//         }
+//         return res;

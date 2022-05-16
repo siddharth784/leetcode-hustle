@@ -1,0 +1,46 @@
+public ListNode sortList(ListNode head) {
+        if(head==null||head.next==null)
+            return head;
+
+        ListNode slow=head,fast=head,prev=null;
+        //we will now break the list into two equal halves:
+        while(fast!=null && fast.next!=null){
+            prev=slow;
+            slow=slow.next;            
+            fast=fast.next.next;
+        }
+
+        prev.next=null;
+        ListNode l1=sortList(slow);
+        ListNode l2=sortList(head);
+        
+        return merge(l1,l2);
+}
+
+    ListNode merge(ListNode l1, ListNode l2){
+        ListNode ans=new ListNode();
+        ListNode hold=ans;
+        while(l1!=null && l2!=null){
+            if(l1!=null && l1.val<=l2.val){
+                ans.next=l1;
+                l1=l1.next;
+            }
+            else if(l2!=null && l1.val>l2.val){
+                ans.next=l2;
+                l2=l2.next;
+            }
+            ans=ans.next;
+        }
+        while(l1!=null){
+            ans.next=l1;
+            l1=l1.next;
+            ans=ans.next;
+        }
+        while(l2!=null){
+            ans.next=l2;
+            l2=l2.next;
+            ans=ans.next;
+        }
+        return hold.next;
+    }
+}

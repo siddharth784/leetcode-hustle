@@ -1,0 +1,29 @@
+Explanation:
+
+First all characters in the string to a LinkedList(Queue) in the order then appear.
+Then poll elements from queue one by one. Check if the polled element has replica in list, if it has then element is repetitive, so put back element in the queue.
+If the element is not repetitive, then get index of element from the string and return the index.
+If no such element is found return -1.
+
+public int firstUniqChar(String s) {
+    Queue<Character> list = new LinkedList();
+    
+    for(char c : s.toCharArray()){
+        list.add(c);
+    }
+    
+    int length = list.size();
+    
+    while(length > 0){
+        Character ch = list.poll();
+        
+        if(!list.contains(ch)){
+            return s.indexOf(ch);
+        } else {
+            list.offer(ch);
+        }
+        length--;
+    }
+    
+    return -1;
+}

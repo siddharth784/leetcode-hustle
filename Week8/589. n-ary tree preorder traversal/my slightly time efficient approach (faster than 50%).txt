@@ -1,0 +1,16 @@
+// this approach is about declaring a static arraylist, which will keep updating and adding new nodes in it 
+
+class Solution {
+    ArrayList<Integer> store=new ArrayList<>();
+    
+    public List<Integer> preorder(Node root) {
+        if(root==null)
+            return new ArrayList<Integer>();
+        store.add(root.val);
+        for(Node child:root.children)
+            preorder(child);
+        return store;
+    } 
+}
+
+        

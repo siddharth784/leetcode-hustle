@@ -1,0 +1,23 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        HashMap<ListNode,Boolean> hm=new HashMap<>();
+        for(var p=head;p!=null;p=p.next){
+            if(hm.containsKey(p)==false)
+            hm.put(p,true);
+            else
+            return p;
+        }
+        return null;
+    }
+}

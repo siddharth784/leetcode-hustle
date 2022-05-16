@@ -1,0 +1,32 @@
+class Solution {
+    int netsum=0;
+    public int sumRootToLeaf(TreeNode root) {
+        // int sum=0;
+        // int netsum=0;
+        addsum(root,0);
+        return netsum;
+    }
+    void addsum(TreeNode root, int tempsum){
+        if(root==null)
+            return;
+        if(root.left==null && root.right==null){
+            // tempsum+=Math.pow(2,level)*root.val;
+            tempsum=tempsum*2+root.val;
+            netsum+=tempsum;
+            // System.out.println("netsum updated to "+netsum);
+        }
+        // tempsum+=Math.pow(2,level)*root.val;
+        tempsum=tempsum*2+root.val;
+        addsum(root.left,tempsum);
+        addsum(root.right,tempsum);
+    }
+    // int sum(TreeNode root,int level){
+    //     if(root==null){
+    //         return 0;
+    //     }
+    //     int lsum=sum(root.left,level+1)+(root.val*(int)Math.pow(10,level));
+    //     int rsum=sum(root.right,level+1)+(root.val*(int)Math.pow(10,level));
+    //     // System.out
+    //     return (lsum+rsum);
+    // }
+}

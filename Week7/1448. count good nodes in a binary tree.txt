@@ -1,0 +1,35 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int goodNodes(TreeNode root) {
+        // if(root==null)
+        // if(root.left==null && root.right==null && )    
+        // boolean isleftgood=goodNodes(root.left);
+        // boolean isrightgood=goodNodes(root.right);
+        return checkgood(root,Integer.MIN_VALUE);        
+    }
+    public int checkgood(TreeNode root, int min){
+        if(root==null)
+            return 0;
+        int checkleft=checkgood(root.left,Math.max(root.val,min));
+        int checkright=checkgood(root.right,Math.max(root.val,min));
+        boolean checkself=(root.val>=min?true:false);
+        if(checkself==true)
+            return (1+checkleft+checkright);
+        else
+            return (checkleft+checkright);
+    }
+}

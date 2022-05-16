@@ -1,0 +1,84 @@
+class ListNode{
+    int key;
+    int val;
+    ListNode next;
+    ListNode(){}
+    ListNode(int key, int val){
+        this.key=key;
+        this.val=val;
+    }
+}
+class MyHashMap {
+    ListNode head;
+    public MyHashMap() {
+        // node=new ListNode();
+        head=new ListNode();
+    }
+    public void put(int key, int value) {
+        //if we've to put the first key-value 
+        if(head.next==null){
+            head.next=new ListNode(key,value);
+            return;
+        }
+        //for if the value of the key is to be updated not freshly stored
+        for(var p=head.next;p!=null;p=p.next){
+            if(p.key==key){
+            p.val=value;
+            return;
+            }
+        }
+        
+        //for if the value is to be freshly put in the map
+        ListNode p=new ListNode();
+        for(p=head.next;p.next!=null;p=p.next)
+            continue;
+        p.next=new ListNode(key,value);
+        
+        //printing the updated hashmap
+        // System.out.print("the hashmap after putting now is: ");
+        // for(p=head;p!=null;p=p.next)
+        // System.out.print(p.key+""+p.val+" ");
+        // System.out.println();
+    }
+    
+    public int get(int key) {
+        if(head.next==null && head.key==key){
+            return -1;
+        }
+        
+        
+        for(var p=head.next;p!=null;p=p.next){
+            if(p!=head&&p.key==key)
+                return p.val;
+        }
+        return -1;
+    }
+    
+    public void remove(int key) {
+        // ListNode p=new ListNode();
+        if(head.next!=null && head.next.key==key){
+            head.next=head.next.next;
+            return;
+        }
+        for(var p=head.next;p!=null;p=p.next){
+            if(p.next!=null && p.next.key==key)
+                p.next=p.next.next;
+        }
+    }
+}
+// class pair{
+//     int key;
+//     int value;
+//     public pair(int key, int value){
+//         this.key=key;
+//         this.value=value;
+//     }
+// }
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */

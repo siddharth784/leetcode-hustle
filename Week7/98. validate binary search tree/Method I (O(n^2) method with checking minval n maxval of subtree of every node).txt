@@ -1,0 +1,37 @@
+//class Solution {
+//    public boolean isValidBST(TreeNode root) {        
+//         if(root==null)
+//         return true;
+//         if(root.left==null && root.right==null)
+//         return true;
+//         boolean b1=isValidBST(root.left);   
+//         boolean b2=isValidBST(root.right);  
+//         boolean leftcheck=true,rightcheck=true;
+//         if(root.left!=null)
+//             leftcheck=maxval(root.left)<root.val;
+//         else
+//             leftcheck=true;
+//         if(root.right!=null)
+//             rightcheck=minval(root.right)>root.val;
+//         else
+//             rightcheck=true;
+//         boolean b3=(leftcheck && rightcheck);
+//         return (b1&&b2&&b3);
+//     }
+//     int maxval(TreeNode node){
+//         if(node==null)
+//             return Integer.MIN_VALUE;
+//         int max=node.val;
+//         max=Math.max(max,maxval(node.left));
+//         max=Math.max(max,maxval(node.right));
+//         return max;
+//     }
+//     int minval(TreeNode node){
+//         if(node==null)
+//             return Integer.MAX_VALUE;
+//         int min=node.val;
+//         min=Math.min(min,minval(node.left));
+//         min=Math.min(min,minval(node.right));
+//         return min;
+//     }
+// }

@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        Arrays.sort(nums);
+        binarysearch(nums,0,nums.length-1,target,ans);
+        return ans;
+    }
+    void binarysearch(int[] nums, int l, int r, int x, ArrayList<Integer> ans){
+        if(l<=r){
+        int mid=l+(r-l)/2;
+        if(nums[mid]==x){
+            // ans.add(mid);
+            binarysearch(nums,l,mid-1,x,ans);
+            ans.add(mid);
+            binarysearch(nums,mid+1,r,x,ans);
+        }
+        else if(nums[mid]<x)
+            binarysearch(nums,mid+1,r,x,ans);
+        else if(nums[mid]>x)
+            binarysearch(nums,l,mid-1,x,ans);
+        }
+    }
+    
+}

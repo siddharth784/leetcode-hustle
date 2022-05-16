@@ -1,0 +1,21 @@
+class Solution {
+    public int deepestLeavesSum(TreeNode root) {
+        // int height=height(root);
+        return getSumLeaves(root,1,height(root));
+    }
+    int height(TreeNode root){
+        if(root==null)
+            return 0;
+        int lheight=height(root.left);
+        int rheight=height(root.right);
+        return (1+Math.max(lheight,rheight));
+    }
+    int getSumLeaves(TreeNode root, int currheight, int maxheight){
+        if(root==null)
+            return 0;
+        if(root.left==null && root.right==null && currheight==maxheight)
+            return root.val;
+        int sum=0;                                        sum+=getSumLeaves(root.left,currheight+1,maxheight)+getSumLeaves(root.right,currheight+1,maxheight);
+        return sum;
+    }
+}

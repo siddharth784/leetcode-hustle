@@ -1,0 +1,14 @@
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(char ch='a';ch<='z';ch++)
+            hm.put(ch,0);
+        for(char ch:sentence.toCharArray())
+            hm.put(ch,1);
+        for(char ch:hm.keySet()){
+            if(hm.get(ch)==0)
+                return false;
+        }
+        return true;
+    }
+}

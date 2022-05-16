@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+        int num1=calcnum(firstWord),num2=calcnum(secondWord),num3=calcnum(targetWord);
+        return (num1+num2==num3);
+    }
+    int calcnum(String str){
+        int i=0,ans=0;
+        while(i<str.length()){
+            char ch=str.charAt(i);
+            ans=ans*10+(ch-'a');
+            i++;
+        }
+        return ans;
+    }
+}

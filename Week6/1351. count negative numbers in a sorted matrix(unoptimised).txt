@@ -1,0 +1,22 @@
+class Solution {
+    public int countNegatives(int[][] grid) {
+        int count=0;
+        for(int i=0;i<grid.length;i++)
+        count+=binarysearch(grid[i], i, 0,grid[i].length-1,count);
+        return count;
+    }
+    int binarysearch(int[] arr, int row, int l, int r, int count){
+        if(l<=r){
+            int mid=l+(r-l)/2;
+            if(arr[mid]<0){
+            System.out.println("-ve number found at arr["+row+"]["+mid+"]");
+            return (1+binarysearch(arr, row, mid+1,r,count)+binarysearch(arr, row, l,mid-1,count));
+            }
+            if(arr[mid]>=0){
+            return binarysearch(arr, row, mid+1,r,count);
+            }
+        }
+        return 0;
+    }
+    
+}

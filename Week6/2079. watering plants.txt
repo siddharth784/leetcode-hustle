@@ -1,0 +1,15 @@
+class Solution {
+    public int wateringPlants(int[] plants, int capacity) {
+        return steps(plants, capacity, capacity, 0);        
+    }
+    
+    int steps(int[] plants, int capacity, int refill, int start){
+        if(start>=plants.length)
+            return 0;
+        if(capacity<plants[start]){
+            return (2*start+steps(plants,refill,refill,start));
+        }
+        System.out.println("watered "+start+"th plant");
+        return (1+steps(plants,capacity-plants[start],refill,start+1));
+    }
+}

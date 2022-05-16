@@ -1,0 +1,29 @@
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        HashMap<Character, Integer> hm=new HashMap<>();
+        //storing in the hashmap the last occuring position of that character in that string
+        for(int i=s.length()-1;i>=0;i--){
+            char ch=s.charAt(i);
+            if(hm.containsKey(ch)==false)
+                hm.put(ch,i);
+        }
+        ArrayList<Integer> ans=new ArrayList<>();
+       
+        int last=-1;
+        int idx=-1;
+        while(idx<s.length()){
+        int storeidx=last+1;
+        idx=last+1;
+        last=hm.get(s.charAt(idx));
+        while(idx<=last){
+            if(hm.get(s.charAt(idx))>last){
+                last=hm.get(s.charAt(idx));
+            }
+            idx++;
+        }
+            ans.add(idx-storeidx);
+        }
+        return ans;
+    }
+}
+        

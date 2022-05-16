@@ -1,0 +1,34 @@
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head==null||head.next==null)
+            return head;
+        ListNode hold=head.next;
+        head.next=swapPairs(head.next.next);
+        hold.next=head;
+        return hold;
+    } 
+}
+//         ListNode prev=null;
+//         for(var p=head;p!=null && p.next!=null;p=p.next.next){
+//             swap(head,prev,p,p.next);
+//             prev=p.next;
+//         }
+//         return head;
+//     }
+    
+//     void swap(ListNode head, ListNode prev, ListNode p, ListNode q){
+//         if(p==head){
+//             ListNode store=q.next;
+//             head=q;
+//             q.next=p;
+//             p.next=store;
+//         }
+//         else{
+//             ListNode store=q.next;
+//             prev.next=q;
+//             q.next=p;
+//             p.next=store;
+//         }
+        
+//     }
+// }

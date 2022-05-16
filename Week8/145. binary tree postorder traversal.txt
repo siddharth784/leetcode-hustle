@@ -1,0 +1,11 @@
+class Solution {
+    List<Integer> al=new ArrayList<Integer>();
+    public List<Integer> postorderTraversal(TreeNode root) {
+        if(root==null)
+            return new ArrayList<Integer>();
+        postorderTraversal(root.left);
+        postorderTraversal(root.right);
+        al.add(root.val);
+        return al;
+    }
+}
