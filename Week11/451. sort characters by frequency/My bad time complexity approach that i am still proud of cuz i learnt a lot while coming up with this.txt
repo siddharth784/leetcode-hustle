@@ -1,0 +1,30 @@
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character,Integer> hm=new TreeMap<>();
+        for(char ch:s.toCharArray())
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->{return (b.freq-a.freq);});	//meaning if b.freq-a.freq ya whatever expression is placed inside comes -ve then the pq will give higher priority to the first element to the pair (in this case (a,b))
+        for(Map.Entry<Character,Integer> e:hm.entrySet()){
+            Pair temp=new Pair(e.getKey(),e.getValue());
+            pq.add(temp);
+        }
+        String ans="";
+        while(pq.isEmpty()==false){
+            Pair tempPair=pq.remove();
+            char tempch=tempPair.ch;
+            int tempval=tempPair.freq;
+            for(int j=0;j<tempval;j++)
+            ans+=tempch;
+        }
+        return ans;
+    }
+}
+class Pair{
+    char ch;
+    int freq;    
+    public Pair(){  }
+    public Pair(char ch, int val){
+        this.ch=ch;
+        this.freq=val;
+    }
+}

@@ -1,0 +1,21 @@
+class Solution {
+    public int countPoints(String rings) {
+        int count=0;
+        for(int i=0;i<10;i++){
+            boolean red=false,blue=false,green=false;
+            for(int j=0;j<rings.length();j++){
+                if(rings.charAt(j)-'0'==i){
+                    if(rings.charAt(j-1)=='B')
+                        blue=true;
+                    if(rings.charAt(j-1)=='G')
+                        green=true;
+                    if(rings.charAt(j-1)=='R')
+                        red=true;
+                }
+            }
+            if(red&&green&&blue)
+                count++;
+        }
+        return count;
+    }
+}

@@ -1,0 +1,17 @@
+class Solution {
+    public String generateTheString(int n) {
+        if(n%2!=0){
+            String ans="";
+            for(int i=0;i<n;i++)
+                ans+='a';
+            return ans;
+        }
+        else{
+            String ans="";
+            for(int i=0;i<n-1;i++)
+                ans+='a';
+            ans+='b';
+            return ans;
+        }
+    }
+}

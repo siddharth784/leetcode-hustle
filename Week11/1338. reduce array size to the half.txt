@@ -1,0 +1,20 @@
+class Solution {
+    public int minSetSize(int[] arr) {
+        int goal=(arr.length+1)/2;
+        Map<Integer,Integer> hm=new HashMap<>();    //to store integers of array and their respective occurence frequency
+        for(int i=0;i<arr.length;i++){
+            // hm.putIfAbsent(i,1);
+            hm.put(arr[i],hm.getOrDefault(arr[i],0)+1);
+        }
+        Queue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        for(int i:hm.values())
+            pq.add(i);
+        int removed=0,count=0;
+        while(removed<goal){
+            int tempremoved=pq.remove();
+            removed+=tempremoved;
+            count++;
+        }
+        return count;
+    }
+}

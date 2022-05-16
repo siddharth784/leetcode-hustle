@@ -1,0 +1,19 @@
+class Solution {
+    public int findNumbers(int[] nums) {
+        int total=0;
+        for(int i:nums){
+            if(checkevendigits(i))
+                total++;
+        }
+        return total;
+    }
+    public boolean checkevendigits(int num){
+        int temp=num;
+        int digits=0;
+        while(temp!=0){
+            digits++;
+            temp/=10;
+        }
+        return (digits%2==0);
+    }
+}

@@ -1,0 +1,27 @@
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] arr=new int[nums.length];
+     
+   //Time efficient smart approach
+        int lo=0,hi=nums.length-1;
+        for(int i=nums.length-1;i>=0;i--){
+            if(Math.abs(nums[lo])>=Math.abs(nums[hi])){
+                arr[i]=nums[lo]*nums[lo];
+                lo++;
+            }
+            else{
+                arr[i]=nums[hi]*nums[hi];
+                hi--;
+            }
+        }
+        return arr;
+    }
+}
+      
+  //Time inefficient brute force approach
+//         for(int i=0;i<nums.length;i++)
+//             arr[i]=nums[i]*nums[i];
+//         Arrays.sort(arr);
+//         return arr;
+//     }
+// }
