@@ -1,4 +1,0 @@
-for(char ch:str)
-//this isnt allowed
-for(char ch:str.toCharArray())
-//this is allowed

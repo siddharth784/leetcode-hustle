@@ -1,4 +1,0 @@
-You can format output in Java language. Like you have to do in this question: 
-https://www.hackerrank.com/challenges/java-output-formatting/problem
-And how can you? Read this article. I find this highly unnecessary cuz it's nowhere use nor even asked in interviews or even CP. but just so you know, java can do this.
-https://www.baeldung.com/java-printstream-printf

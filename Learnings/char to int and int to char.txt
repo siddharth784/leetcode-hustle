@@ -1,7 +1,0 @@
-char to int and int to char can be tricky and confusing. The question 1844 leetcode is a great question to consolidate one's grip on this whole concept. And to understand what to do in it, you can study char to int and int to char subtopics on javatpoint.
-It also helps in remembering that the conversion of int to char has to be done by mentioning (char) cuz it's widening casting, while conversion of char to int is automatic, and a char entity can be directly used as int.
-
-Pertinent links:
-https://www.w3schools.com/java/java_type_casting.asp
-https://www.javatpoint.com/java-char-to-int
-https://www.javatpoint.com/java-int-to-char

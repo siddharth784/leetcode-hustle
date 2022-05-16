@@ -1,3 +1,0 @@
-You can't do s1==s2 to check equality of Strings s1 and s2.
-YOU'LL have to use s1.equals(s2);
-the former will return wrong answer

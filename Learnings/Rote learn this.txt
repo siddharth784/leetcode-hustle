@@ -1,9 +1,0 @@
-in q48, I had to transpose then horizontally mirror the matrix. but that didn't click until seeing the solution. Now that I think about it, I think that I should've atleast thought about transposing the matrix once. because in matrix/mirroring/transformation of matrix questions, transpose is often used.
-
-So learn to check out transpose option when doing matrix and such questions, and also learn tranposing ka algo.
-
-for(int i=0;i<matrix.length;i++){
-for(int j=0;j<i;j++){
-swap(matrix,i,j,j,i);
-}
-}

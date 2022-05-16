@@ -1,1 +1,0 @@
-Samriddhi maam once said "linked lists ke questions tough nahi hote hain, bas unme hamein edge cases ka special dhyan rakhna padta hai." e.g. n=0,even,odd,n-1. ka dry run kr lena chahiye question mein

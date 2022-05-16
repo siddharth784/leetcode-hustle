@@ -1,9 +1,0 @@
-I have done leetcode q1859 by my own approach and method, which you can find in pc. And there is a solved answer to same question link of which i am giving here: 
-https://leetcode.com/problems/sorting-the-sentence/discuss/1213443/Java-Simple-Solution-or-Runtime%3A-0-ms-or-O(N)
-I think there is a lot to learn from her code.
-Some of it is:
-1. How we must use StringBuilder more often to preserve space and time
-2. How we can think of different approach altogether. Like I have done question by hashmap, while she has used new string array, and an index pointer whose value she updates according to the iteration
-3. sb.toString(); where sb is a StringBuilder
-4. sb.append(ans[i]);
-5. String[] str=s.split(" "); seperates the string elements which have space in b/w, and puts them in array.

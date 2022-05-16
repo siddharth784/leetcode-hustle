@@ -1,3 +1,0 @@
-that what better way to print just the team name from inside the string: CHENNAI SUPER KINGS INNINGS (TARGET: 154 RUNS FROM 20 OVERS)
-than to do String ans=str.split("INNINGS")[0];
-and also add .trim() in the end if you want to cut any leading or trailing spaces in the string ans too.

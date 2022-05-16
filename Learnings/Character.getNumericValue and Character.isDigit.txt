@@ -1,9 +1,0 @@
-int i=Character.getNumericValue(ch);
-
-//now if ch='5' then i=5
-//highly convinient 
-
-if(Character.isDigit(str.charAt(i))==true)
-ndigits++;
-
-//this checks if the character is a number/digit

@@ -1,1 +1,0 @@
-https://www.javatpoint.com/java-constructor#:~:text=In%20Java%2C%20a%20constructor%20is,used%20to%20initialize%20the%20object.
