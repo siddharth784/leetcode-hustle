@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    String smallestString="";
+    public String smallestFromLeaf(TreeNode root) {
+    traverse(root,"");
+        return smallestString;
+    }
+    public void traverse(TreeNode root, String str){
+        if(root==null)
+            return;
+        char ch=(char)(97+root.val);
+        if(root.left==null && root.right==null){
+            String s=ch+str;
+            if(s.compareTo(smallestString)<0||smallestString.equals(""))
+                smallestString=s;
+        }
+        traverse(root.left,ch+str);
+        traverse(root.right,ch+str);
+    }
+}

@@ -1,0 +1,37 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        if(text.equals(""))
+            return 0;
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(char ch:text.toCharArray())
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+  
+        int minfreq=10001;
+        String bal="balloon";
+        for(char ch:bal.toCharArray()){
+            if(hm.containsKey(ch)==false)
+                return 0;
+            int freq=hm.get(ch);
+            if(ch=='l'||ch=='o')
+            freq/=2;
+            
+            minfreq=Math.min(minfreq,freq);
+        }
+        return minfreq;
+    }
+}
+        
+//FASTEST APPROACH USING ALPHABETS ARRAY:
+    public int maxNumberOfBalloons(String text) {
+            int[] chars = new int[26]; //count all letters
+            for (char c : text.toCharArray()) {
+                chars[c - 'a']++;
+            }
+            int min = chars[1];//for b
+            min = Math.min(min, chars[0]);//for a
+            min = Math.min(min, chars[11] / 2);// for l /2 
+            min = Math.min(min, chars[14] / 2);//similarly for o/2
+            min = Math.min(min, chars[13]);//for n
+            return min;        
+        }
+}

@@ -1,0 +1,28 @@
+class Solution {
+    class Pair{
+        String str;
+        int freq;
+        Pair(){}
+        Pair(String s, int val){
+            this.str=s;
+            this.freq=val;
+        }
+    }
+    public List<String> topKFrequent(String[] words, int k) {
+        PriorityQueue<Pair> pq=new PriorityQueue<>((o1,o2)->{
+            if(o1.freq!=o2.freq)
+                return (o2.freq-o1.freq);
+            else
+                return (o1.str.compareTo(o2.str));
+        });
+        HashMap<String,Integer> hm=new HashMap<>();
+        for(String word:words)
+            hm.put(word,hm.getOrDefault(word,0)+1);
+        for(String key:hm.keySet())
+            pq.offer(new Pair(key,hm.get(key)));
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<k;i++)
+            list.add(pq.poll().str);
+        return list;
+    }
+}

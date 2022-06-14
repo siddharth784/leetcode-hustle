@@ -1,0 +1,64 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int count=0;
+    public int pathSum(TreeNode root, int targetSum) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        hm.put(0,1);
+        traverse(root,targetSum,0,hm);
+        return count;
+    }
+    public void traverse(TreeNode root, int targetSum, int presum, HashMap<Integer,Integer> hm){
+        if(root==null)
+            return;
+        
+        presum+=root.val;
+        if(hm.containsKey(presum-targetSum))
+            count+=hm.get(presum-targetSum);
+        hm.put(presum,hm.getOrDefault(presum,0)+1);
+        
+        traverse(root.left,targetSum,presum,hm);
+        traverse(root.right,targetSum,presum,hm);
+       
+        if(hm.get(presum)>1)
+            hm.put(presum,hm.get(presum)-1);
+        else if(hm.get(presum)==1)
+            hm.remove(presum);
+    }
+}
+
+// class Solution {
+//     int count=0;
+//     static HashMap<Integer,Integer> hm=new HashMap<>();
+//     hm.put(0,1);
+//     public int pathSum(TreeNode root, int targetSum) {
+//         // HashMap<Integer,Integer> hm=new HashMap<>();
+//         traverse(root,targetSum,0);
+//         return count;
+//     }
+//     public void traverse(TreeNode root, int targetSum, int presum){
+//         if(root==null)
+//             return;
+//         presum+=root.val;
+//         if(hm.containsKey(presum-targetSum)){
+//             count+=hm.get(presum-targetSum);
+//             System.out.println("found for presum="+presum);
+//         }
+//         hm.put(presum,hm.getOrDefault(presum,0)+1);
+//         traverse(root.left,targetSum,presum,hm);
+//         traverse(root.right,targetSum,presum,hm);
+//     }
+// }

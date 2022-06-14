@@ -1,0 +1,46 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean btreeGameWinningMove(TreeNode root, int n, int x) {
+        TreeNode xnode=spot(root,x);
+        int subtree1=numberOfNodes(xnode.left);
+        int subtree2=numberOfNodes(xnode.right);
+        int subtree3=n-subtree1-subtree2-1;
+        int max=Math.max(Math.max(subtree1,subtree2),subtree3);
+        if(max>n-max)
+            return true;
+        return false;
+    }
+    public TreeNode spot(TreeNode root, int x){
+        if(root==null)
+            return null;
+        if(root.val==x)
+            return root;
+        TreeNode n1=spot(root.left,x);
+        TreeNode n2=spot(root.right,x);
+        if(n1!=null)
+            return n1;
+        if(n2!=null)
+            return n2;
+    }
+    public int numberOfNodes(TreeNode root){
+        if(root==null)
+            return 0;
+        return (1+numberOfNodes(root.left)+numberOfNodes(root.right));
+    }
+}
+
+

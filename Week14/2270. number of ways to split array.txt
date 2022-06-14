@@ -1,0 +1,16 @@
+class Solution {
+    public int waysToSplitArray(int[] nums) {
+        long netsum=0;
+        for(int num:nums)
+            netsum+=Long.valueOf(num);
+        long lsum=0,rsum=netsum;
+        int ways=0;
+        for(int i=0;i<nums.length;i++){
+            lsum+=nums[i];
+            rsum-=nums[i];
+            if(lsum>=rsum && i<nums.length-1)
+                ways++;
+        }
+        return ways;
+    }
+}

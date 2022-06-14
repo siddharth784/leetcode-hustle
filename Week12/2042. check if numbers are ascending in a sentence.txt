@@ -1,0 +1,25 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        int hold=Integer.MIN_VALUE;
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(Character.isDigit(ch)==false)
+                continue;
+            
+            //experiment
+            else{
+                int temp=0;
+                while(i<s.length() && s.charAt(i)!=' '){
+                    temp*=10;
+                    temp+=s.charAt(i);
+                    i++;
+                }
+                if(temp<=hold)
+                    return false;
+                hold=temp;
+            }
+        }
+        return true;
+    }
+}
+            

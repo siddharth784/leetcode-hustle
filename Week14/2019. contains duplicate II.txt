@@ -1,0 +1,58 @@
+2 APPROACHES:
+
+HASHMAP APPROACH- T. COMPLEXITY O(n), S. COMPLEXITY O(n)
+We use a HashMap to record the maximum index of each element. When scanning the array from left to right, the process:
+
+If an element nums[i] already exists in the hash table and the index j of the element recorded in the hash table satisfies i - j <= k, return true.
+
+Recording nums[i] and index i into the hash table, where i is the largest index of nums[i].
+
+public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer,Integer> hm=new HashMap<>();  //stores value-index pair
+        for(int i=0;i<nums.length;i++){
+            int num=nums[i];
+            if(hm.containsKey(num)){
+                if(i-hm.get(num)<=k)
+                    return true;
+            }
+            hm.put(num,i);
+        }
+        return false;
+    }
+}
+SLIDING WINDOW APPROACH- T. COMPLEXITY O(n), S.COMPLEXITY O(k)
+Maintain a sliding window whose length does not exceed k+1 in the array nums, and the abs value of any two index delta in the same sliding window does not exceed k.**
+If the sliding window has repeated elements, then there are two different index i and j such that nums[i] = nums[j] and i - j <= k.
+**
+If there are no repeating elements in the sliding window, there is no index that meets the requirements.
+
+Therefore, it is only necessary to traverse each sliding window and determine whether there are duplicate elements in the sliding window.
+
+We use a HashSet to store the elements in the sliding window.
+
+If i>k, the element whose index is i-k-1 will be removed from the sliding window.
+
+If a element already exists in the HashSet, there are duplicate elements, return true, if not in the hash set add it to the hash set.
+*
+
+public boolean containsNearbyDuplicate(int[] nums, int k) {
+    if (nums == null || nums.length <= 1 || k <= 0) {
+        return false;
+    }
+
+    int len = nums.length;
+    Set<Integer> set = new HashSet<>();
+    for (int i = 0; i < len; i++) {
+        if (i > k) {
+            set.remove(nums[i - k - 1]);
+        }
+
+        if (set.contains(nums[i])) {
+            return true;
+        } else {
+            set.add(nums[i]);
+        }
+    }
+
+    return false;
+}

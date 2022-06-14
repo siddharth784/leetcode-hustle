@@ -1,0 +1,26 @@
+class Solution {
+    int st=100001,end=-1;   //based on constraints of the question
+    public int[] searchRange(int[] nums, int target) {
+        binarySearch(nums,target,0,nums.length-1);
+        if(st>=nums.length || end<0)
+            return new int[]{-1,-1};
+        int[] ans=new int[]{st,end};
+        return ans;
+    }
+    public void binarySearch(int[] nums, int tar, int lo, int hi){
+        if(lo>hi)
+            return;
+        int mid=(lo+hi)/2;
+        if(nums[mid]==tar){
+            st=Math.min(st,mid);
+            end=Math.max(end,mid);
+            binarySearch(nums,tar,lo,mid-1);
+            binarySearch(nums,tar,mid+1,hi);
+        }
+        else if(nums[mid]>tar)
+            binarySearch(nums,tar,lo,mid-1);
+        else if(nums[mid]<tar){
+            binarySearch(nums,tar,mid+1,hi);
+        }
+    }
+}

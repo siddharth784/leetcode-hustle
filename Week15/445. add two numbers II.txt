@@ -1,0 +1,67 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1=new Stack<>();
+        Stack<Integer> s2=new Stack<>();
+        for(var p=l1;p!=null;p=p.next)
+            s1.push(p.val);
+        for(var p=l2;p!=null;p=p.next)
+            s2.push(p.val);
+        int carry=0;
+        ListNode hold=null;
+        while(s1.empty()==false || s2.empty()==false || carry!=0){
+            int sum=carry;
+            if(!s1.empty())
+                sum+=s1.pop();
+            if(!s2.empty())
+                sum+=s2.pop();
+            // System.out.println(sum);
+            carry=sum/10;
+            ListNode node=new ListNode(sum%10);
+            node.next=hold;
+            hold=node;
+        }
+        return hold;
+    }
+}
+        
+        
+        
+        // THE FOLLOWING APPROACH IS INVALID CUZ LINKED LIST CAN HAVE UP TO 100 ELEMENTS AND CONSEQUENTLY AS MANY DIGITS IN THE NUMBER, WHICH INT CAN'T STORE
+//         int num1=0,num2=0;
+//         for(var p=l1;p!=null;p=p.next)
+//             num1=num1*10+p.val;
+//         for(var p=l2;p!=null;p=p.next)
+//             num2=num2*10+p.val;
+//         int num=num1+num2;
+//         System.out.println(num);
+//         if(num==0)
+//             return new ListNode(0);
+//         int digits=0;
+//         int holdnum=num;
+//         while(num!=0){
+//             digits++;
+//             num/=10;
+//         }
+//         num=holdnum;
+//         int div=(int)Math.pow(10,digits-1);
+//         ListNode ans=new ListNode();
+//         ListNode holdans=ans;
+//         while(div!=0){
+//             ans.next=new ListNode(num/div);
+//             ans=ans.next;
+//             num=num%div;
+//             div/=10;
+//         }
+//         return holdans.next;
+//     } 
+// }

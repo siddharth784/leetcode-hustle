@@ -1,0 +1,48 @@
+So I was attempting this question by myself and after 15 minutes I came up with an approach which looks like this:
+
+class Solution {
+    int maxlen=0;
+    public int longestZigZag(TreeNode root) {
+        traverse(root,'l',0);   //after root we have to look to its left if there's further tree
+        traverse(root,'r',0);
+        return maxlen;
+    }
+    public void traverse(TreeNode node, char dir, int n){
+        if(node==null)
+            return;
+        n++;
+        System.out.println(n);
+        maxlen=Math.max(maxlen,n-1);
+        if(dir=='l')
+            traverse(node.left,'r',n);
+        else if(dir=='r')
+            traverse(node.right,'l',n);
+    }
+}
+
+Then I kinda gave up and looked up the solution in discuss section. turns out the correct solution is:
+
+class Solution {
+    int maxStep = 0;
+    public int longestZigZag(TreeNode root) {
+        dfs(root, true, 0);
+        dfs(root, false, 0);
+        return maxStep;
+    }
+    private void dfs(TreeNode root, boolean isLeft, int step) {
+        if (root==null) 
+        return;
+        maxStep=Math.max(maxStep, step); // update max step sofar
+        if (isLeft){
+            dfs(root.left, false, step + 1); // keep going from root to left
+            dfs(root.right, true, 1); // restart going from root to right
+        } 
+        else {
+            dfs(root.right, true, step + 1); // keep going from root to right
+            dfs(root.left, false, 1); // restart going from root to left
+        }
+    }
+}
+
+
+I was soooo close. All I needed to do extra, was to run traverse for the non zigzag child of a node, and start a new sum(if you aren't able to understand, then see my final solution to this problem). It's honestly very impressive to me how I was able to come up with exactly the same prototype of traversal function(same arguments). Impressed.

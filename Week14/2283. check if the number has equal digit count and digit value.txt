@@ -1,0 +1,13 @@
+class Solution {
+    public boolean digitCount(String num) {
+        int[] digitcount=new int[10];
+        for(char ch:num.toCharArray())
+            digitcount[Character.getNumericValue(ch)]++;
+        
+        for(int i=0;i<num.length();i++){
+            if(digitcount[i]!=Character.getNumericValue(num.charAt(i)))
+                return false;
+        }
+        return true;
+    }
+}

@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Queue<Pair> q=new ArrayDeque<>();
+        q.offer(new Pair(root,0));
+        while(q.isEmpty()==false){
+            int count=q.size();
+            // Stack<Pair> st=new Stack<>();
+            List<Pair> al=new ArrayList<>();
+            boolean xfound=false,yfound=false;
+            int xparent=0,yparent=0;
+            for(int i=0;i<count;i++){
+                Pair p=q.poll();
+                TreeNode node=p.root;
+                if(node.val==x){
+                    xfound=true;
+                    xparent=p.parent;
+                }
+                if(node.val==y){
+                    yfound=true;
+                    yparent=p.parent;
+                }
+                al.add(p);
+                if(node.left!=null)
+                    q.offer(new Pair(node.left,node.val));
+                if(node.right!=null)
+                    q.offer(new Pair(node.right,node.val));
+            }
+            if(xfound && yfound){
+                if(xparent!=yparent)
+                    return true;
+            }      
+        }
+        return false;
+    }
+}
+class Pair{
+    TreeNode root;
+    int parent;
+    Pair(){ }
+    Pair(TreeNode node, int val){
+        this.root=node;
+        this.parent=val;
+    }
+}s

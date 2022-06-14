@@ -1,0 +1,14 @@
+class Solution {
+    public int totalMoney(int n) {
+        int weeks=n/7+1;
+        int week1=28;
+        int money=0;
+        for(int i=1;i<weeks;i++)
+            money+=week1+7*(i-1);
+        System.out.println(money);
+        for(int i=weeks;i<weeks+n%7;i++)
+            money+=i;
+        System.out.print(money);
+        return money;
+    }
+}

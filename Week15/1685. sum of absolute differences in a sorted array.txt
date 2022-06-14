@@ -1,0 +1,39 @@
+class Solution {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+/*         THE CORRECT APPROACH IS GIVEN IN THE HINTS OF THIS QUESTION. IT IS TO WRITE DOWN THE GENERIC FORMULA FOR nums[i], then standardise the formula so as to optimise time complexity
+        WHICH WILL COME DOWN TO: 
+         ans[i]= (no. of elements to left of nums[i])*(nums[i]) - (no. of elements to right of nums[i])*(nums[i]) - (Σelements to left of nums[i]) + (Σelements to right of nums[i])           
+         which means storing prefix and suffix sum for nums array will help in optimising time complexity                                           */
+        int presum=0,sufsum=0;
+        for(int i:nums)
+            sufsum+=i;
+        int[] ans=new int[nums.length];
+        
+        for(int i=0;i<nums.length;i++){
+            sufsum-=nums[i];
+            ans[i]=i*nums[i]-(nums.length-i-1)*nums[i]-presum+sufsum;
+            presum+=nums[i];
+        }
+        return ans;
+    }
+}
+        
+        
+        
+        
+        
+        
+        
+        //THE FOLLOWING BRUTE FORCE APPROACH IS EXCEEDING TIME LIMIT TO EXECUTE
+//         
+//         int[] result=new int[nums.length];
+//         for(int i=0;i<nums.length;i++){
+//             for(int j=0;j<nums.length&&j!=i;j++){
+//                 result[i]+=Math.abs(nums[i]-nums[j]);
+//             }
+//             for(int j=i+1;j<nums.length;j++)
+//                 result[i]+=Math.abs(nums[i]-nums[j]);
+//         }
+//             return result;
+//     }
+// }

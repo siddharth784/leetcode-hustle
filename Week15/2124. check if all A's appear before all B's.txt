@@ -1,0 +1,31 @@
+class Solution {
+    public boolean checkString(String s) {
+//         int righta=Integer.MIN_VALUE, leftb=Integer.MAX_VALUE;
+//         int k=0;
+//         for(char ch:s.toCharArray()){
+//             if(ch=='a')
+//                 righta=Math.max(righta,k);
+//             else
+//                 leftb=Math.min(leftb,k);
+//             k++;
+//         }
+//         if(righta>leftb)
+//             return false;
+//         return true;
+//     }
+// }
+
+// IN THIS FASTER APPROACH, WE INSTEAD CHECK IF THERE IS ANY B BEFORE ANY A. IF YES, RETURN FALSE IMMEDIATELY ELSE RETURN TRUE AT THE END.
+        char hold='a';
+        for(char ch:s.toCharArray()){
+            if(ch=='a'){
+                if(hold=='b')
+                    return false;
+                hold='a';
+            }
+            else
+                hold='b';
+        }
+        return true;
+    }
+}

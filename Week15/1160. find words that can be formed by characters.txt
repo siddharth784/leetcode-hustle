@@ -1,0 +1,25 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        char[] alpha=new char[26];
+        for(char ch:chars.toCharArray())
+            alpha[ch-'a']++;
+        int count=0;
+        for(String word:words){
+            boolean good=true;
+            Map<Character,Integer> hm=new HashMap<>();
+            for(char ch:word.toCharArray())
+                hm.put(ch,hm.getOrDefault(ch,0)+1);
+            for(char ch:hm.keySet()){
+                if(alpha[ch-'a']>=hm.get(ch))
+                    continue;
+                else{
+                    good=false;
+                    break;
+                }
+            }
+            if(good)
+                count+=word.length();
+        }
+        return count;
+    }
+}

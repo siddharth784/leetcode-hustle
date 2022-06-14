@@ -1,0 +1,56 @@
+class Solution {
+    public String[] findWords(String[] words) {
+        HashMap<Character,Boolean> hm1=new HashMap<>();
+        HashMap<Character,Boolean> hm2=new HashMap<>();
+        HashMap<Character,Boolean> hm3=new HashMap<>();
+        List<String> ans=new ArrayList<>();
+        String s1="qwertyuiop";
+        String s2="asdfghjkl";
+        String s3="zxcvbnm";
+        for(char ch:s1.toCharArray()){
+            hm1.put(ch,true);
+            // hm1.put((char)(ch+'A'-'a'),true);
+        }
+        for(char ch:s2.toCharArray()){
+            hm2.put(ch,true);
+            // hm1.put((char)(ch+'A'-'a'),true);
+        }
+        for(char ch:s3.toCharArray()){
+            hm3.put(ch,true);
+            // hm1.put((char)(ch+'A'-'a'),true);
+        }
+        
+        for(String word:words){
+            int row=-1;
+            String lword=word.toLowerCase();
+            if(hm1.containsKey(lword.charAt(0)))
+                row=1;
+            else if(hm2.containsKey(lword.charAt(0)))
+                row=2;
+            else if(hm3.containsKey(lword.charAt(0)))
+                row=3;
+            boolean add=true;
+            for(int i=1;i<word.length();i++){
+                int temprow=-1;
+                char ch=lword.charAt(i);
+                    if(hm1.containsKey(ch))
+                        temprow=1;
+                    else if(hm2.containsKey(ch))
+                        temprow=2;
+                    else if(hm3.containsKey(ch))
+                        temprow=3;
+                    if(temprow!=row){
+                        add=false;   
+                        break;             
+                    }
+            }
+            if(add)
+                ans.add(word);
+        }
+        String[] fans=new String[ans.size()];
+        for(int i=0;i<fans.length;i++)
+            fans[i]=ans.get(i);
+        return fans;
+        
+    }
+}

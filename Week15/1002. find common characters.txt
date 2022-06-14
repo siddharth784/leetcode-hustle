@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> commonChars(String[] words) {
+        Map<Character,Integer> union=new HashMap<>();
+        List<String> ans=new ArrayList<>();
+        for(char ch:words[0].toCharArray())
+            union.put(ch,union.getOrDefault(ch,0)+1);
+        for(int i=1;i<words.length;i++){
+            String word=words[i];
+            HashMap<Character,Integer> hm=new HashMap<>();
+            for(char ch:word.toCharArray()){
+                if(union.containsKey(ch))
+                    hm.put(ch,Math.min(union.get(ch),hm.getOrDefault(ch,0)+1));
+            }
+            union=hm;            
+        }
+        for(char key:union.keySet()){
+            for(int i=0;i<union.get(key);i++)
+                ans.add(""+key);
+        }
+        return ans;
+    }
+}

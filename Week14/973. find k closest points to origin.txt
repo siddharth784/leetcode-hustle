@@ -1,0 +1,32 @@
+class Solution {
+    class Pair{
+        int x,y;
+        int d;
+        Pair(){}
+        Pair(int a, int b, int d){
+            this.x=a;
+            this.y=b;
+            this.d=d;
+        }
+    }
+    public int[][] kClosest(int[][] points, int k) {
+        Queue<Pair> pq=new PriorityQueue<>((o1,o2)->{
+            return o1.d-o2.d;
+        });
+        for(int i=0;i<points.length;i++){
+            int a=points[i][0];
+            int b=points[i][1];
+            int dis=distance(a,b);
+            pq.offer(new Pair(a,b,dis));
+        }
+        int[][] ans=new int[k][2];
+        for(int i=0;i<ans.length;i++){
+            ans[i][0]=pq.peek().x;
+            ans[i][1]=pq.poll().y;
+        }
+        return ans;
+    }
+    public int distance(int a, int b){
+        return (a*a+b*b);
+    }
+}

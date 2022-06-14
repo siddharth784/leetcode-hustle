@@ -1,0 +1,21 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Map<Integer,Boolean> hm=new HashMap<>();
+        for(int i:nums1)
+            hm.put(i,false);
+        for(int i:nums2){
+            if(hm.containsKey(i))
+                hm.put(i,true);
+        }
+        int k=0;
+        ArrayList<Integer> al=new ArrayList<>();
+        for(int i:hm.keySet()){
+            if(hm.get(i)==true)
+                al.add(i);
+        }
+        int[] ans=new int[al.size()];
+        for(int i:al)
+            ans[k++]=i;
+        return ans;
+    } 
+}

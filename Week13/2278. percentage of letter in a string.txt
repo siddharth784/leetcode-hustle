@@ -1,0 +1,11 @@
+class Solution {
+    public int percentageLetter(String s, char letter) {
+        double count=0;
+        for(char ch:s.toCharArray()){
+            if(ch==letter)
+                count++;
+        }
+        double percentage=count/s.length();
+        return (int)(percentage*100);
+    }
+}

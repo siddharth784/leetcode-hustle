@@ -1,0 +1,27 @@
+class Solution {
+    public List<Integer> twoOutOfThree(int[] nums1, int[] nums2, int[] nums3) {
+        Map<Integer,Boolean> hm1 = new HashMap<>();
+        Map<Integer,Boolean> hm2 = new HashMap<>();
+        Map<Integer,Boolean> hm3 = new HashMap<>();
+        for(int i:nums1)
+            hm1.put(i,true);
+        for(int i:nums2)
+            hm2.put(i,true);
+        for(int i:nums3)
+            hm3.put(i,true);
+        List<Integer> al = new ArrayList<>();
+        for(int i:hm1.keySet()){
+            if( (hm2.containsKey(i) || hm3.containsKey(i)) && al.contains(i)==false)
+                al.add(i);
+        }
+        for(int i:hm2.keySet()){
+            if( (hm1.containsKey(i) || hm3.containsKey(i)) && al.contains(i)==false)
+                al.add(i);
+        }
+        for(int i:hm3.keySet()){
+            if( (hm2.containsKey(i) || hm1.containsKey(i)) && al.contains(i)==false)
+                al.add(i);
+        }
+        return al;
+    }
+}

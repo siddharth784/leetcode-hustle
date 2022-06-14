@@ -1,0 +1,48 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode[] splitListToParts(ListNode head, int k) {  
+        
+//  IT IS AN EMOTIONAL MOMENT FOR ME CUZ I HAVE DONE THIS QUESTION ALLL BY MYSELF AT 1:42AM IN THE MIDNIGHT HOUR. I NEVER THOUGHT I WOULD BE ABLE TO DO IT MYSELF WITHOUT LOOKING AT DISCUSS SECTION, BUT YOU KNOW WHAT THEY SAY "BELIEVE".
+
+// The approach used here is, find size(viz the size of linked lists which will be stored at the right part of array) and rest(viz the number of linked lists in the array which will have (size+1) number of nodes in them). Then we traverse through the linked list and knowing the sizes, we generate them. And in the end, if there are still indexes left in the array unfilled, it signals that they are supposed to be filled null since we have exhaused head linked list so there aren't anymore nodes to add to array but null.
+// dry run kro kafi clear ho jaega...tune khud hi kiya hai question after all, that too in about 10 minutes.
+        int len=0;
+        for(var p=head;p!=null;p=p.next)
+            len++;
+        int size=len/k;
+        int rest=len%k;
+        ListNode[] ans=new ListNode[k];
+        ListNode p=head;
+        int idx=0;
+        
+        while(p!=null){
+            int n=size;
+            if(rest!=0){
+                n++;
+                rest--;
+            }
+            ans[idx++]=p;
+            ListNode hold=p;
+            for(int i=1;i<n;i++)
+                p=p.next;
+            
+            ListNode next=p.next;
+            p.next=null;
+            p=next;
+        }
+        while(idx<k)
+            ans[idx++]=null;
+        return ans;
+    }
+}
+
+

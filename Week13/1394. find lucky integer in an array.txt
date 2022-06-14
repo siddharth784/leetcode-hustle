@@ -1,0 +1,27 @@
+class Solution {
+    public int findLucky(int[] arr) {
+        TreeMap<Integer,Integer> hm=new TreeMap<>();
+        for(int i:arr)
+            hm.put(i,hm.getOrDefault(i,0)+1);
+        int lucky=-1;
+        for(int i:hm.keySet()){
+            if(hm.get(i)==i)
+                lucky=Math.max(lucky,i);
+        }
+        return lucky;
+    }
+}
+
+
+//ANOTHER O(N) 100% FASTER APPROACH WITH WORSE SPACE COMPLEXITY
+    public int findLucky(int[] arr){
+        int[] nums=new int[501];
+        for(int i:arr)
+            nums[i]++;
+        for(int i=500;i>=1;i--){
+            if(nums[i]==i)
+                return i;
+        }
+        return -1;
+    }
+}

@@ -1,0 +1,70 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        if(root==null)
+            return new ArrayList<>();
+        List<List<Integer>> ans=new ArrayList<>();
+        Map<Integer,List<Pair>> tm=new TreeMap<>();
+        Queue<Pair> q=new ArrayDeque<>();
+        q.offer(new Pair(root,0,0));
+        // int lvl=0;
+        while(q.isEmpty()==false){
+            Pair p=q.poll();
+            TreeNode node=p.root;
+            int pos=p.pos;
+            if(tm.containsKey(pos)==false){
+                List<Pair> al=new ArrayList<>();
+                al.add(new Pair(node,pos,p.lvl));
+                tm.put(pos,al);
+            }
+            else if(tm.containsKey(pos)){
+                tm.get(pos).add(new Pair(node,pos,p.lvl));
+            }
+            if(node.left!=null)
+                q.offer(new Pair(node.left,pos-1,p.lvl+1));
+            if(node.right!=null)
+                q.offer(new Pair(node.right,pos+1,p.lvl+1));
+            // lvl++;
+        }
+        for(int i:tm.keySet()){
+            List<Pair> li=tm.get(i);
+            Collections.sort(li,(a,b)->{
+                if(a.lvl==b.lvl)
+                    return (a.root.val-b.root.val);
+                else
+                    return (a.lvl-b.lvl);
+            });
+            ArrayList<Integer> al=new ArrayList<>();
+            for(Pair p:li)
+                al.add(p.root.val);
+            ans.add(al);
+        }
+        
+        return ans;
+    }
+}
+class Pair{
+    TreeNode root;
+    int pos;
+    int lvl;
+    Pair(){ }
+    Pair(TreeNode node, int val, int lvl){
+        this.root=node;
+        this.pos=val;
+        this.lvl=lvl;
+    }
+}

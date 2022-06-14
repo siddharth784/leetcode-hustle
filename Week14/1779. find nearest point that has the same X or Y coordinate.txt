@@ -1,0 +1,62 @@
+//2 APPROACHES:
+
+
+
+class Solution {
+   
+ class Pair{
+        int x,y,manhatdis,idx;
+        Pair(){}
+        Pair(int a, int b, int c, int i){
+            this.x=a;
+            this.y=b;
+            this.manhatdis=c;
+            this.idx=i;
+        }
+    }
+
+    public int nearestValidPoint(int x, int y, int[][] points) {
+        PriorityQueue<Pair> pq=new PriorityQueue<>((o1,o2)->{
+            if(o1.manhatdis==o2.manhatdis)
+                return (o1.idx-o2.idx);
+            else
+                return (o1.manhatdis-o2.manhatdis);
+        });
+        for(int i=0;i<points.length;i++){
+            int tempx=points[i][0];
+            int tempy=points[i][1];
+            if(tempx==x||tempy==y)
+                pq.offer(new Pair(tempx,tempy,manhatdis(tempx,tempy,x,y),i));
+        }
+        if(pq.isEmpty())
+            return -1;
+        else
+            return (pq.peek().idx);
+    }
+    
+    public int manhatdis(int x1, int y1, int x2, int y2){
+        return (Math.abs(x1-x2)+Math.abs(y1-y2));
+    }
+}
+
+
+
+ //ANOTHER SIMPLER APPROACH
+    
+    
+     public int nearestValidPoint(int x, int y, int[][] points) {
+         int mindis=Integer.MAX_VALUE,idx=-1;
+         for(int i=0;i<points.length;i++){
+             int tempx=points[i][0];
+             int tempy=points[i][1];
+             if(tempx==x||tempy==y){
+                 int d=Math.abs(x-tempx)+Math.abs(y-tempy);
+                 if(d<mindis){
+                     mindis=d;
+                     idx=i;
+                 }
+             }
+         }
+         return idx;
+     }
+}

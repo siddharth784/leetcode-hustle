@@ -1,0 +1,14 @@
+class Solution {
+    public int minTimeToType(String word) {
+        int total=0;
+        char hold='a';
+        for(char ch:word.toCharArray()){
+            int clockwise=Math.abs(ch-hold);
+            int anticlockwise=Math.abs(26-clockwise);
+            total+=(Math.min(clockwise,anticlockwise));
+            hold=ch;
+        }
+        total+=word.length();
+        return total;
+    }
+}

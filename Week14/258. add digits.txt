@@ -1,0 +1,14 @@
+https://leetcode.com/problems/add-digits/discuss/1754049/Easy-O(1)-Explanation-with-Example
+
+Do look the explanation before trying to make sense of the code, because it won't. That's cuz the question belongs to the concept of "digital root" which is a topic of Number Theory, which I haven't studied till yet.
+
+class Solution {
+    public int addDigits(int num) {
+        if(num==0)
+            return 0;
+        if(num%9==0)
+            return 9;
+        else
+            return (num%9);
+    }
+}

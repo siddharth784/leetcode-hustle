@@ -1,0 +1,13 @@
+class Solution {
+    public int minOperations(int[] nums) {
+        int hold=nums[0],count=0;
+        for(int i=0;i<nums.length;i++){
+            if(!(nums[i]>hold || i==0)){
+                count+=hold-nums[i]+1;
+                nums[i]=hold+1;
+            }
+            hold=nums[i];
+        }
+        return count;
+    }
+}

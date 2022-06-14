@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int maxlen=0;
+    public int longestZigZag(TreeNode root) {
+        traverse(root,'l',0);   //this signifies that at root(after reaching at root in the function) we have to look to its left if there's further tree
+        traverse(root,'r',0);
+        return maxlen;
+    }
+    public void traverse(TreeNode node, char dir, int n){
+        if(node==null)
+            return;
+        n++;
+        maxlen=Math.max(maxlen,n-1);
+        if(dir=='l'){
+            traverse(node.left,'r',n);
+            traverse(node.right,'l',1);	//meaning that we also want to see if there exists any zigzag path starting from node whose length can be greatest
+        }
+        else if(dir=='r'){
+            traverse(node.right,'l',n);
+            traverse(node.left,'r',1);	//meaning that we also want to see if there exists any zigzag path starting from node whose length can be greatest
+        }
+    }
+}

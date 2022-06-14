@@ -1,0 +1,60 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //SUPERIOR APPROACH BY SUMIR SIR AND ME COMBINED (FASTER THAN 100%) USING UPPER LIMIT LOWER LIMIT AND STATIC POINTER VARIABLE
+    int j=0;
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode node=new TreeNode(preorder[j++]);
+        node.left=construct(preorder,Integer.MIN_VALUE,node.val);
+        node.right=construct(preorder,node.val,Integer.MAX_VALUE);
+        return node;
+    }
+    public TreeNode construct(int[] preorder, int min, int max){
+        if(j>=preorder.length || preorder[j]<=min || preorder[j]>=max)
+            return null;
+        TreeNode node=new TreeNode(preorder[j++]);
+        node.left=construct(preorder,min,node.val);
+        node.right=construct(preorder,node.val,max);
+        return node;
+    }
+}
+
+    
+
+    //DIFFERENT APPROACH USING VISUAL+LOGICAL SENSE(USING THE CONCEPT THAT PREORDER = NODE LEFT RIGHT)
+    public TreeNode bstFromPreorder(int[] preorder){
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<preorder.length;i++)
+            hm.put(preorder[i],i);
+        TreeNode root=construct(preorder,0,preorder.length-1,hm);
+        return root;
+    }
+    public TreeNode construct(int[] preorder, int st, int end, HashMap<Integer,Integer> hm){
+        if(st>end)
+            return null;
+        TreeNode node=new TreeNode(preorder[st]);
+        // int idx=hm.get(node.val);
+        int leftnodes=0;
+        for(int j=st+1;j<=end;j++){
+            if(preorder[j]>=node.val)
+                break;
+            leftnodes++;
+        }
+        node.left=construct(preorder,st+1,leftnodes+st,hm);
+        node.right=construct(preorder,st+leftnodes+1,end,hm);
+        return node;
+    }
+}

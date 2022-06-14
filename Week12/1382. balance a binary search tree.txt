@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    ArrayList<Integer> al=new ArrayList<>();
+    public TreeNode balanceBST(TreeNode root){
+        if(root==null)
+            return null;
+        traverse(root);
+        Collections.sort(al);
+        return constructBST(al,0,al.size()-1);                
+    }
+    
+    public TreeNode constructBST(ArrayList<Integer> al, int lo, int hi){
+        if(lo>hi)
+            return null;
+        if(lo<=hi){
+            int mid=(lo+hi)/2;
+            TreeNode node=new TreeNode(al.get(mid),constructBST(al,lo,mid-1),constructBST(al,mid+1,hi));
+            return node;
+        }
+        return null;
+    }
+    
+    public void traverse(TreeNode root){
+        if(root==null)
+            return;
+        al.add(root.val);
+        traverse(root.left);
+        traverse(root.right);
+    }
+}

@@ -1,0 +1,104 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // FOR EXPLANATION: https://leetcode.com/problems/maximum-width-of-binary-tree/discuss/2120331/java-solution
+    class Pair{
+        TreeNode root;
+        long serialNo;
+        Pair(){}
+        Pair(TreeNode node, long val){
+            this.root=node;
+            this.serialNo=val;;
+        }
+    }
+    long maxw=0;
+    public int widthOfBinaryTree(TreeNode root){
+        Queue<Pair> q=new ArrayDeque<>();
+        q.offer(new Pair(root,1));
+        while(q.isEmpty()==false){
+            int count=q.size();
+            long l=Long.MAX_VALUE,r=Long.MIN_VALUE;
+            for(int i=0;i<count;i++){
+                Pair p=q.poll();
+                TreeNode hold=p.root;
+                long sno=p.serialNo;
+                r=Math.max(r,sno);
+                l=Math.min(l,sno);
+                if(hold.left!=null)
+                    q.offer(new Pair(hold.left,2*sno));
+                if(hold.right!=null)
+                    q.offer(new Pair(hold.right,2*sno+1));
+            }
+            maxw=Math.max(maxw,r-l+1);
+        }
+        return (int)(maxw);
+    }
+}
+    
+//      THE FOLLOWING CODE FAILS ONLY BECAUSE OF BAD TIME COMPLEXITY
+//     class Pair{
+//         TreeNode root;
+//         boolean real;
+//         int serialNo;
+//         Pair(){}
+//         Pair(TreeNode node, int val, boolean b){
+//             this.root=node;
+//             this.serialNo=val;
+//             this.real=b;
+//         }
+//     }
+//     int maxwidth=0;
+//     public int widthOfBinaryTree(TreeNode root) {
+//         Queue<Pair> q=new ArrayDeque<>();
+//         q.offer(new Pair(root,1,true));
+//         int num=1;
+//         while(q.isEmpty()==false){
+//             int count=q.size();
+//             int l=Integer.MAX_VALUE,r=Integer.MIN_VALUE;
+//             boolean lastlvl=true;//checks if the following level is the last one with real nodes
+//             for(int i=0;i<count;i++){
+//                 Pair p=q.poll();
+//                 TreeNode hold=p.root;
+//                 boolean b=p.real;
+//                 int n=p.serialNo;
+//                 if(b){
+//                     l=Math.min(l,n);
+//                     r=Math.max(r,n);
+//                 }
+//                 num++;
+                
+//                 if(b && hold.left!=null){
+//                     lastlvl=false;
+//                     q.offer(new Pair(hold.left,num,true));
+//                 }
+//                 else
+//                     q.offer(new Pair(new TreeNode(101),num,false));
+//                 num++;
+//                 if(b && hold.right!=null){
+//                     q.offer(new Pair(hold.right,num,true));
+//                     lastlvl=false;
+//                 }
+//                 else
+//                     q.offer(new Pair(new TreeNode(101),num,false));
+//             }
+//             // System.out.println(l+" "+r);
+//             maxwidth=Math.max(r-l+1,maxwidth);
+//             if(lastlvl)
+//                 break;
+//         }
+//         return maxwidth;
+//     }
+// }

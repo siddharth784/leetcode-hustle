@@ -1,0 +1,111 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public String getDirections(TreeNode root, int startValue, int destValue) {
+        ArrayList<TreeNode> startList=getPath(root, startValue);
+        ArrayList<TreeNode> destList=getPath(root, destValue);
+        int i=startList.size()-1,j=destList.size()-1;
+        while(i>=0 && j>=0 && startList.get(i)==destList.get(j)){
+            i--;
+            j--;
+        }
+        i++;
+        j++;
+        // now i is at the index of startList where lca lies, same for j w.r.t. destList
+        StringBuilder sb=new StringBuilder();
+        for(int idx=0;idx<i;idx++)
+            sb.append("U");
+        for(int idx=j-1;idx>=0;idx--){
+            if(destList.get(idx)==destList.get(idx+1).left)
+                sb.append("L");
+            else
+                sb.append("R");
+        }
+        return sb.toString();       
+    }
+    public ArrayList<TreeNode> getPath(TreeNode root, int val){
+        if(root==null)
+            return new ArrayList<>();
+        if(root.val==val){
+            ArrayList<TreeNode> al=new ArrayList<>();
+            al.add(root);
+            return al;
+        }
+        else{
+                ArrayList<TreeNode> left=getPath(root.left,val);
+                if(left.isEmpty()==false){
+                    left.add(root);
+                    return left;
+                }
+                else{   //left subtree mein val not present means either right subtree mein present or absent in the whole root subtree
+                    ArrayList<TreeNode> right=getPath(root.right,val);
+                    if(right.isEmpty()==false){
+                        right.add(root);
+                        return right;
+                    }
+                    else    //whole root subtree doesn't contain val.
+                        return new ArrayList<>();
+                }
+        }
+    }
+}
+        
+        //BELOW CODE WORKS, BUT SHOWS SPACE LIMIT EXCEEDED FOR EDGE CASES, OTHERWISE THIS BELOW CODE, MADE UP BY ME WORKS FOR ALL SMALLER CASES
+//         String startPath=findPathString(root,startValue,"");
+//         String endPath=findPathString(root,destValue,"");
+//         int lca=lowestCommonAncestor(root,startValue,destValue).val;
+//         int lcaPathSize=findPathString(root,lca,"").length();
+//         String lcaToStart=startPath.substring(lcaPathSize);
+//         String lcaToDest=endPath.substring(lcaPathSize);
+//         StringBuilder ans=new StringBuilder();
+//         for(int i=0;i<lcaToStart.length();i++)
+//             ans.append("U");
+//         ans.append(lcaToDest);
+//         return ans.toString();
+//     }
+//     public String findPathString(TreeNode root, int val, String str){//here str is the path to get to root node.
+//         if(root==null)
+//             return null;
+//         if(root.val==val)
+//             return str;
+//         String l=findPathString(root.left,val,str+"L");
+//         String r=findPathString(root.right,val,str+"R");
+//         if(l==null && r==null)
+//             return null;
+//         if(l!=null)
+//             return l;
+//         // if(r!=null)
+//             return r;   
+//     }
+    
+//     public TreeNode lowestCommonAncestor(TreeNode root, int p, int q) {
+//         if(root==null)
+//             return null;
+//         if(root.val==p||root.val==q)
+//             return root;
+//         TreeNode left=lowestCommonAncestor(root.left,p,q);
+//         TreeNode right=lowestCommonAncestor(root.right,p,q);
+//         if(left!=null && right!=null)
+//             return root;
+//         if(left!=null)
+//             return left;
+//         if(right!=null)
+//             return right;
+//         // if(left==null && root==null)
+//             return null;
+        
+//     }
+// }

@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int max=Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        maxPathSumRTN(root);
+        return max;
+    }
+    public int maxPathSumRTN(TreeNode root){
+        if(root==null)
+            return 0;
+        //left subtree mein single path starting from root.left that gives max path sum
+        int lmaxsum=maxPathSumRTN(root.left);
+        int rmaxsum=maxPathSumRTN(root.right);
+        
+        // so that if let's say lmaxsum is -ve, then rectify it by taking 0 instead of lmaxsum
+        int lmaxsum_=Math.max(lmaxsum,0);
+        int rmaxsum_=Math.max(rmaxsum,0);
+        
+        //this will give the sum of maximum sum node to node path involving root
+        int maxsumLtoR=lmaxsum_+rmaxsum_+root.val;
+        //update max with root ka node to node max path sum
+        max=Math.max(max,maxsumLtoR);
+        return (Math.max(lmaxsum_,rmaxsum_)+root.val);
+    }
+}

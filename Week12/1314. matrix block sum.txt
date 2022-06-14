@@ -1,0 +1,32 @@
+class Solution {
+    public int[][] matrixBlockSum(int[][] mat, int k) {
+        int m=mat.length,n=mat[0].length;
+        int[][] cumsum=new int[m][n];
+        for(int i=0;i<m;i++){
+            int sum=0;
+            for(int j=0;j<n;j++){
+                sum+=mat[i][j];
+                cumsum[i][j]=sum;
+            }
+        }
+        
+        int[][] ans=new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                int startcol=Math.max(0,j-k);
+                int endcol=Math.min(n-1,j+k);
+                int startrow=Math.max(0,i-k);
+                int endrow=Math.min(m-1,i+k);
+                int sum=0;
+                for(int idx=startrow;idx<=endrow;idx++){
+                    if(startcol!=0)
+                        sum+=cumsum[idx][endcol]-cumsum[idx][startcol-1];
+                    else
+                        sum+=cumsum[idx][endcol];
+                }
+                ans[i][j]=sum;
+            }
+        }
+        return ans;
+    }
+}

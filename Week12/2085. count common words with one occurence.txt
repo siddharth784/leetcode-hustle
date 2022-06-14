@@ -1,0 +1,24 @@
+class Solution {
+    public int countWords(String[] words1, String[] words2) {
+        HashMap<String,Boolean> hm1=new HashMap<>();
+        HashMap<String,Boolean> hm2=new HashMap<>();
+        for(String str:words1){
+            if(hm1.containsKey(str))
+                hm1.put(str,false);
+            else
+                hm1.put(str,true);
+        }
+        for(String str:words2){
+            if(hm1.containsKey(str)==false || hm2.containsKey(str) ||  (hm1.containsKey(str)==true && hm1.get(str)==false))
+                hm2.put(str,false);
+            else
+                hm2.put(str,true);
+        }
+        int count=0;
+        for(Boolean b:hm2.values()){
+            if(b)
+                count++;
+        }
+        return count;
+    }
+}

@@ -1,0 +1,25 @@
+class Solution {
+    public String freqAlphabets(String s) {
+        String ans="";
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(Character.isDigit(ch)==true){
+                if(i+2<s.length() && Character.isDigit(s.charAt(i+1)) && s.charAt(i+2)=='#' ){
+                    // ans+=(String)(ch-'a'+1+"");
+                    // System.out.println((String)(ch-'a'+1+""));
+                    int hold=Character.getNumericValue(ch)*10+Character.getNumericValue(s.charAt(i+1));
+                    ans+=(char)(96+hold);
+                    i+=2;
+                }
+                else{
+                    // ans+=(String)(ch-'a'+1+"");
+                    // System.out.println((String)(ch-'a'+1+""));
+                    ans+=(char)(96+Character.getNumericValue(ch));
+                }
+            }
+            else
+                continue;
+        }
+        return ans;
+    }
+}
