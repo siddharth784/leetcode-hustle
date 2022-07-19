@@ -1,0 +1,26 @@
+class Solution {
+    //Just divide by 2, 3 and 5 as often as possible and then check whether we arrived at 1. Also try divisor 4 if that makes the code simpler / less repetitive.
+    public boolean isUgly(int n) {
+        if(n<=0)
+            return false;
+        if(n<=6)
+            return true;
+        for(int i=2;i<=5;i++){
+            while(n%i==0)
+                n/=i;
+        }
+        return (n==1);
+    }
+}
+//         int i=2;
+//         while(n%i==0)
+//             n/=i;
+//         i=3;
+//         while(n%i==0)
+//             n/=i;
+//         i=5;
+//         while(n%i==0)
+//             n/=i;
+//         return (n==1);
+//     }
+// }

@@ -1,0 +1,38 @@
+class Solution {
+    public int jump(int[] nums) {
+        //MEMOIZATION/DP
+        int n=nums.length;
+        int[] dp=new int[n]; //dp[idx] must represent the minimum no. of jumps required to go from 0 to idx.
+        dp[0]=0;
+        for(int i=1;i<n;i++){
+            int minjumps=Integer.MAX_VALUE;
+            // the following for loop is about seeing ki before i, kitne indexes pe rehke you could reach i in 1 jump, and we check that by if(j+nums[j]>=i)
+            for(int j=i-1;j>=0;j--){
+                if(j+nums[j]>=i)
+                    minjumps=Math.min(minjumps,dp[j]);
+            }
+            dp[i]=1+minjumps;
+        }
+        return dp[n-1];
+    }
+}
+        
+        
+        // RECURSION WHICH IS GIVING WRONG ANSWER FOR SOME REASON IN SOME CASES
+//         return f(nums,0);
+//     }
+//     public int f(int[] nums, int idx){
+//         if(idx>=nums.length)
+//             return Integer.MAX_VALUE;
+//         if(idx==nums.length-1)
+//             return 0;
+//         if(nums[idx]==0)
+//             return Integer.MAX_VALUE;
+//         int maxjumplen=nums[idx];
+//         int minjumps=Integer.MAX_VALUE;
+//         for(int i=1;i<=maxjumplen;i++){
+//             minjumps=Math.min(minjumps,f(nums,idx+i));
+//         }
+//         return (1+minjumps);
+//     }
+// }

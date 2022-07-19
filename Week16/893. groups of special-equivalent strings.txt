@@ -1,0 +1,44 @@
+class Solution {
+    // SIMPLE APPROACH: IN A HASHSET OF STRINGS, THERE WILL ONLY BE ONE ENTRY FOR ALL SPECIAL EQUIVALENT STRINGS. HOW? BECAUSE WE WILL PROCESS STRINGS IN SUCH A WAY (BY PASSING THEM IN PROCESS FUNCTION), THAT ALL SPECIAL EQUIVALENT STRINGS WILL BE RETURNED AS THE SAME STRING AFTER PROCESSING. SO THEY WILL ONLY FORM ONE ENTRY SINCE HASHSET TAKES IN UNIQUE ENTITIES
+    public int numSpecialEquivGroups(String[] words) {
+        Set<String> set=new HashSet<>();
+        for(String word:words)
+            set.add(process(word));
+        return set.size();
+    }
+    public String process(String str){  
+        int[] odd = new int[26];
+        int[] even = new int[26];
+        for(int i=0;i<str.length();i++){
+            if(i%2==0)
+                even[str.charAt(i)-'a']++;
+            else
+                odd[str.charAt(i)-'a']++;
+        }
+        StringBuilder sb=new StringBuilder();
+        int evenidx=0,oddidx=0;
+        while(evenidx<26 && oddidx<26){
+            while(evenidx<26){
+                if(even[evenidx]!=0){
+                    for(int j=0;j<even[evenidx];j++)
+                    sb.append((char)('a'+evenidx));
+                    evenidx++;
+                    break;
+                }
+                else
+                    evenidx++;
+            }
+            while(oddidx<26){
+                if(odd[oddidx]!=0){
+                    for(int j=0;j<odd[oddidx];j++)
+                    sb.append((char)('a'+oddidx));
+                    oddidx++;
+                    break;
+                }
+                else 
+                    oddidx++;
+            }
+        }
+        return sb.toString();
+    }
+}

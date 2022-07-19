@@ -1,0 +1,27 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        int onestuds=0;     //no. of students who prefer square sandwich
+        int zerostuds=0;    //no. of students who prefer circular sandwich
+        for(int student:students){
+            if(student==0)
+                zerostuds++;
+            else
+                onestuds++;
+        }
+        for(int sandwich:sandwiches){
+            if(sandwich==0){
+                if(zerostuds==0)
+                    return onestuds;
+                else
+                    zerostuds--;
+            }
+            else if(sandwich==1){
+                if(onestuds==0)
+                    return zerostuds;
+                else
+                    onestuds--;
+            }
+        }
+        return 0;
+    }
+}

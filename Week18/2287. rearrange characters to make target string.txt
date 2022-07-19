@@ -1,0 +1,19 @@
+class Solution {
+    public int rearrangeCharacters(String s, String target) {
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(char ch:s.toCharArray())
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        int min=100;
+        HashMap<Character,Integer> hm_=new HashMap<>();
+        
+        for(char ch:target.toCharArray())
+            hm_.put(ch,hm_.getOrDefault(ch,0)+1);
+        
+        for(char ch:target.toCharArray()){
+            if(!hm.containsKey(ch))
+                return 0;
+            min=Math.min(min,hm.get(ch)/hm_.get(ch));
+        }
+        return min;
+    }
+}

@@ -1,0 +1,23 @@
+class Solution {
+    char[] vowels=new char[]{'a','e','i','o','u'};
+    public int countVowelStrings(int n) {
+        // firstly using recursion(top down)
+        
+        // if(n==1)
+            // return 5;
+        // countVowelStrings(n-1);
+        
+        // no lets create a f(idx,vowelidx) where idx is the number length of which strings are to be created, and vowelidx represent the vowel that we chose on (idx+1).
+        return f(n,4);
+    }
+    public int f(int idx, int lastvowel){
+        if(idx==1){
+            return 1+lastvowel;
+        }
+        int total=0;
+        for(int pick=0;pick<=lastvowel;pick++){
+            total+=f(idx-1,pick);
+        }
+        return total;
+    }
+}

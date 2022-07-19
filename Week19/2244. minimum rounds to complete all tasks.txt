@@ -1,0 +1,117 @@
+class Solution {
+    public int minimumRounds(int[] tasks) {
+        //DP
+        int n=tasks.length;
+        if(n==0)
+            return 0;
+        if(n==1)
+            return -1;
+        // the following 2 lines are wrong, cuz n=3 can also mean that there are 2 tasks of one difficulty level while 1 task of another difficulty level.
+        // if(n==2||n==3)
+        //     return 1;
+        
+        Map<Integer,Integer> map=new TreeMap<>();
+        for(int task:tasks)
+            map.put(task,map.getOrDefault(task,0)+1);
+        // System.out.println(map);
+        int[] dp=new int[n+1];
+        dp[0]=0;
+        dp[1]=-1;
+        // dp[2]=dp[3]=1;
+        for(int i=2;i<=n;i++){
+            // int subtwo=Integer.MAX_VALUE;
+            if(i==2||i==3)
+                dp[i]=1;
+            else{
+                int subtwo=1+dp[i-2];
+                if(dp[i-2]==-1){
+                    dp[i]=1+dp[i-3];
+                }else{
+                    int subthree=Integer.MAX_VALUE;
+                    if(i>3){
+                        subthree=1+dp[i-3];
+                        if(dp[i-3]==-1)
+                            dp[i]=subtwo;
+                        else
+                            dp[i]=Math.min(subtwo,subthree);
+                    }
+                }
+            }
+        }
+        // System.out.println(dp[2]);
+        // if(dp.length>3)
+        // System.out.println(dp[3]);
+        int rounds=0;
+        for(int freq:map.values()){
+            if(dp[freq]==-1)
+                return -1;
+            // System.out.println(rounds);
+            rounds+=dp[freq];
+            // System.out.println(rounds);
+        }
+        return rounds;
+    }
+}
+        
+        //MEMOIZATION
+//         Map<Integer,Integer> map=new HashMap<>();
+//         for(int task:tasks)
+//             map.put(task,map.getOrDefault(task,0)+1);
+         
+//         int[] memo=new int[tasks.length];
+//         stepstozero(memo.length-1,memo);
+//         System.out.println(memo[3]);
+//         int rounds=0;
+//         for(int freq:map.values()){
+//             if(memo[freq]==-1)
+//                 return -1;
+//             else
+//                 rounds+=memo[freq];
+//         }
+//         return rounds;
+//     }
+        
+//     public int stepstozero(int n, int[] memo){  // this function returns ki kisi number n ko zero krne mein kitne steps lagte hain, with each step being subtracting either 2 or 3 from the number
+//         if(n==0)
+//             return memo[n]=0;
+//         if(n==1)
+//             return memo[n]=-1;
+//         int subtwo=1+stepstozero(n-2,memo);
+//         int subthree=1+stepstozero(n-3,memo);
+//         return memo[n]=(Math.min(subtwo,subthree));        
+//     }
+// }
+        
+    
+    
+    
+    
+    
+        //RECURSION
+//         Map<Integer,Integer> map=new TreeMap<>();
+//         for(int task:tasks)
+//             map.put(task,map.getOrDefault(task,0)+1);
+        
+//         int ans=0;
+//         for(int freq:map.values()){
+//             int temp=stepstozero(freq);
+//             if(temp==-1)
+//                 return -1;
+//             else
+//                 ans+=temp;
+//         }
+//         return ans;
+//     }
+    
+//     public int stepstozero(int n){  // this function returns ki kisi number n ko zero krne mein kitne steps lagte hain, with each step being subtracting either 2 or 3 from the number
+//         if(n==0)
+//             return 0;
+//         if(n==1)
+//             return -1;
+//         if(n==2||n==3)
+//             return 1;
+//         int subtwo=1+stepstozero(n-2);
+//         int subthree=1+stepstozero(n-3);
+//         return Math.min(subtwo,subthree);        
+//     }
+// }

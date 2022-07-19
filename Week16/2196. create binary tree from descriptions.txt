@@ -1,0 +1,53 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode createBinaryTree(int[][] descriptions) {
+        HashMap<Integer,TreeNode> hm=new HashMap<>();
+        int temp=descriptions[0][0];
+        
+        for(int i=0;i<descriptions.length;i++){
+            hm.putIfAbsent(descriptions[i][0],new TreeNode(descriptions[i][0]));
+            hm.putIfAbsent(descriptions[i][1],new TreeNode(descriptions[i][1]));
+        }
+    
+        // System.out.println(hm);
+        // boolean[] hasParent=new boolean[hm.size()];
+        HashMap<TreeNode,Boolean> hasParent=new HashMap<>();
+        
+        for(int i=0;i<descriptions.length;i++){
+            TreeNode node=hm.get(descriptions[i][0]);
+            // System.out.println(descriptions[i][0]+" started");
+            if(!hasParent.containsKey(node))
+                hasParent.put(node,false);
+            
+            if(descriptions[i][2]==0){
+                node.right=hm.get(descriptions[i][1]);
+                hasParent.put(node.right,true);
+            }
+            else{                  //else if(descriptions[i][2]==1)
+                node.left=hm.get(descriptions[i][1]);
+                hasParent.put(node.left,true);
+            }
+            // System.out.println(descriptions[i][0]+" survived");
+        }
+        // System.out.println(hasParent);
+        for(TreeNode node:hasParent.keySet()){
+            if(hasParent.get(node)==false)
+                return node;
+        }
+        return new TreeNode(4);
+    }
+}

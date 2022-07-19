@@ -1,0 +1,22 @@
+class Solution {
+    public int dayOfYear(String date) {
+        int[] leapdays=new int[]{31,29,31,30,31,30,31,31,30,31,30,31};
+        int[] nonleapdays=new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
+        int yr=Integer.valueOf(date.split("-")[0]);
+        int month=Integer.valueOf(date.split("-")[1]);
+        int day=Integer.valueOf(date.split("-")[2]);
+        int total=0;
+        yr = (yr%100==0)?yr/100:yr;
+        if(yr%4==0){
+            for(int i=0;i<month-1;i++)
+                total+=leapdays[i];
+                total+=day; 
+        }
+        else{
+            for(int i=0;i<month-1;i++)
+                total+=nonleapdays[i];
+            total+=day;
+        }        
+        return total;
+    }
+}

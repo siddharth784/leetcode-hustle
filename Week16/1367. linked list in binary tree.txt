@@ -1,0 +1,49 @@
+
+class Solution {
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if(head==null||root==null)
+            return false;
+        
+        boolean check=false;
+        
+        if(root.val==head.val){
+            // System.out.print("checkPathExists ran for "+head.val);
+             check = checkPathExists(head,root);
+            // System.out.print(" and check came out to be "+check);
+            // System.out.println();
+        }
+        
+        if(check==false){
+            check = check || isSubPath(head,root.left);
+            check = check || isSubPath(head,root.right);
+        }
+        return check;
+    }
+    
+    public boolean checkPathExists(ListNode head, TreeNode root){
+        if(head==null)
+            return true;    //jab linked list jisse path match krna tha wo khatm hogya to mtlb no issue mtlb return true
+        if(root==null)
+            return false;   //jab linked list jisse match krna tha wo khatm nhi hua but tree hogya to path isn't made hence return false
+        return (head.val==root.val && (checkPathExists(head.next,root.left)||checkPathExists(head.next,root.right)));
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

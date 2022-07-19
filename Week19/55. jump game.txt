@@ -1,0 +1,32 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        //DP
+        int n=nums.length;
+        boolean[] dp=new boolean[n];    //let's create a dp array where dp[n] will tell if it is possible to reach nums.length-1 from n
+        dp[n-1]=true;   //base case
+        for(int i=n-2;i>=0;i--){
+            int jumps=nums[i];
+            boolean reach=false;
+            for(int j=1;j<=jumps && i+j<n;j++)
+                reach=reach||dp[i+j];
+            dp[i]=reach;
+        }
+        return dp[0];
+    }
+}
+        
+        // RECURSION TLE APPROACH
+//         return f(nums,0);
+//     }
+//     public boolean f(int[] nums, int idx){
+//         if(idx>=nums.length)
+//             return false;
+//         if(idx==nums.length-1)
+//             return true;
+//         boolean reach=false;
+//         for(int i=1;i<=nums[idx];i++)
+//             reach=reach||f(nums,idx+i);
+//         return reach;
+        
+//     }
+// }

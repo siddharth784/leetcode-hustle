@@ -1,0 +1,42 @@
+class Solution {
+    public int largestInteger(int num) {
+        
+        PriorityQueue<Integer> oddpq=new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> evenpq=new PriorityQueue<>(Collections.reverseOrder());
+        int digits=0;
+        int temp=num;
+        while(temp!=0){
+            digits++;
+            temp/=10;
+        }
+        temp=num;
+        int[] parity=new int[digits];
+        int idx=0;
+        
+        while(digits!=0){
+            int dig=temp/( (int)(Math.pow(10,digits-1)) );
+            // int dig=temp%10;
+            if(dig%2==0){
+                evenpq.offer(dig);
+                parity[idx++]=0;
+            }
+            else{
+                oddpq.offer(dig);
+                parity[idx++]=1;
+            }
+            temp=temp%((int)(Math.pow(10,digits-1)));
+            digits--;
+            
+        }     
+        int ans=0;
+        for(int i=0;i<parity.length;i++){
+            if(parity[i]==0)
+                ans=ans*10+evenpq.poll();
+            else
+                ans=ans*10+oddpq.poll();
+        }
+        return ans;
+    }
+}
+        
+        

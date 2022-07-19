@@ -1,0 +1,82 @@
+class Solution {
+    public int minCost(int[] startPos, int[] homePos, int[] rowCosts, int[] colCosts) {
+        //Greedy algo approach:
+        int startrow=startPos[0],startcol=startPos[1],homerow=homePos[0],homecol=homePos[1];
+        int cost=0;
+        if(startrow<homerow){
+            for(int row=startrow+1;row<=homerow;row++)
+                cost+=rowCosts[row];
+        }
+        else if(startrow>homerow){
+            for(int row=startrow-1;row>=homerow;row--)
+                cost+=rowCosts[row];
+        }
+        if(startcol<homecol){
+            for(int col=startcol+1;col<=homecol;col++)
+                cost+=colCosts[col];
+        }
+        else if(startcol>homecol){
+            for(int col=startcol-1;col>=homecol;col--)
+                cost+=colCosts[col];
+        }
+        return cost;
+    }
+}
+        
+        
+        
+        
+        
+//         THE BELOW APPROACH IS 100% CORRECT AND A DP ONE TOO, BUT IT GIVES MEMORY LIMIT EXCEEDED ERROR FOR SOME LARGE TESTCASES..I SUSPECT THAT THIS QUESTION SHOULD BE DONE USING GREEDY SIMPLY..HENCE THEY HAVE GOT SUCH TEST CASES JO KI WILL SHOW ERROR IF YOU USE COMPLEXER ALGOS LIKE DP. GREEDY SHOULD ALSO WORK KYUKI YAHA ISS QUESTION MEIN, IF IN TESTCASE 1, IF WE HAD TRAVELLED FROM 0TH TO 3RD COLUMN THEN TO 2ND ROW, FIR BHI THE COST WOULD'VE BEEN THE SAME. THE ISSUE IS, MUJHE RELATED TOPICS DROPDOWN KHOLNE K BAD PTA CHALA KI GREEDY KA QUESTION HAI. THIS SHOULDN'T HAPPEN. I SHOULD ALWAYS FIRST CHECK IF IT CAN BE DONE USING GREEDY SIMPLY. IF NOT THEN DP. BTW https://www.geeksforgeeks.org/greedy-approach-vs-dynamic-programming/
+        
+        
+//         int m=rowCosts.length,n=colCosts.length;
+//         int[][] dp=new int[m][n];   //dp will store the net cost incurred USING THE OPTIMAL APPROACH to reach i,j from startrow,startcol
+//         int startrow=startPos[0],startcol=startPos[1];
+//         dp[startrow][startcol]=0;
+//         // filling the base cases
+//         for(int i=startrow+1;i<m;i++)
+//             dp[i][startcol]=dp[i-1][startcol]+rowCosts[i];
+//         for(int i=startrow-1;i>=0;i--)
+//             dp[i][startcol]=dp[i+1][startcol]+rowCosts[i];
+//         for(int j=startcol-1;j>=0;j--)
+//             dp[startrow][j]=dp[startrow][j+1]+colCosts[j];
+//         for(int j=startcol+1;j<n;j++)
+//             dp[startrow][j]=dp[startrow][j-1]+colCosts[j];
+        
+//         // let's fill the upper left quadrant when we draw a horizontal n vertical line at (startrow,startcol)
+//         for(int i=startrow-1;i>=0;i--){
+//             for(int j=startcol-1;j>=0;j--){
+//                 int right=dp[i][j+1]+colCosts[j];
+//                 int down=dp[i+1][j]+rowCosts[i];
+//                 dp[i][j]=Math.min(right,down);
+//             }
+//         }
+//         //let's now fill upper right quadrant
+//         for(int i=startrow-1;i>=0;i--){
+//             for(int j=startcol+1;j<n;j++){
+//                 int down=dp[i+1][j]+rowCosts[i];
+//                 int left=dp[i][j-1]+colCosts[j];
+//                 dp[i][j]=Math.min(left,down);
+//             }
+//         }
+//         // lower left quadrant
+//         for(int i=startrow+1;i<m;i++){
+//             for(int j=startcol-1;j>=0;j--){
+//                 int up=dp[i-1][j]+rowCosts[i];
+//                 int right=dp[i][j+1]+colCosts[j];
+//                 dp[i][j]=Math.min(up,right);
+//             }
+//         }
+//         // lower right quadrant
+//         for(int i=startrow+1;i<m;i++){
+//             for(int j=startcol+1;j<n;j++){
+//                 int up=dp[i-1][j]+rowCosts[i];
+//                 int left=dp[i][j-1]+colCosts[j];
+//                 dp[i][j]=Math.min(up,left);
+//             }
+//         }
+//         return dp[homePos[0]][homePos[1]];
+        
+//     }
+// }

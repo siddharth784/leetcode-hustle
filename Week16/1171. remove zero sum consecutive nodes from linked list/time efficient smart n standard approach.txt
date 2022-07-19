@@ -1,0 +1,21 @@
+  int presum=0;
+        HashMap<Integer,ListNode> hm=new HashMap<>();
+        ListNode holdzero=new ListNode(0,head);
+        hm.put(0,holdzero);
+        for(var p=head;p!=null;p=p.next){
+            presum+=p.val;
+            hm.put(presum,p);
+        }
+        presum=0;
+        for(var p=holdzero;p!=null;p=p.next){
+            presum+=p.val;
+            if(hm.containsKey(presum))
+                p.next=hm.get(presum).next;
+        }
+        return holdzero.next;
+    }
+}
+        
+        
+        
+        

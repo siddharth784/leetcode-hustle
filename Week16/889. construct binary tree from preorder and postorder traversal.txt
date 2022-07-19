@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // hm will be of postorder
+    //hm.get(node.val)-post_lo will give us no. of left side elements. and that will help us navigate the left body and right body of node. but how?
+    //
+    public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<postorder.length;i++)
+            hm.put(postorder[i],i);
+        return construct(0,preorder.length-1,0,postorder.length-1,preorder,postorder,hm);
+    }
+    public TreeNode construct(int pre_lo, int pre_hi, int post_lo, int post_hi, int[] pre, int[] post, HashMap<Integer,Integer> hm){
+        if(pre_lo>pre_hi||post_lo>post_hi||post_hi>=post.length||post_lo<0||pre_hi>=pre.length||pre_lo<0)
+            return null;
+        TreeNode node=new TreeNode(pre[pre_lo]);
+        // int lnodes=hm.get(pre[pre_lo+1])
+        // how to count no. of nodes to the left of node is still to be solved
+        if(pre_lo==pre_hi)  //cuz it means uska sirf root part h, left aur right part absent h
+            return node;
+
+        int lnodes=hm.get(pre[pre_lo+1])-post_lo+1;
+        // System.out.println("lnodes for "+node.val+" "+lnodes);                   
+    node.left=construct(pre_lo+1,pre_lo+lnodes,post_lo,hm.get(pre[pre_lo+1]),pre,post,hm);
+        node.right=construct(pre_lo+lnodes+1,pre_hi,post_lo+lnodes,post_hi-1,pre,post,hm);
+        return node;
+    }
+}

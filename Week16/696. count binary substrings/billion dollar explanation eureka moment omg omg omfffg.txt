@@ -1,0 +1,29 @@
+explanation link: https://leetcode.com/problems/count-binary-substrings/discuss/108610/Acceptable-JAVA-solution-with-explaination
+
+
+explanation text:
+It takes me some time to understand this problem, after look at the top solution. I figured out how to solve it, Thanks to @compton_scatter, here is just some explaination of his solution:
+
+preRun count the same item happend before (let say you have 0011, preRun = 2 when you hit the first 1, means there are two zeros before first '1')
+curRun count the current number of items (let say you have 0011, curRun = 2 when you hit the second 1, means there are two 1s so far)
+Whenever item change (from 0 to 1 or from 1 to 0), preRun change to curRun, reset curRun to 1 (store the curRun number into PreRun, reset curRun)
+Every time preRun >= curRun means there are more 0s before 1s, so could do count++ . (This was the tricky one, ex. 0011 when you hit the first '1', curRun = 1, preRun = 2, means 0s number is larger than 1s number, so we could form "01" at this time, count++ . When you hit the second '1', curRun = 2, preRun = 2, means 0s' number equals to 1s' number, so we could form "0011" at this time, that is why count++)
+
+
+class Solution {
+public int countBinarySubstrings(String s) {
+if (s == null || s.length() == 0) return 0;
+        int preRun = 0;
+        int curRun =1;
+        int count = 0;
+        for (int i = 1; i < s.length(); i++){
+            if (s.charAt(i) == s.charAt(i-1)) curRun++;
+            else {
+                preRun = curRun;
+                curRun = 1;
+            }
+            if (preRun >= curRun) count++;
+        }
+        return count;
+    }
+}

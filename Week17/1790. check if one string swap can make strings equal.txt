@@ -1,0 +1,27 @@
+class Solution {
+    public boolean areAlmostEqual(String s1, String s2) {
+        int l1=s1.length(),l2=s2.length();
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(char ch:s1.toCharArray())
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        for(char ch:s2.toCharArray()){
+            if(!hm.containsKey(ch))
+                return false;
+            else{
+                if(hm.get(ch)<=0)
+                    return false;
+                hm.put(ch,hm.get(ch)-1);
+            }
+        }
+        int count=0;
+        for(int i=0;i<l1;i++){
+            if(s1.charAt(i)!=s2.charAt(i))
+                count++;
+        }
+        if(count!=2 && count!=0)
+            return false;
+        return true;
+    }
+}
+        
+        

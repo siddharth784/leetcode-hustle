@@ -1,0 +1,61 @@
+class Solution {
+    int count=0;
+    public int uniquePathsIII(int[][] grid) {
+        int onerow=0,onecol=0;
+        boolean breakout=false;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1){
+                    onerow=i;
+                    onecol=j;
+                    breakout=true;
+                    break;
+                }
+            }
+            if(breakout)
+                break;
+        }
+        int[][] dummy=grid;
+        pathTraverse(grid,onerow,onecol,dummy);
+        return count;
+    }
+    public void pathTraverse(int[][] grid, int row, int col, int[][] dummy){
+        if(row>=grid.length || col>=grid[0].length||row<0||col<0){
+            return;
+        }
+        else if(grid[row][col]==-1){
+            return;
+        }
+        else if(dummy[row][col]==3){
+            return;
+        }
+        else if(grid[row][col]==2){
+            boolean allwalked=true;
+            boolean breakout=false;
+            for(int i=0;i<dummy.length;i++){
+                for(int j=0;j<dummy[0].length;j++){
+                    if(dummy[i][j]==0){
+                        allwalked=false;
+                        breakout=true;
+                        break;
+                    }
+                }
+                if(breakout)
+                    break;
+            }
+            
+            if(allwalked==true){
+                count++;            
+            }
+            return;
+        }
+        else{
+            dummy[row][col]=3; 
+            pathTraverse(grid,row+1,col,dummy);
+            pathTraverse(grid,row,col+1,dummy);
+            pathTraverse(grid,row-1,col,dummy);
+            pathTraverse(grid,row,col-1,dummy);
+            dummy[row][col]=0;
+        }
+    }
+}

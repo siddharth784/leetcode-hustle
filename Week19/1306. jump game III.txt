@@ -1,0 +1,28 @@
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        // very clear memoization question..need not recursion
+        // I now realise that memo[] is useless. memoization k liye visited[] is useful here.
+        int n=arr.length;
+        // boolean[] memo=new boolean[n];
+        // Arrays.fill(memo,false);
+        boolean[] visited=new boolean[n];
+        // Arrays.fill(visited,false);  //not needed cuz default boolean value is false
+        // return f(start,arr,memo,visited);
+        return f(start,arr,visited);
+    }
+    public boolean f(int idx, int[] arr, boolean[] visited){
+        if(idx>=arr.length || idx<0)
+            return false;
+        if(arr[idx]==0)
+            return true;
+        if(visited[idx])
+            return false;
+        //no this is not memoization in the given ques., instead using visited[] is.
+        // if(memo[idx]!=false)
+        //     return memo[idx];
+        visited[idx]=true;
+        boolean l=f(idx-arr[idx],arr,visited);
+        boolean r=f(idx+arr[idx],arr,visited);
+        return l||r;
+    }
+}

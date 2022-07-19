@@ -1,0 +1,16 @@
+class Solution {
+    public boolean makeEqual(String[] words) {
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(String word:words){
+            for(char ch:word.toCharArray())
+                hm.put(ch,hm.getOrDefault(ch,0)+1);
+        }
+        for(int freq:hm.values()){
+            if(freq%words.length==0)
+                continue;
+            else
+                return false;
+        }
+        return true;
+    }
+}

@@ -1,0 +1,41 @@
+		if(head==null)
+            return null;
+        
+        // What I think can be a possible solution: maintain a hashmap to store prefix sum for each index of the linked list. Then check if the number which when added to current number of linked list can result into zero. If it does, then remove that subarray. Now how to remove that subarray? Using a stack. Basically we'll store values of the linked list in a stack
+        HashMap<Integer,Integer> hm=new HashMap<>();    //stores prefixsum as key, and the last index where it occurred as value (i.e. sum from 0 to lastindex will be = key)
+        hm.put(0,-1);
+        int presum=0;
+        Stack<ListNode> st=new Stack<>();
+        
+        int idx=0;
+        boolean altered=false;  
+        for(var p=head;p!=null;p=p.next){
+            presum+=p.val;
+            st.push(p);
+            if(altered==false && hm.containsKey(presum)){
+                altered=true;
+                int removeNodes=idx-hm.get(presum);
+                for(int i=0;i<removeNodes;i++)  //the issue I am facing here is that I don't understand how will I remove the prefixsums from hashmap which have been counted in due to the existence of those nodes which I am popping off here. e.g. [1,2,3,-3,6,4] UPDATE: which has been fixed using altered variable. which means that removing nodes from linked list will be only allowed for once, after that the new produced linked list will have to go through the whole function again so that we don't have any misused prefix sum values in hashmap which were used to remove nodes despite their corresponding nodes being removed from list in previous iterations.
+                    st.pop();
+                idx++;
+                continue;
+            }            
+            hm.put(presum,idx);
+            idx++;
+        }
+        // System.out.println(st.peek().val);
+        
+        
+        ListNode hold=null;
+        while(st.empty()==false){
+            ListNode curr=st.pop();
+            curr.next=hold;
+            hold=curr;
+        }
+        if(altered==false)
+            return hold;
+        else
+            return removeZeroSumSublists(hold);
+    }
+}
+

@@ -1,0 +1,28 @@
+class Solution {
+    public int projectionArea(int[][] grid) {
+        // area on the xy plane: grid.length*grid[0].length- (zero height cubes)
+        // area on the yz plane: sum of max of each row
+        // area on the xz plane: sum of max of each column
+        int m=grid.length;
+        int n=grid[0].length;
+        int xy=m*n;
+        int yz=0;
+        int xz=0;
+        for(int i=0;i<m;i++){
+            int max=0;
+            for(int j=0;j<n;j++)
+                max=Math.max(max,grid[i][j]);
+            yz+=max;
+        }
+        for(int j=0;j<n;j++){
+            int max=0;
+            for(int i=0;i<m;i++){
+                max=Math.max(max,grid[i][j]);
+                if(grid[i][j]==0)   //subtracting zero height towers from xy area
+                    xy--;
+            }
+            xz+=max;
+        }
+        return (xy+yz+xz);
+    }
+}

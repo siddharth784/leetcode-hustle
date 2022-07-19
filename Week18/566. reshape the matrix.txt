@@ -1,0 +1,21 @@
+class Solution {
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        if(mat.length*mat[0].length != r*c)
+            return mat;
+        
+        int[][] ans=new int[r][c];
+        int i_=0,j_=0;
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                ans[i_][j_]=mat[i][j];
+                if(j_==c-1){
+                    i_++;
+                    j_=0;
+                }
+                else
+                    j_++;
+            }
+        }
+        return ans;            
+    }
+}

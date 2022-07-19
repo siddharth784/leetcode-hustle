@@ -1,0 +1,56 @@
+class Solution {
+    public String sortString(String s) {
+        int[] alpha=new int[26];
+        for(char c:s.toCharArray())
+            alpha[c-'a']++;
+        StringBuilder ans=new StringBuilder();
+        
+        boolean allzero=false;
+        while(!allzero){
+            allzero=true;
+            for(int i=0;i<26;i++){
+                if(alpha[i]!=0){
+                    ans.append((char)('a'+i));
+                    allzero=false;
+                    alpha[i]--;
+                }
+            }
+            for(int i=25;i>=0;i--){
+                if(alpha[i]!=0){
+                    ans.append((char)('a'+i));
+                    allzero=false;
+                    alpha[i]--;
+                }
+            }
+        }
+        return ans.toString();
+    }
+}
+        
+        // MY TLE SOLUTION BUT V SMART SOLUTION
+//         Map<Character,Integer> tm=new TreeMap<>();
+//         for(char ch:s.toCharArray())
+//             tm.put(ch,tm.getOrDefault(ch,0)+1);
+//         StringBuilder ans=new StringBuilder();
+//         while(!tm.isEmpty()){
+//             Stack<Character> store=new Stack<>();
+//             //smallest to largest
+//             for(char c:tm.keySet()){
+//                 if(tm.get(c)!=0){
+//                     store.push(c);
+//                     ans.append(c);
+//                     tm.put(c,tm.get(c)-1);
+//                 }
+//             }
+//             //largest to smallest
+//             while(!store.isEmpty()){
+//                 char c=store.pop();
+//                 if(tm.get(c)!=0){
+//                     ans.append(c);
+//                     tm.put(c,tm.get(c)-1);
+//                 }
+//             }
+//         }
+//         return ans.toString();
+//     }
+// }

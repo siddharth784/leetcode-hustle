@@ -1,0 +1,32 @@
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        List<Boolean> ans=new ArrayList<>();
+        for(String query:queries){
+            // check each query with pattern using 2 pointer approach..out of all checking methods 2 pointer method seems to be the working one
+            boolean filled=false;   //for each query, we want to only enter once, if that query matches to pattern. and if we've accounted for that query, don't do it again. for that we keep a boolean variable
+            int j=0;
+            for(int i=0;i<query.length();i++){
+                char c=query.charAt(i);
+                if(c>='A'&&c<='Z'){
+                    // for when capital letter is encountered in query, if pattern is exhausted then false, and also if chars arent matching then too false
+                    if(!filled && j>=pattern.length()){
+                        ans.add(false);
+                        filled=true;
+                    }
+                    else if(!filled && pattern.charAt(j)!=c){
+                        ans.add(false);
+                        filled=true;
+                    }
+                }
+                if(j<pattern.length() && c==pattern.charAt(j)){
+                    j++;
+                }
+            }
+            if(!filled && j==pattern.length())
+                ans.add(true);
+            else if(!filled)
+                ans.add(false);
+        }
+        return ans;
+    }
+}

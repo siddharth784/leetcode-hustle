@@ -1,0 +1,23 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        HashMap<String,Integer> hm=new HashMap<>();
+        for(String email:emails){
+            String[] temp=email.split("@");
+            String local=temp[0];
+            String domain=temp[1];
+            String flocal="";
+            for(int i=0;i<local.length();i++){
+                char ch=local.charAt(i);
+                if(ch=='.')
+                    continue;
+                else if(ch=='+')
+                    break;
+                else
+                    flocal+=ch;
+            }
+            String fmail=flocal+"@"+domain;
+            hm.put(fmail,hm.getOrDefault(fmail,0)+1);
+        }
+        return hm.size();
+    }
+}

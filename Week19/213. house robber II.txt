@@ -1,0 +1,48 @@
+class Solution {
+    public int rob(int[] nums) {
+        //DP
+        int n=nums.length;
+        if(n==1)
+            return nums[0];
+        if(n==2)
+            return Math.max(nums[0],nums[1]);
+        int[] dp1=new int[n];   //dp array of when robbing starts from 2nd house or idx=1
+        int[] dp2=new int[n];   //dp array of when robbing starts from 1st house or idx=0
+        dp2[0]=nums[0];
+        dp1[1]=nums[1]; 
+        // and dp1[0] is irrelevant, we will code such that no element of dp1 will access it anyway(by already setting dp1[1] and dp1[2] manually)
+        dp1[2]=Math.max(nums[2],nums[1]);
+        for(int i=3;i<=n-1;i++){    //fill dp1 
+            int robthis=nums[i]+dp1[i-2];
+            int dontrobthis=dp1[i-1];
+            dp1[i]=Math.max(robthis,dontrobthis);
+        }
+        dp2[1]=Math.max(nums[0],nums[1]);
+        for(int i=2;i<=n-2;i++){    //fill dp2
+            int robthis=nums[i]+dp2[i-2];
+            int dontrobthis=dp2[i-1];
+            dp2[i]=Math.max(robthis,dontrobthis);
+        }
+        return Math.max(dp2[n-2],dp1[n-1]);
+    }
+}
+        
+        
+        //recursion
+//         int n=nums.length;
+//         int start1= f(n-1,1,nums);
+//         int start2= f(n-2,0,nums);
+//         return Math.max(start1,start2);
+//     }
+//     public int f(int idx, int st, int[] nums){  //let the function return the maximum amount of money that can be robbed in a circle of (idx+1) houses.
+//         if(idx<st)
+//             return 0;
+//         if(idx==st)
+//             return nums[idx];
+//             int robthis=Integer.MIN_VALUE;
+//             if(idx>=2)
+//                 robthis=nums[idx]+f(idx-2,st,nums);
+//             int dontrobthis=f(idx-1,st,nums);
+//             return Math.max(robthis,dontrobthis);
+//     }
+// }

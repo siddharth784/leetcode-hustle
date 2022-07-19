@@ -1,0 +1,25 @@
+class Solution {
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+        List<List<Integer>> ans=new ArrayList<>();
+        HashMap<Integer,List<Integer>> hm=new HashMap<>();
+        for(int i:groupSizes)
+            hm.put(i,new ArrayList<>());
+        
+        for(int i=0;i<groupSizes.length;i++)
+            hm.get(groupSizes[i]).add(i);
+        
+        
+        for(int key:hm.keySet()){
+            List<Integer> li=hm.get(key);
+            if(li.size()==key)
+                ans.add(li);
+            else{
+                int size=li.size();
+                for(int i=0;i<=size-key;i+=key)
+                    ans.add(li.subList(i,i+key));
+            }
+        }
+        return ans;
+    }
+}
+        

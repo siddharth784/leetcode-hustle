@@ -1,0 +1,32 @@
+class Solution {
+    public int[][] allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
+        Queue<Pair> pq=new PriorityQueue<>((o1,o2)->{
+            return o1.dis-o2.dis;
+        });
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                Pair p=new Pair(i,j,Math.abs(rCenter-i)+Math.abs(cCenter-j));
+                pq.offer(p);
+            }
+        }
+        int[][] ans=new int[rows*cols][2];
+        int i=0;
+        while(pq.isEmpty()==false){
+            Pair temp=pq.poll();
+            int[] arr=new int[]{temp.x,temp.y};
+            ans[i++]=arr;
+        }
+        return ans;
+    }
+}
+class Pair{
+    Pair(){}
+    Pair(int i, int j, int d){
+        this.x=i;
+        this.y=j;
+        this.dis=d;
+    }
+    int x;
+    int y;
+    int dis;
+}

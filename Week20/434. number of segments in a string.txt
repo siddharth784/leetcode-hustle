@@ -1,0 +1,16 @@
+class Solution {
+    public int countSegments(String s) {
+        // NO WE CAN'T SIMPLY DO RETURN S.SPLIT(" ").LENGTH; CUZ SOME EDGE CASES LIKE ", , ,    jfs eff" will be return 13 by us while the correct answer is 5. also "" will be returned 1 when answer should be 0
+        String[] arr=s.split(" ");
+        int validblocks=0;
+        for(String block:arr){
+            for(char ch:block.toCharArray()){
+                if(ch!=' '){
+                    validblocks++;
+                    break;
+                }
+            }
+        }
+        return validblocks++;
+    }
+}

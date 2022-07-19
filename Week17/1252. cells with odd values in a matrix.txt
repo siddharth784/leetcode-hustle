@@ -1,0 +1,18 @@
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int[] rowinc=new int[m];
+        int[] colinc=new int[n];
+        for(int i=0;i<indices.length;i++){
+            rowinc[indices[i][0]]++;
+            colinc[indices[i][1]]++;
+        }
+        
+        int count=0;
+        int[][] mat=new int[m][n];
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++)
+                count= (rowinc[i]+colinc[j])%2!=0 ? count+1 : count;
+        }
+        return count;
+    }
+}

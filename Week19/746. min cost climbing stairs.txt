@@ -1,0 +1,52 @@
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        //DP
+        int n=cost.length;
+        if(n==0||n==1)
+            return 0;
+        
+        int[] dp=new int[n+1];
+        dp[0]=dp[1]=0;
+        for(int i=2;i<=n;i++){
+            int jumpone=dp[i-1]+cost[i-1];
+            int jumptwo=dp[i-2]+cost[i-2];
+            dp[i]=Math.min(jumpone,jumptwo);
+        }
+        return dp[n];
+    }
+}
+        // MEMOIZATION
+//         int n=cost.length;
+//         int[] memo=new int[n+1];
+//         Arrays.fill(memo,-1);
+//         return f(cost,n,memo);
+//     }
+//     public static int f(int[] cost, int idx, int[] memo){
+//         if(idx==0||idx==1)
+//             return memo[idx]=0;
+//         if(memo[idx]!=-1)
+//             return memo[idx];
+//         int jumpone=f(cost,idx-1,memo)+cost[idx-1];
+//         int jumptwo=Integer.MAX_VALUE;
+//         if(idx>1)
+//             jumptwo=f(cost,idx-2,memo)+cost[idx-2];
+//         return Math.min(jumptwo,jumpone);
+//     }
+// }
+        
+        
+        
+        //RECURSION
+        
+//         return f(cost,cost.length);
+//     }
+//     public static int f(int[] cost, int idx){
+//         if(idx==0||idx==1)
+//             return 0;
+//         int jumpone=cost[idx-1]+f(cost,idx-1);
+//         int jumptwo=Integer.MAX_VALUE;
+//         if(idx>1)
+//             jumptwo=cost[idx-2]+f(cost,idx-2);
+//         return Math.min(jumpone,jumptwo);
+//     }
+// }

@@ -1,0 +1,37 @@
+class Solution {
+    public int minimumNumbers(int num, int k) {
+        int[] memo=new int[num+1];
+        Arrays.fill(memo,-3);
+        return helper(num,k,memo);
+    }
+        
+        
+    public int helper(int num, int k, int[] memo){
+        
+        // if(num==k)
+            // return 1;
+        if(num==0)
+            return memo[num]=0;
+        if(num==k)
+            return 1;
+        if(num<0)
+            return -1;
+        if(memo[num]!=-3)
+            return memo[num];
+        
+        int i=num;
+        while(i>=1){
+            if(i%10==k){
+                int temp=helper(num-i,k,memo);
+                if(temp==-1)
+                    memo[i]=-1;
+                else
+                    return memo[num]=(temp+1);
+                i-=10;
+            }
+            else
+                i--;
+        }
+        return memo[num]=-1;
+    }
+}

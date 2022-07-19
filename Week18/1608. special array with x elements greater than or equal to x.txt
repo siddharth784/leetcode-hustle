@@ -1,0 +1,26 @@
+class Solution {
+    public int specialArray(int[] nums) {
+        
+        //I came up with approach:
+//  step1. sort the array
+//  step2. traverse the array from right to left
+//  step3. keep count of (elements traversed+1). if that count is less than current element, and also greater than the element to the left of current element(to ensure there aren't more numbers greater than or equal to x), then count is a potential x. and since there is a unique x, return count right away.
+        
+        Arrays.sort(nums);
+        int count=0;
+        for(int i=nums.length-1;i>=0;i--){
+            count++;
+            if(i>0){
+                if(nums[i-1]<count && nums[i]>=count)
+                return count;            
+            }
+            else{
+                if(nums[i]>=count)
+                    return count;
+            }
+            
+        }
+        return  -1;
+        
+    }
+}

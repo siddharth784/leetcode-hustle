@@ -1,0 +1,37 @@
+class Solution {
+    // BETTER SPACE N TIME COMPLEXITY:
+    public int triangularSum(int[] nums) {
+        return find(nums,nums.length);
+    }
+    public int find(int[] nums, int n){
+        if(n==1)
+            return nums[0];
+        for(int i=0;i<n-1;i++)
+            nums[i]=(nums[i]+nums[i+1])%10;
+        return find(nums,n-1);
+    }
+}
+        
+        
+        
+        
+       //BAD TIME COMPLEXITY + CHAOTIC:        
+//         int filled=nums.length-1;   //filled denotes not how many cells are filled in this round, but how many will be filled in the upcoming round
+//         while(filled>=1){
+//             int[] newnums=new int[filled];
+//             for(int i=0;i<filled;i++)
+//                 newnums[i]=(nums[i]+nums[i+1])%10;
+            
+//             for(int i=0;i<nums.length;i++){
+//                 if(i<newnums.length)
+//                     nums[i]=newnums[i];
+//                 else
+//                     nums[i]=-1;
+//             }
+//             filled--;
+//         }
+//         return nums[0];
+//     }
+// }
+        
+        

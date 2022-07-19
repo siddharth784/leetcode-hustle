@@ -1,0 +1,13 @@
+class Solution {
+    public boolean checkOnesSegment(String s) {
+        // make use of the fact that there are no leading zeros, meaning that all ones should be occuring in the beginning of s itself. if any 1 occurs thereafter, it's an outlier
+        boolean zerospotted=false;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='0')
+                zerospotted=true;
+            if(zerospotted && s.charAt(i)=='1')
+                return false;
+        }
+        return true;
+    }
+}

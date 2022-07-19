@@ -1,0 +1,26 @@
+class Solution {
+    public int countLargestGroup(int n) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        int preset=0;
+        for(int i=1;i<=n;i++){
+            int sumdigits=sumOfDigits(i);
+            hm.put(sumdigits,hm.getOrDefault(sumdigits,0)+1);
+        }
+        int maxfreq=0;
+        int count=0;
+        for(int i:hm.keySet()){
+            if(hm.get(i)==maxfreq){
+                count++;
+            }
+            else if(hm.get(i)>maxfreq){
+                count=1;
+                maxfreq=hm.get(i);
+            }
+        }
+        return count;
+    }
+    
+    public int sumOfDigits(int num){
+        return (num==0 ? 0 : sumOfDigits(num/10)+num%10);
+    }
+}

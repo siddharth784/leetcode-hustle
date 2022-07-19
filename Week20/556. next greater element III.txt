@@ -1,0 +1,48 @@
+class Solution {
+    public int nextGreaterElement(int n) {
+        char[] charr=(n+"").toCharArray();
+        int[] arr=new int[charr.length];
+        for(int i=0;i<arr.length;i++)
+            arr[i]=charr[i]-'0';
+        
+        int swap1=0;
+        int left=0;
+        // int i=arr.length-2;
+        // for(i=arr.length-2;i>=0;i--){
+        int i=arr.length-2;
+        boolean leftfound=false;
+        while(i>=0){
+            if(arr[i]<arr[i+1]){
+                swap1=arr[i];
+                left=i;
+                leftfound=true;
+                break;
+            }
+            i--;
+        }
+        if(!leftfound)
+            return -1;
+        
+        //swap the rightmost digit which has a greater digit available to its right subarray in the number with the rightmost digit greater than it.
+        int swap2idx=0;
+        for(int idx=arr.length-1;idx>=0;idx--){
+            if(arr[idx]>arr[left]){
+                swap2idx=idx;
+                break;
+            }
+        }
+        int temp=arr[left];
+        arr[left]=arr[swap2idx];
+        arr[swap2idx]=temp;
+        
+        
+        //Now sort from left to end of number
+        Arrays.sort(arr,left+1,arr.length);
+        long ans=0;
+        for(int ele:arr)
+            ans=ans*10+ele;
+        if(ans>Integer.MAX_VALUE)
+            return -1;
+        return (int)ans;
+    }
+}

@@ -1,0 +1,49 @@
+class Solution {
+    public int rob(int[] nums) {
+        //DP
+        int n=nums.length;
+        if(n==1)
+            return nums[0];
+        int[] dp=new int[n];
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0],nums[1]);
+        for(int i=2;i<n;i++){
+            int robthis=dp[i-2]+nums[i];
+            int dontrobthis=dp[i-1];
+            dp[i]=Math.max(robthis,dontrobthis);
+        }
+        return dp[n-1];
+    }
+}
+        //MEMOIZATION
+//         int n=nums.length;
+//         int[] memo=new int[n];
+//         Arrays.fill(memo,-1);
+//         return f(n-1,nums,memo);
+//     }
+//     public int f(int idx, int[] nums, int[] memo){
+//         if(idx==0)
+//             return memo[idx]=nums[0];
+//         if(idx==1)
+//             return memo[idx]=Math.max(nums[0],nums[1]);
+//         if(memo[idx]!=-1)
+//             return memo[idx];
+//         int robthis=nums[idx]+f(idx-2,nums,memo);
+//         int dontrobthis=f(idx-1,nums,memo);
+//         return memo[idx]=Math.max(robthis,dontrobthis);        
+//     }
+// }
+        //RECURSION
+//         int n=nums.length;
+//         return f(nums,n-1);
+//     }
+//     public int f(int[] nums, int idx){
+//         if(idx==0)
+//             return nums[idx];
+//         if(idx==1)
+//             return Math.max(nums[0],nums[1]);
+//         int robthis=nums[idx]+f(nums,idx-2);
+//         int dontrobthis=f(nums,idx-1);
+//         return Math.max(robthis,dontrobthis);
+//     }
+// }

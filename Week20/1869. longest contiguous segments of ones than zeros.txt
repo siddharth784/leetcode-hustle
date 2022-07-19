@@ -1,0 +1,23 @@
+class Solution {
+    public boolean checkZeroOnes(String s) {
+        int maxones=0;   //denotes the length of longest contiguous segment of 0's
+        int maxzeros=0; //denotes the length of longest contiguous segment of 1's
+        int zeros=0;    //will store the temporary streak of zeros
+        int ones=0; //will store the temporary streak of ones
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='0'){
+                if(ones!=0)
+                    ones=0;
+                zeros++;
+                maxzeros=Math.max(maxzeros,zeros);
+            }
+            else{
+                if(zeros!=0)
+                    zeros=0;
+                ones++;
+                maxones=Math.max(maxones,ones);
+            }
+        }
+        return (maxones>maxzeros);
+    }
+}

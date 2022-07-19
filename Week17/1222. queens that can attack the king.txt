@@ -1,0 +1,159 @@
+class Solution {
+    public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
+        List<List<Integer>> ans=new ArrayList<>();
+        int[][] chess=new int[8][8];
+        for(int i=0;i<queens.length;i++)
+            chess[queens[i][0]][queens[i][1]]=1;
+        
+        for(int i=0;i<queens.length;i++){
+            if(check(queens[i][0],queens[i][1],king[0],king[1],chess)){
+                ans.add(new ArrayList<>());
+                ans.get(ans.size()-1).add(queens[i][0]);
+                ans.get(ans.size()-1).add(queens[i][1]);
+            }
+        }
+        return ans;
+    }
+    public boolean check(int x1, int y1, int x2, int y2, int[][] chess){
+        if(x1==x2){
+            if(y1<y2){
+                for(int i=y1+1;i<y2;i++){
+                    if(chess[x1][i]==1)
+                        return false;
+                }
+            }   
+            else if(y1>y2){
+                for(int i=y1-1;i>y2;i--){
+                    if(chess[x1][i]==1)
+                        return false;
+                }
+            }
+            return true;
+        }
+        else if(y1==y2){
+            if(x1<x2){
+                for(int i=x1+1;i<x2;i++){
+                    if(chess[i][y1]==1)
+                        return false;
+                }
+            }
+            else if(x1>x2){
+                for(int i=x1-1;i>x2;i--){
+                    if(chess[i][y1]==1)
+                        return false;
+                }
+            }
+            return true;
+        }
+        else if(Math.abs(y2-y1)==Math.abs(x2-x1)){
+            
+            if(y2-y1<0 && x2-x1<0){  // from king to queen '\'
+                for(int i=x1-1,j=y1-1;i>x2 && j>y2;i--,j--){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            
+            else if(y2-y1<0 && x2-x1>0){    // from queen to king '/'
+                for(int i=x1+1,j=y1-1;i<x2 && j>y2;i++,j--){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            else if(y2-y1>0 && x2-x1>0){ // from queen to king '\'
+                for(int i=x1+1,j=y1+1;i<x2 && j<y2;i++,j++){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            else{
+                for(int i=x1-1,j=y1+1;i>x2 && j<y2;i--,j++){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            return true;
+                
+        }
+        return false;
+    }
+}class Solution {
+    public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
+        List<List<Integer>> ans=new ArrayList<>();
+        int[][] chess=new int[8][8];
+        for(int i=0;i<queens.length;i++)
+            chess[queens[i][0]][queens[i][1]]=1;
+        
+        for(int i=0;i<queens.length;i++){
+            if(check(queens[i][0],queens[i][1],king[0],king[1],chess)){
+                ans.add(new ArrayList<>());
+                ans.get(ans.size()-1).add(queens[i][0]);
+                ans.get(ans.size()-1).add(queens[i][1]);
+            }
+        }
+        return ans;
+    }
+    public boolean check(int x1, int y1, int x2, int y2, int[][] chess){
+        if(x1==x2){
+            if(y1<y2){
+                for(int i=y1+1;i<y2;i++){
+                    if(chess[x1][i]==1)
+                        return false;
+                }
+            }   
+            else if(y1>y2){
+                for(int i=y1-1;i>y2;i--){
+                    if(chess[x1][i]==1)
+                        return false;
+                }
+            }
+            return true;
+        }
+        else if(y1==y2){
+            if(x1<x2){
+                for(int i=x1+1;i<x2;i++){
+                    if(chess[i][y1]==1)
+                        return false;
+                }
+            }
+            else if(x1>x2){
+                for(int i=x1-1;i>x2;i--){
+                    if(chess[i][y1]==1)
+                        return false;
+                }
+            }
+            return true;
+        }
+        else if(Math.abs(y2-y1)==Math.abs(x2-x1)){
+            
+            if(y2-y1<0 && x2-x1<0){  // from king to queen '\'
+                for(int i=x1-1,j=y1-1;i>x2 && j>y2;i--,j--){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            
+            else if(y2-y1<0 && x2-x1>0){    // from queen to king '/'
+                for(int i=x1+1,j=y1-1;i<x2 && j>y2;i++,j--){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            else if(y2-y1>0 && x2-x1>0){ // from queen to king '\'
+                for(int i=x1+1,j=y1+1;i<x2 && j<y2;i++,j++){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            else{
+                for(int i=x1-1,j=y1+1;i>x2 && j<y2;i--,j++){
+                    if(chess[i][j]==1)
+                        return false;
+                }
+            }
+            return true;
+                
+        }
+        return false;
+    }
+}

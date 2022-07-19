@@ -1,0 +1,33 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+        if(word1.length() != word2.length())
+            return false;
+        
+        int[] alpha1=new int[26];
+        int[] alpha2=new int[26];
+        for(char ch:word1.toCharArray())
+            alpha1[ch-'a']++;
+        for(char ch:word2.toCharArray())
+            alpha2[ch-'a']++;
+        
+        for(int i=0;i<26;i++){
+            if(alpha1[i]!=0 && alpha2[i]==0)
+                return false;
+            if(alpha1[i]==0 && alpha2[i]!=0)
+                return false;
+        }
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<26;i++)
+            hm.put(alpha1[i],hm.getOrDefault(alpha1[i],0)+1);
+        
+        HashMap<Integer,Integer> hm_=new HashMap<>();
+        for(int i=0;i<26;i++)
+            hm_.put(alpha2[i],hm_.getOrDefault(alpha2[i],0)+1);
+        
+        for(int key:hm.keySet()){
+            if(hm.get(key)!=hm_.get(key))
+                return false;
+        }
+        return true;
+    }
+}

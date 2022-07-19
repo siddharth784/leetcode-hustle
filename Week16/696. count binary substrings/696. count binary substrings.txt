@@ -1,0 +1,51 @@
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int curCount=1, prevCount=0;
+        int ans=0;
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i)==s.charAt(i-1))
+                curCount++;
+            else{
+                prevCount=curCount;
+                curCount=1;
+            }
+        
+            //now to check if any feasible binary substrings can be made at this index
+            if(curCount<=prevCount) //cuz 0001 mein ek substring mil jaegi last ke 01 ki, then 00011 mein bhi ek 0011 mil jaegi last ki, then 000111 me bhi ek mil jaegi puri, but 0001111 mein substring nhi milegi. milegi bhi to wo jo count ho chuki hogi already
+                ans++;
+        }
+        return ans;
+    }
+}
+        
+        
+        
+//                 // THE FOLLOWING CODE IS CORRECT FOR THE CASE WHEN THERE HAD NOT BEEN THE CONDITION "ALL 0's AND 1's IN THE SUBSTRINGS MUST BE GROUPED CONSECUTIVELY"
+        
+//         // we can make a hashmap containing as keys, the imbalance(no. of ones - no. of zeros) until a particular index, and the frequency of that balance will be the value against that key
+        
+//         HashMap<Integer,Integer> hm=new HashMap<>();
+//         HashMap
+//         // hm.put(0,1);
+//         int idx=0;
+//         int zeros=0,ones=0;
+//         int count=0;
+//         for(char ch:s.toCharArray()){
+//             if(ch=='0')
+//                 zeros++;
+//             else
+//                 ones++;
+//             int imbalance=ones-zeros;
+//             System.out.println("imbalance is "+imbalance + " for index "+idx);
+//             if(hm.containsKey(imbalance)){
+//                 count+=hm.get(imbalance);
+//                 System.out.println(hm.get(imbalance)+" substrings found at "+idx);
+//             }            
+//             hm.put(imbalance,hm.getOrDefault(imbalance,0)+1);
+//             idx++;
+//         }
+//         return count;
+//     }
+// }
+
+

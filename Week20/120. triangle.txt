@@ -1,0 +1,26 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int rows=triangle.size();
+        int[][]dp=new int[rows][rows];
+        for(int[] row:dp)
+            Arrays.fill(row,10000);
+        // let dp[row][col] represent ki to reach (row,col) element, what's the minimum path sum
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<=i;j++){
+                if(i==0)
+                    dp[i][j]=triangle.get(i).get(j);
+                else{
+                    int up=dp[i-1][j],ldiag=Integer.MAX_VALUE;
+                    if(j>0) 
+                        ldiag=dp[i-1][j-1];
+                    dp[i][j]=triangle.get(i).get(j)+Math.min(ldiag,up);
+                }
+            }
+        }
+        int minpathsum=Integer.MAX_VALUE;
+        for(int i:dp[rows-1])
+            minpathsum=Math.min(minpathsum,i);
+        
+        return minpathsum;        
+    }
+}

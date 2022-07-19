@@ -1,0 +1,32 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int numComponents(ListNode head, int[] nums) {
+        
+        // FIRST AND FOREMOST IT'S IMPORTANT TO UNDERSTAND THE QUES. CUZ THE EXPLANATION GIVEN OF THE QUES. IS GARBAGE AND INADEQUATE. SO REFER TO THIS LINK: https://leetcode.com/problems/linked-list-components/discuss/131853/Can-someone-explain-the-test-case
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<nums.length-1;i++)
+            hm.put(nums[i],nums[i+1]);
+        
+        hm.put(nums[nums.length-1],-1);
+        int count=0;
+        for(var p=head;p!=null;p=p.next){
+            if(hm.containsKey(p.val)){
+                if(p.next==null)
+                    count++;
+                else if(!hm.containsKey(p.next.val))
+                    count++;
+            }
+        }
+        return count;
+    }
+}
+        

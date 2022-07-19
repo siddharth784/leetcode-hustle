@@ -1,0 +1,39 @@
+class Solution {
+    public String intToRoman(int num) {
+        StringBuilder sb=new StringBuilder();
+        int digits=0;
+        int temp=num;
+        while(temp!=0){
+            digits++;
+            temp/=10;
+        }
+        
+        String[][] roman=new String[][]{{"I","V"},{"X","L"},{"C","D"},{"M","Z"}};
+        
+        String n=""+num;
+        
+        for(int i=0;i<n.length();i++){
+            int pos=n.length()-i;
+            int dig=Character.getNumericValue(n.charAt(i));
+            if(dig>=1&&dig<=3){
+                for(int j=0;j<dig;j++)
+                    sb.append(roman[pos-1][0]);
+            }
+            if(dig==4){
+                sb.append(roman[pos-1][0]+roman[pos-1][1]);
+            }
+            if(dig>=5 && dig<=8){
+                int rem=dig-5;
+                sb.append(roman[pos-1][1]);
+                for(int j=0;j<rem;j++)
+                    sb.append(roman[pos-1][0]);
+            }
+            if(dig==9){
+                sb.append(roman[pos-1][0]);
+                sb.append(roman[pos][0]);
+            }            
+        }
+        return sb.toString();
+    }
+}
+   

@@ -1,0 +1,77 @@
+class Solution {
+    public boolean findRotation(int[][] mat, int[][] target) {
+        // MY CLEAN PERFECT SOLUTION
+        
+        int n=mat.length;
+        //checking if mat can become target on 0°/360° rotation
+        boolean check0=true;
+        for(int i=0;i<n;i++){
+            boolean breakout=false;
+            for(int j=0;j<n;j++){
+                if(mat[i][j]!=target[i][j]){
+                    check0=false;
+                    breakout=true;
+                    break;
+                }
+            }
+            if(breakout)
+                break;
+        }
+        if(check0)
+            return true;
+        
+        // checking if mat can become target on 90° rotation given that a[i,j] is found at (j,n-1-i) on 90° rotation
+        boolean check90=true;
+        for(int i=0;i<n;i++){
+            boolean breakout=false;
+            for(int j=0;j<n;j++){
+                if(mat[i][j]!=target[j][n-1-i]){
+                    check90=false;
+                    breakout=true;
+                    break;
+                }
+            }
+            if(breakout)
+                break;
+        }
+        if(check90)
+            return true;
+        
+        // checking if mat can become target on 180° rotation given that a[i,j] is found at (n-1-i,n-1-j) on 180° rotation
+        boolean check180=true;
+        for(int i=0;i<n;i++){
+            boolean breakout=false;
+            for(int j=0;j<n;j++){
+                if(mat[i][j]!=target[n-1-i][n-1-j]){
+                    check180=false;
+                    breakout=true;
+                    break;
+                }
+            }
+            if(breakout)
+                break;
+        }
+        if(check180)
+            return true;
+        
+        
+        // checking if mat can become target on 270° rotation given that a[i,j] is found at (n-1-j,i) on 270° rotation
+        boolean check270=true;
+        for(int i=0;i<n;i++){
+            boolean breakout=false;
+            for(int j=0;j<n;j++){
+                if(mat[i][j]!=target[n-1-j][i]){
+                    check270=false;
+                    breakout=true;
+                    break;
+                }
+            }
+            if(breakout)
+                break;
+        }
+        if(check270)
+            return true;
+        // no resort:
+        return false;
+    }
+}
