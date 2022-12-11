@@ -1,0 +1,18 @@
+class Solution {
+    public int mostFrequentEven(int[] nums) {
+        Map<Integer,Integer> map=new TreeMap<>();
+        for(int num:nums){
+            if(num%2==0)
+                map.put(num,map.getOrDefault(num,0)+1);
+        }
+        int ans=-1;
+        int maxfreq=0;
+        for(int n:map.keySet()){
+            if(map.get(n)>maxfreq){
+                maxfreq=map.get(n);
+                ans=n;
+            }
+        }
+        return ans;
+    }
+}

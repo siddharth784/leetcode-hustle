@@ -1,0 +1,85 @@
+class Solution {
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> ans=new ArrayList<>();
+    //THE CORRECT SOLUTION: PRIORITYQUEUE ONE BUT INSTEAD OF HOLING IN num1.length*nums2.length ELEMENTS, IT HOLDS ONLY K ELEMENTS AT MAX. BASICALLY IN PRIORITYQUEUE WE WILL STORE ARRAY OF LENGTH 3 WHICH WILL STORE: 
+        //1.NUMS1 ELEMENT; 
+        // 2.THE NUMS2 ELEMENT WHICH IS NEXT IN LINE TO BE PAIRED WITH NUMS1 ELEMENT WHICH HADN'T BEEN PAIRED WITH IT YET;
+        // 3.THE INDEX OF NUMS2 ELEMENT WHICH IS PAIRED RN WITH NUMS1 ELEMENT
+        
+        Queue<int[]> pq=new PriorityQueue<>((o1,o2)->(o1[0]+o1[1]-o2[0]-o2[1]));
+        for(int i=0;i<nums1.length && i<k;i++)
+            pq.offer(new int[]{nums1[i],nums2[0],0});
+        
+        while(k-->0 && !pq.isEmpty()){
+            int[] curr=pq.poll();
+            List<Integer> list=new ArrayList<>();
+            list.add(curr[0]);
+            list.add(curr[1]);
+            ans.add(list);
+            int nextidx=curr[2]+1;
+            if(nextidx<nums2.length)
+            pq.offer(new int[]{curr[0],nums2[nextidx],nextidx});
+        }
+        return ans;
+    }
+}
+        
+        
+        
+    //MEMORY LIMIT EXCEEDED CUZ PQ TAKES IN nums1.length*nums2.length elements:        
+//         Queue<Pair> pq=new PriorityQueue<>((o1,o2)->{
+//             return (o1.num1+o1.num2)-(o2.num1+o2.num2);
+//         });
+//         for(int ele:nums1){
+//             for(int ele2:nums2)
+//                 pq.add(new Pair(ele,ele2));
+//         }
+//         while(!pq.isEmpty() && k!=0){
+//             List<Integer> hold=new ArrayList<>();
+//             hold.add(pq.peek().num1);
+//             hold.add(pq.poll().num2);
+//             ans.add(hold);
+//             k--;
+//         }
+//         return ans;
+//     }
+// }
+// class Pair{
+//     int num1,num2;
+//     Pair(){}
+//     Pair(int a, int b){
+//         this.num1=a;
+//         this.num2=b;
+//     }
+    
+// }
+        
+        
+        
+        
+        
+        //WRONG METHOD CUZ WE CAN'T JUST MOVE POINTER AHEAD..WE MIGHT NEED THE SAME ELEMENT LATER ON
+//         int i=0,j=0;
+//         while(i<nums1.length && j<nums2.length && k>0){
+//             if(nums1[i]<=nums2[j]){
+//                 List<Integer> pair=new ArrayList<>();
+//                 pair.add(nums1[i]);
+//                 pair.add(nums2[j]);
+//                 ans.add(pair);
+//                 i++;
+//                 k--;
+//             }
+//             else{
+//                 List<Integer> pair=new ArrayList<>();
+//                 pair.add(nums1[i]);
+//                 pair.add(nums2[j]);
+//                 ans.add(pair);
+                
+//                 j++;
+//                 k--;
+//             }
+//         }
+        
+//         return ans;
+//     }
+// }

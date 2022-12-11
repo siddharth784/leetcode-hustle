@@ -1,0 +1,15 @@
+class Solution {
+    public String removeDigit(String number, char digit) {
+// we can just remove the leftmost digit if it's followed by a larger number. If we cannot find such case, we remove the last occurence of digit
+        
+        int lastidx=0;
+        for(int i=0;i<number.length();i++){
+            if(number.charAt(i)==digit){
+                lastidx=i;
+                if(i==number.length()-1 || number.charAt(i+1)>number.charAt(i))
+                return (number.substring(0,i)+number.substring(i+1));
+            }
+        }
+        return number.substring(0,lastidx)+number.substring(lastidx+1);
+    }
+}

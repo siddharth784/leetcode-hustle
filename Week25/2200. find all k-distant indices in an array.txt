@@ -1,0 +1,20 @@
+class Solution {
+    public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
+        List<Integer> ans=new ArrayList<>();
+        List<Integer> keyindices=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==key)
+                keyindices.add(i);
+        }
+        int last=0;
+        for(int keyidx:keyindices){
+            for(int i=Math.max(last,keyidx-k);i<nums.length && i<=keyidx+k;i++){
+                if(ans.contains(i)==false)
+                    ans.add(i);
+            }
+            last=keyidx+k;
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+}

@@ -1,0 +1,45 @@
+class Solution {
+    public int minimumRecolors(String blocks, int k) {
+//ONCE I SAW THAT THIS IS A SLIDING WINDOW QUESTION, THE QUESTION BECAME MUCH EASIER
+        int blacks=0,whites=0;
+        for(int i=0;i<k;i++){
+            blacks=(blocks.charAt(i)=='B')?(blacks+1):blacks;
+            whites=(blocks.charAt(i)=='W')?(whites+1):whites;
+        }
+        int minops=Integer.MAX_VALUE;
+        int i=0,j=k-1;
+        while(j<blocks.length()){
+            minops=Math.min(minops,whites);
+            if(blocks.charAt(i)=='W')
+                whites--;
+            else
+                blacks--;
+            if(j!=blocks.length()-1){
+                if(blocks.charAt(j+1)=='W')
+                    whites++;
+                else
+                    blacks++;
+            }
+            i++;
+            j++;
+        }
+        return minops;
+    }
+}
+        
+        
+        
+//         int leftblacks=0,rightblacks=0;
+//         for(int i=0;i<blocks.length();i++){
+//             if(blocks.charAt(i)=='B'){
+//                 if(gap!=0)
+//                     rightblacks++;
+//                 else
+//                     leftblacks++;
+//             }
+//             else{
+//                 gap++;
+//             }
+//         }
+//     }
+// }

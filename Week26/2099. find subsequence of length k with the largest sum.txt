@@ -1,0 +1,67 @@
+class Solution {
+    public int[] maxSubsequence(int[] nums, int k) {
+//APPROACH NO.2: ANOTHER APPROACH WHERE WE LEARN NEW THINGS. WE MAP VALUES TO THEIR INDICES USING 2D ARRAY. THEN WE SORT THE ARRAY BY VALUE AND WE PICK K GREATEST PAIRS. THEN WE SORT IT BY THEIR INDICES AND RETURN THE ANSWER
+        int n=nums.length;
+        int[][] indAndVal=new int[n][2];
+        for(int i=0;i<n;i++){
+            indAndVal[i][0]=i;
+            indAndVal[i][1]=nums[i];
+        }
+        Arrays.sort(indAndVal,(o1,o2)->o2[1]-o1[1]);
+        int[][] topK=Arrays.copyOfRange(indAndVal,0,k);
+        Arrays.sort(topK,(o1,o2)->o1[0]-o2[0]);
+        int[] ans=new int[k];
+        for(int i=0;i<ans.length;i++)
+            ans[i]=topK[i][1];
+        return ans;
+    }
+}
+        
+        
+        
+        
+//APPROACH NO.1: sort the array. put last k elements into ans[]. then sort ans[] according to custom sort. For this custom sort we require direct link of the number to its original index. that's why we use pair class 
+//         Queue<Pair> pq=new PriorityQueue<>((o1,o2)->o2.val-o1.val);
+//         for(int i=0;i<nums.length;i++)
+//             pq.offer(new Pair(nums[i],i));
+//         Pair[] ans=new Pair[k];
+//         int idx=0;
+//         while(idx<ans.length)
+//             ans[idx++]=pq.poll();
+//         Arrays.sort(ans,(o1,o2)->o1.idx-o2.idx);
+//         int[] answer=new int[k];
+//         for(int i=0;i<answer.length;i++)
+//             answer[i]=ans[i].val;
+//         return answer;        
+
+//     }
+//     class Pair{
+//         int val,idx;
+//         Pair(){}
+//         Pair(int num, int i){
+//             this.val=num;
+//             this.idx=i;
+//         }
+//     }
+// }
+        
+//FAIL:        
+//         Queue<Integer> pq=new PriorityQueue<>();
+//         HashMap<Integer,Integer> hm=new HashMap<>();
+//         int[] ans=new int[k];
+//         for(int i=0;i<nums.length;i++){
+//             pq.offer(nums[i]);
+//             hm.put(nums[i],i);
+//         }
+//         int idx=0;
+//         for(int i=1;i<=k;i++)
+//         ans[idx++]=pq.poll();
+        
+//         // Arrays.sort(ans,(o1,o2)->{
+//         //     return (hm.get(o1)-hm.get(o2));
+//         // });
+//         Arrays.sort(ans,(o1,o2)->hm.get(o1)-hm.get(o2));
+        
+//         return ans;
+//     }
+// }

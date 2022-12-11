@@ -1,0 +1,45 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {        
+// ATTEMPT: CREATE A PREFIX SUM LINEAR ARRAY WHICH DENOTES NO. OF ZEROS PRESENT FROM THE STARTING TO THAT INDEX. THIS WILL HELP US FIND  THE NO. OF ZEROS IN ANY SLIDING WINDOW, WHICH WILL HELP US LATER. NOW, DO BINARY SEARCH. LO=0,HI=NUMS.LENGTH-1. IF NO. OF ZEROS IN THIS ARRAY IS ==k, REGISTER THIS LENGTH IN ANS BY MATH.MAX AND THEN  IF NOT SO, UPDATE LO AND MID AS PER <k OR >k. UPDATE: NOT WORKING OUT. BINARY SEARCH ON THE INDICES DOESN'T MAKE SENSE ANYWAY HERE. INSTEAD, DO BINARY SEARCH BUT DIFFERENT WAY. LO WILL BE 0,HI WILL BE NUMS.LENGTH. THEN WHATEVER THE MID WILL BE, WE WILL RUN A SLIDING WINDOW OF 'MID' SIZE IN THE ARRAY, AND CHECK IF THERE ARE <=k ZEROS IN ANY OF THEM. IF YES, REGISTER MID SIZE BY MATH.MAX. REPEAT. MID WILL BTW REPRESENT AN ARBITRARY SUBARRAY LENGTH. USS LENGTH KA SUBARRAY MEIN <=k ZEROS HON YE HUM CHAHTE HAIN.
+        
+//DID IT MYSELFFFFF!!!        
+        int maxlen=Integer.MIN_VALUE;
+        int n=nums.length;
+        int[] zeros=new int[n];
+        zeros[0]=(nums[0]==0)?1:0;
+        for(int i=1;i<n;i++)
+            zeros[i]=(zeros[i]==0)?zeros[i-1]+1:zeros[i-1];
+        
+        int lo=0,hi=n;
+        while(lo<=hi){
+            int mid=(lo+hi)/2;
+            int i=0,j=mid-1;
+            int zeroscount=0;
+            for(int idx=i;idx<=j;idx++)
+                zeroscount=(nums[idx]==0)?zeroscount+1:zeroscount;
+            
+            int minzerocount=Integer.MAX_VALUE;
+            while(j<n){
+                minzerocount=Math.min(minzerocount,zeroscount);
+                if(minzerocount<=k)
+                    break;
+                if(nums[i]==0)
+                    zeroscount--;
+                if(j!=n-1 && nums[j+1]==0)
+                    zeroscount++;
+                i++;
+                j++;
+            }
+            
+            if(minzerocount<=k){
+                maxlen=Math.max(maxlen,mid);
+                lo=mid+1; //lo=mid+1 is ok instead of lo=mid kyuki minzerocount in case of mid length ko hum already register kr chuke hain maxlen mein already. Plus, agar lo=mid krenge to jb hi-lo=1 hoga yani ek ka gap hoga lo aur hi mein, to diverge nahi kr payenge hum usko into lo==hi, joki humein chahiye..ki lo aur hi equal hon if that's suppposed to happen. but since in +ve nos. mid when lo=hi-1 is lo, lo==hi nhi ho payega in case of lo=hi-1
+            }
+            else if(minzerocount>k)
+                hi=mid-1;
+        }
+        
+        return maxlen;
+    }
+}
+        

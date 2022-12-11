@@ -1,0 +1,25 @@
+class Solution {
+    public int secondHighest(String s) {
+      //  boolean first=true,second=true;
+        //Queue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        Set<Integer> set=new TreeSet<>(Collections.reverseOrder());
+        for(char ch:s.toCharArray()){
+            if(Character.isDigit(ch)){
+                set.add(Character.getNumericValue(ch));
+            }
+        }
+        
+        if(set.size()<2) 
+            return -1;
+        boolean first=true;
+        for(int num:set){
+            if(!first)
+                return num;
+            if(first){
+                first=false;
+            
+            }
+        }
+        return -1;
+    }
+}

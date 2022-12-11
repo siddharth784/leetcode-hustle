@@ -1,0 +1,49 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        // int[][] rowcount=new int[9][9];
+        // int[][] colcount=new int[9][9];
+        for(int row=0;row<9;row++){
+            HashMap<Character,Integer> hm=new HashMap<>();
+            for(int j=0;j<9;j++){
+                if(board[row][j]!='.'){
+                    hm.put(board[row][j],hm.getOrDefault(board[row][j],0)+1);
+                    if(hm.get(board[row][j])>1)
+                        return false;
+                }
+                // rowcount[row][j]++;
+                // if(rowcount[row][j]>1)
+                //     return false;
+            }
+        }
+        
+        for(int j=0;j<9;j++){
+            HashMap<Character,Integer> hm=new HashMap<>();
+            for(int i=0;i<9;i++){
+                if(board[i][j]!='.'){
+                    hm.put(board[i][j],hm.getOrDefault(board[i][j],0)+1);
+                    if(hm.get(board[i][j])>1)
+                        return false;
+                }
+            }
+        }
+        
+        
+        for(int sti=0;sti<9;sti+=3){
+            for(int stj=0;stj<9;stj+=3){
+                HashMap<Character,Integer> hm=new HashMap<>();
+                for(int i=sti;i<sti+3;i++){
+                    for(int j=stj;j<stj+3;j++){
+                        if(board[i][j]!='.'){
+                            hm.put(board[i][j],hm.getOrDefault(board[i][j],0)+1);
+                            if(hm.get(board[i][j])>1)
+                                return false;
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        return true;
+    }
+}

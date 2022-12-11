@@ -1,0 +1,33 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        Map<Integer,Boolean> rowzero=new TreeMap<>();
+        Map<Integer,Boolean> colzero=new TreeMap<>();
+        for(int i=0;i<matrix.length;i++)
+rowzero.put(i,false);
+        for(int j=0;j<matrix[0].length;j++)
+            colzero.put(j,false);
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    rowzero.put(i,true);
+                    colzero.put(j,true);
+                }
+            }
+        }
+        
+        for(int row:rowzero.keySet()){
+            if(rowzero.get(row)){
+                for(int i=row,j=0;j<matrix[0].length;j++)
+                    matrix[i][j]=0;
+            }
+        }
+        
+        for(int col:colzero.keySet()){
+            if(colzero.get(col)){
+                for(int i=0,j=col;i<matrix.length;i++)
+                    matrix[i][j]=0;
+            }
+        }
+        //return matrix;
+    }
+}

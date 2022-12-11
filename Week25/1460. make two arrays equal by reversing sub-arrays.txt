@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+        //bruh if there is no limit on the swapping thing and on size of subarray which is to be reversed, you can make 2 arrays absolutely equal if they have the same set of elements
+        int[] count=new int[1001];
+        for(int ele:target)
+            count[ele]++;
+        for(int ele:arr)
+            count[ele]--;
+        for(int i=0;i<=1000;i++){
+            if(count[i]!=0)
+                return false;
+        }
+        return true;
+    }
+}

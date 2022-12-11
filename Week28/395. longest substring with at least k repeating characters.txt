@@ -1,0 +1,67 @@
+class Solution {
+    public int longestSubstring(String s, int k) {
+//NOT V EFFICIENT BUT CORRECT APPROACH: START FROM EACH INDEX OF THE STRING. KEEP TRACK OF FREQUENCY OF ALPHABETS IN THE SUBSTRING STARTING FROM i. IF THE FREQUENCY OF THE CURRENT jTH CHARACTER IS LESS THAN k, THEN WE ALREADY KNOW THE SUBSTRING RN DOESN'T QUALIFY SO CONTINUE. OTHERWISE CHECK FOR ALL 26 CHARACTERS. BUT I THINK IT COULD BE DONE WAY FASTER USING SLIDING WINDOW WHERE WINDOW'S SIZE REDUCES FROM s.length() TO 0.        
+        
+//SURPRISINGLY EVEN SLOWER SLIDING WINDOW APPROACH:        
+        int windowlen=s.length();
+        int ans=0;
+        while(windowlen>=1){
+            int i=0,j=windowlen-1;
+            int[] alpha=new int[26];
+            for(int idx=0;idx<=j;idx++)
+                alpha[s.charAt(idx)-'a']++;
+            
+            while(j<s.length()){
+                boolean valid=true;
+                for(int idx=0;idx<26;idx++){
+                    if(alpha[idx]<k && alpha[idx]>0){
+                        valid=false;
+                        break;
+                    }
+                }
+                if(valid)
+                    ans=Math.max(ans,windowlen);
+                
+                alpha[s.charAt(i)-'a']--;
+                if(j!=s.length()-1)
+                    alpha[s.charAt(j+1)-'a']++;
+                i++;
+                j++;
+            }
+            
+            windowlen--;
+        }
+        return ans;
+    }
+}
+        
+
+// FASTER BUT STILL SLOW APPROACH WITH GIVING EACH STARTING INDEX OF THE STRING A CHANCE:
+        int ans=0;
+        for(int i=0;i<s.length();i++){
+            int[] alpha=new int[26];
+            int j=i;
+            while(j<s.length()){
+                char ch=s.charAt(j);
+                alpha[ch-'a']++;
+                j++;
+                if(alpha[ch-'a']<k)
+                    continue;
+                else{
+                    boolean valid=true;
+                    for(int idx=0;idx<26;idx++){
+                        if(alpha[idx]<k && alpha[idx]>0){
+                            valid=false;
+                            break;
+                        }
+                    }
+                    if(valid)
+                        ans=Math.max(ans,j-i);
+                }
+                    
+            }
+        }
+        
+        return ans;
+    }
+}

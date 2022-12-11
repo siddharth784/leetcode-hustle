@@ -1,0 +1,48 @@
+class Solution {
+    public int[] shortestToChar(String s, char c) {
+// LET'S TRY 2 POINTER APPROACH. ONE WHERE WE WILL ALWAYS KEEP TRACK OF 2 POINTERS/INDICES. FIRST POINTER WILL STORE THE MOST RECENT c TO THE LEFT OF CURRENT CHARACTER. 2ND POINTER WILL STORE THE MOST RECENT c TO THE RIGHT OF CURRENT CHARACTER
+        Queue<Integer> pq=new PriorityQueue<>();
+        for(int idx=0;idx<s.length();idx++){
+            if(s.charAt(idx)==c)
+                pq.offer(idx);
+        }
+        int[] ans=new int[s.length()];
+        int p1=-10001,p2=10001;
+        
+        if(!pq.isEmpty())
+            p2=pq.poll(); //in the beginning p1 will be far left somewhere which will make it non viable option and p2(right pointer) will be at the index of first appearance of char c in the Stringa
+        for(int idx=0;idx<s.length();idx++){
+            if(idx-p1<p2-idx){
+                ans[idx]=idx-p1;
+            }
+            else{
+                ans[idx]=p2-idx;
+                if(p2==idx){
+                    p1=p2;
+                    if(!pq.isEmpty())
+                        p2=pq.poll();
+                    else
+                        p2=10001;
+                }
+            }
+        }
+        return ans;
+    }
+}
+        
+        
+        
+        
+        
+//FAIL:        
+//         TreeMap<Integer,Boolean> tm=new TreeMap<>();
+//         int idx=0;
+//         for(char ch:s.toCharArray()){
+//             if(ch==c)
+//                 tm.put(idx,true);
+//             idx++;
+//         }
+//         int i=tm
+        
+//     }
+// }

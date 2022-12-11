@@ -1,0 +1,41 @@
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+//DID MYSELF. RELATED TOPICS SAYS BINARY SEARCH AND SORTING. AND DOING THIS IN O(n) SEEMS IMPOSSIBLE. WHICH MEANS IT'S TO BE DONE IN O(log n) WHICH MEANS RUNNING THROUGH EACH INTERVAL, BUT FOR FINDING THE RIGHT INTERVAL FOR THE INTERVAL WE USE BINARY SEARCH, WHICH MAKES SENSE CUZ WE SORT ARRAY IN THE BEGINNING. UPDATE:WILL HAVE TO CREATE A PAIR CLASS CUZ SORTING IS REQUIRED BUT WE CAN'T SPOIL THE ORIGINAL INDICES OF INTERVALS. SO BETTER CREATE A CLONE OF OG ARRAY BY CREATING A PAIR[] ARRAY 
+        int[] ans=new int[intervals.length];
+        int idx=0;
+        Pair[] intervals_=new Pair[intervals.length];
+        for(int i=0;i<intervals.length;i++)
+            intervals_[i]=new Pair(intervals[i][0],intervals[i][1],i);
+        Arrays.sort(intervals_,(o1,o2)->o1.st-o2.st);
+        
+        for(int[] interval:intervals){
+            int st=interval[0],end=interval[1];
+            int lo=0,hi=intervals.length-1;
+            int rightidx=Integer.MAX_VALUE;
+            while(lo<=hi){
+                int mid=(lo+hi)/2;
+                if(intervals_[mid].st>=end){
+                    rightidx=Math.min(rightidx,intervals_[mid].ogidx);
+                    hi=mid-1;
+                }
+                else
+                    lo=mid+1;
+            }
+            if(rightidx==Integer.MAX_VALUE)
+                rightidx=-1;
+            ans[idx++]=rightidx;
+        }
+        return ans;
+        
+    }
+    
+    class Pair{
+        int st,end,ogidx;
+        Pair(){}
+        Pair(int x, int y, int z){
+            this.st=x;
+            this.end=y;
+            this.ogidx=z;
+        }
+    }
+}

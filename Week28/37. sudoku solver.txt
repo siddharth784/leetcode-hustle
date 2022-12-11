@@ -1,0 +1,43 @@
+class Solution {
+    public void solveSudoku(char[][] board) {
+        //AN UNUSUAL/DIFFERENT TYPE OF BACKTRACKING QUESTION
+        solve(board);
+    }
+    
+    public boolean solve(char[][] board){
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.'){
+                    for(char ch='1';ch<='9';ch++){
+                        if(isValid(board,i,j,ch)){
+                            board[i][j]=ch;
+                            if(solve(board))
+                                return true;
+                            else
+                                board[i][j]='.';
+                        }
+                    }
+                    return false; //there is something wrong with prefilled numbers
+                }
+            }
+        }
+            return true;
+    }
+    public boolean isValid(char[][] board, int row, int col, char ch){
+        for(int i=row,j=0;j<9;j++){
+            if(board[i][j]==ch)
+                return false;
+        }
+        for(int i=0,j=col;i<9;i++){
+            if(board[i][j]==ch)
+                return false;
+        }
+        for(int i=(row/3)*3;i<(row/3)*3+3;i++){
+            for(int j=(col/3)*3;j<(col/3)*3+3;j++){
+                if(board[i][j]==ch)
+                    return false;
+            }
+        }
+        return true;
+    }
+}

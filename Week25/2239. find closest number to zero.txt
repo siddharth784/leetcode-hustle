@@ -1,0 +1,15 @@
+class Solution {
+    public int findClosestNumber(int[] nums) {
+        int gap=Integer.MAX_VALUE;
+        int closest=0;
+        for(int num:nums){
+            if(Math.abs(num)<gap){
+                closest=num;
+                gap=Math.abs(num);
+            }
+            else if(Math.abs(num)==gap && Math.abs(num)>closest)
+                closest=num;
+        }
+        return closest;
+    }
+}

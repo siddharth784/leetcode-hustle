@@ -1,0 +1,18 @@
+class Solution {
+    public List<Integer> minSubsequence(int[] nums) {
+        List<Integer> al=new ArrayList<>();
+        Arrays.sort(nums);
+        int allsum=0;
+        for(int ele:nums)
+            allsum+=ele;
+        int currsum=0;
+        int j=nums.length-1;
+        while(currsum<=allsum-currsum){
+            currsum+=nums[j];
+            al.add(nums[j]);
+            j--;
+        }
+        Collections.sort(al,(a,b)->b-a);
+        return al;
+    }
+}

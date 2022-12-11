@@ -1,0 +1,33 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+// RANDOM CHAD IN DISCUSS SECTION KA 200IQ SOLUTION USING JUST ARRAYS:
+//        https://leetcode.com/problems/relative-sort-array/discuss/335056/Java-in-place-solution-using-counting-sort
+        
+        
+        
+    // MY CUSTOM SORTING SOLUTION        
+        HashMap<Integer,Integer> hm=new HashMap<>(); //rankings of elements in arr2
+        int k=0;
+        for(int ele:arr2)
+            hm.put(ele,k++);
+        
+        Integer[] arr=new Integer[arr1.length];
+        for(int j=0;j<arr1.length;j++)
+            arr[j]=arr1[j];
+        
+        Arrays.sort(arr,(o1,o2)->{
+            if(hm.containsKey(o1) && hm.containsKey(o2))
+                return hm.get(o1)-hm.get(o2);
+            else if(hm.containsKey(o1))
+                return -1;
+            else if(hm.containsKey(o2))
+                return 1;
+            else
+                return o1-o2;
+            });
+        
+        for(int j=0;j<arr.length;j++)
+            arr1[j]=arr[j];
+        return arr1;        
+    }
+}

@@ -1,0 +1,23 @@
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        Map<Integer,Integer> hm=new HashMap<>();
+        for(int num:nums)
+            hm.put(num,hm.getOrDefault(num,0)+1);
+        Integer[] nums_=new Integer[nums.length];
+        for(int i=0;i<nums.length;i++)
+            nums_[i]=nums[i];
+        
+        Arrays.sort(nums_,(o1,o2)->{
+            if(!hm.containsKey(o1)||!hm.containsKey(o2))
+                return o2-o1;
+            else if(hm.get(o1)==hm.get(o2))
+                return (o2-o1);
+            else
+                return (hm.get(o1)-hm.get(o2));
+        });
+        
+        for(int i=0;i<nums.length;i++)
+            nums[i]=nums_[i];
+        return nums;
+    }
+}

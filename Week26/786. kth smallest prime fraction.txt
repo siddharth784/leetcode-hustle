@@ -1,0 +1,23 @@
+class Solution {
+    public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+// O(n2) VERY SLOW BUT ACCEPTED APPROACH:        
+        int[] ans=new int[2];
+        Queue<Integer[]> pq=new PriorityQueue<>((o1,o2)->{  //taking Integer cuz I'm scared custom lambda function might dysfunction if I took int[]
+            double f1=(double)o1[0]/o1[1];
+            double f2=(double)o2[0]/o2[1];
+            if(f1-f2<0)
+                return -1;
+            else if(f1==f2)
+                return 0;
+            return 1;
+            // return f1-f2; cuz this lambda function for some reason doesn't want double type return value
+        });
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++)
+                pq.offer(new Integer[]{arr[i],arr[j]});
+        }
+        while(k-->1)
+            pq.poll();
+        return new int[]{pq.peek()[0],pq.peek()[1]};
+    }
+}

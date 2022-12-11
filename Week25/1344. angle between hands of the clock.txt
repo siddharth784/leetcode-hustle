@@ -1,0 +1,20 @@
+class Solution {
+    public double angleClock(int hour, int minutes) {
+        // double minuteangle=(double)(minutes/60)*360;
+        // double hrangle=(double)( (double)(hour/12)*360 + (double)(minutes/60)*30);
+        double minby60=(double)minutes/60;
+        double mby360=(double)minby60*360;
+        double hrby12=(double)hour/12;
+        double mby3602=(double)hrby12*360;
+        double mby30=(double)minby60*30;
+        
+        double minuteangle=mby360;
+        double hrangle=mby3602+mby30;
+        minuteangle%=360;
+        hrangle%=360;
+        double anglebw=Math.abs(minuteangle-hrangle);
+        if(anglebw>=(double)180)
+            return 360-anglebw;
+        return anglebw;
+    }
+}

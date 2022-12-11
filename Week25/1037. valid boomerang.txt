@@ -1,0 +1,16 @@
+class Solution {
+    public boolean isBoomerang(int[][] points) {
+        if(points[0][0]==points[1][0] && points[0][1]==points[1][1])
+            return false;
+        if(points[1][0]==points[2][0] && points[1][1]==points[2][1])
+            return false;
+        if(points[0][0]==points[2][0] && points[0][1]==points[2][1])
+            return false;
+        double m1=0,m2=0;
+        m1=(double)(points[1][1]-points[0][1])/(double)(points[1][0]-points[0][0]);
+        m2=(double)(points[2][1]-points[1][1])/(double)(points[2][0]-points[1][0]);
+        if(points[2][0]-points[1][0]==0 && points[1][0]-points[0][0]==0) //both sloped infinity
+            return false;
+        return m1!=m2;    
+    }
+}

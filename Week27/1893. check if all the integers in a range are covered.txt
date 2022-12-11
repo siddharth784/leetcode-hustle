@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isCovered(int[][] ranges, int left, int right) {
+        HashMap<Integer,Boolean> hm=new HashMap<>();
+        for(int[] range: ranges){
+            for(int i=range[0];i<=range[1];i++)
+                hm.put(i,true);
+        }
+        for(int i=left;i<=right;i++){
+            if(hm.containsKey(i)==false)
+                return false;
+        }
+        return true;
+    }
+}

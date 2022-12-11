@@ -1,0 +1,26 @@
+class Solution {
+    public String findLongestWord(String s, List<String> dictionary) {
+        String ans="";
+        boolean first=true;
+        
+        for(String word:dictionary){
+            int i=0,j=0;
+            while(i<s.length() && j<word.length()){
+                if(s.charAt(i)==word.charAt(j)){
+                    i++;
+                    j++;
+                }
+                else
+                    i++;
+            }
+            if(j==word.length()){ //eligible word
+                if(first || (word.length()>ans.length() || (word.length()==ans.length() && word.compareTo(ans)<0))){ //3 cases where ans need be updated: 1.it's the first eligible word 2. it's longer than ans 3. it's equal in length to ans but it's lexicographically smaller
+                    ans=word;
+                    first=false;
+                }
+            }
+        }
+        
+        return ans;
+    }
+}

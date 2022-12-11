@@ -1,0 +1,159 @@
+class Solution {
+    public long taskSchedulerII(int[] tasks, int space) {
+//HASHMAP APPROACH WITH THIS IN MIND THAT THE CHRONOLOGICAL ORDER OF THE TASKS HAS TO BE MAINTAINED IN EXECUTION
+        Map<Integer,Long> last=new HashMap<>();
+        long days=0;
+        for(int task:tasks){
+            if(last.containsKey(task)){
+                //or last.put(task, days = Math.max(days, last.get(task) + space) + 1);
+                last.put(task,Math.max(days+1,last.get(task)+space+1));
+                days=last.get(task);
+            }
+            else{
+                last.put(task,++days); //here if you do days++, code will fail. Why? cuz not only do we want updation of days we also want the updated latest date(days+1) to go corresponding to task
+            }
+        }
+        return days;
+    }
+}
+        
+        
+//COMPLETELY CORRECT APPROACH BUT TLE FOR LAST FEW CASES        
+        // HashSet<Integer> unallowed=new HashSet<>();
+//         List<Integer> unallowed=new ArrayList<>();
+//         int idx=0;
+//         int random=-1;
+//         long days=0;
+//         while(idx<tasks.length){
+//             int todo=tasks[idx];
+//             if(!unallowed.contains(todo)){
+//                 days++;
+//                 unallowed.add(todo);
+//                 if(unallowed.size()>space)
+//                     unallowed.remove(0);                
+//                 idx++;
+//             }
+//             else{ //take a rest
+//                 int restdays=unallowed.indexOf(todo)+1;
+//                 for(int i=1;i<=restdays;i++){
+//                     unallowed.add(random--);
+//                     if(unallowed.size()>space)
+//                         unallowed.remove(0);
+//                     days++;
+//                 }
+                
+//             }
+//         }
+//         return days;
+//     }
+// }
+        
+        
+        
+        
+// APPROACH THAT WOULD'VE BEEN CORRECT IF THE TASKS HADN'T HAD TO BE DONE IN GIVEN ORDER. UPDATE: NO THIS WOULD NOT GIVE THE OPTIMUM ANSWER EVEN IN THAT CASE. I FOUND OUT AFTER RUNNING THIS CODE ON TASK SCHEDULER QUESTION
+//         Map<Integer,Integer> tm=new TreeMap<>();
+//         for(int task:tasks)
+//             tm.put(task,tm.getOrDefault(task,0)+1);
+//         // System.out.print(tm);
+//         List<Integer> days=new ArrayList<>();
+//         // days.add(0);
+//         // days.add(0);
+//         // days.add(0);
+//         List<Integer> unallowed=new ArrayList<>();
+//         boolean finished=false;
+//         while(finished==false){
+//             finished=true; // finished will tell if frequency of all tasks has become zero. which means we are done with all the tasks
+//             boolean exhausted=true; //exhausted will tell if looping through the treemap's keys once completely, hasn't even given us one task for the day, and that we need to take a break for a day.
+//             for(int num:tm.keySet()){
+                
+//                 int freq=tm.get(num);
+//                 if(freq>0){
+//                     finished=false;
+//                     int size=days.size();
+//                     // boolean taskallowed=true;
+//                     // int idx=size-1;
+//                     // while(idx>=0 && idx>=size-space){
+//                     //     if(days.get(idx)==num){
+//                     //         taskallowed=false;
+//                     //         break;
+//                     //     }
+//                     //     idx--;
+//                     // }
+//                     // if(taskallowed){
+                    
+//                     // if(size>3 && days.get(size-1)!=num && days.get(size-2)!=num && days.get(size-3)!=num){
+//                     // if( ((size-1>=0&&days.get(size-1)!=num)||size-1<0) && ((size-2>=0&&days.get(size-2)!=num)||size-2<0) && ((size-3>=0&&days.get(size-3)!=num)||size-3<0)){
+//                     // if(days.get(size-1)!=num && days.get(size-2)!=num && days.get(size-3)!=num){
+//                     if(!unallowed.contains(num)){
+                        
+//                         days.add(num);
+//                         System.out.println("we gonna do "+num+" type task for "+(size+1)+"th day");
+//                         exhausted=false;
+//                         tm.put(num,freq-1);
+//                         unallowed.add(num);
+//                         if(unallowed.size()>space)
+//                             unallowed.remove(0);
+//                     }
+//                     // else if(size<=3 && days.get(0)!=num && days.
+//                 }
+//             }
+//             if(exhausted && finished==false){
+//                 System.out.println("we gonna rest for "+(days.size()+1)+"th day");
+//                 days.add(0);
+//                 unallowed.add(0);
+//                 if(unallowed.size()>space)
+//                 unallowed.remove(0);                
+//             }
+//         }
+        
+        
+//         return days.size();
+//     }
+// }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //FAILED APPROACH OF MOVING TASKS[] ELEMENTS IN A QUEUE UNTIL FINDING IF THE ELEMENT IN THE FRONT OF THE QUEUE IS FIT TO BE DONE AS A TASK FOR TODAY
+        
+        // Set<Integer> unallowed=new HashSet<>();
+//         List<Integer> unallowed=new ArrayList<>();
+//         Queue<Integer> q=new ArrayDeque<>();
+//         for(int task:tasks)
+//             q.add(task);
+        
+//         List<Integer> days=new ArrayList<>();
+//         int rounds=0;
+//         while(!q.isEmpty()){
+//             int hold=q.poll();
+//             if(!unallowed.contains(hold)){
+//                 days.add(hold);
+//                 // unallowed.remove(first of the window. now i dont know how to remove in a hashset from an index. so use list instead)
+//                 if(days.size()>3)
+//                     unallowed.remove(0);
+//                 unallowed.add(hold);
+//                 rounds=0;
+//             }
+//             else{
+//                 if(rounds==q.size()){
+//                     days.add(0); //or whichever no.
+//                     unallowed.remove(0);
+//                 }
+//                 else{
+//                     q.offer(hold);
+//                     rounds++;
+//                 }
+//             }
+//         }
+        
+//         return days.size();
+//     }
+// }

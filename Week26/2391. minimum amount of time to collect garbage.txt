@@ -1,0 +1,61 @@
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+        int papertime=0;
+        int lastidx=garbage.length-1;
+        for(int i=garbage.length-1;i>=0;i--){
+            if(garbage[i].contains("P")){
+                lastidx=i;
+                break;
+            }
+            else
+                lastidx--;
+        }
+        for(int house=0;house<=lastidx;house++){
+            if(house<lastidx)
+            papertime+=travel[house];
+            papertime+=count(garbage[house],'P');
+        }
+        
+        lastidx=garbage.length-1;
+        int metaltime=0;
+        for(int i=garbage.length-1;i>=0;i--){
+            if(garbage[i].contains("M")){
+                lastidx=i;
+                break;
+            }
+            else
+                lastidx--;
+        }
+        for(int house=0;house<=lastidx;house++){
+            if(house<lastidx)
+            metaltime+=travel[house];
+            metaltime+=count(garbage[house],'M');
+        }
+        
+        
+        lastidx=garbage.length-1;
+        int glasstime=0;
+        for(int i=garbage.length-1;i>=0;i--){
+            if(garbage[i].contains("G")){
+                lastidx=i;
+                break;
+            }
+            else
+                lastidx--;
+        }
+        for(int house=0;house<=lastidx;house++){
+            if(house<lastidx)
+            glasstime+=travel[house];
+            glasstime+=count(garbage[house],'G');
+        }
+        // System.out.println(glasstime+"\n"+papertime+"\n"+metaltime);
+        return glasstime+papertime+metaltime;     
+    }
+    
+    public int count(String str, char c){
+        int ans=0;
+        for(char ch:str.toCharArray())
+            ans=(ch==c)?ans+1:ans;
+        return ans;
+    }
+}

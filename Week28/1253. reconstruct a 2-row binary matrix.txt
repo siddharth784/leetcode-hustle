@@ -1,0 +1,47 @@
+class Solution {
+    public List<List<Integer>> reconstructMatrix(int upper, int lower, int[] colsum) {
+        List<List<Integer>> ans=new ArrayList<>();
+        //intuition: deal with one column at a time. for each column, check if upper>0. if yes, fill one in the upper row there. same for lower for that column. repeat for all columns. simple greedy approach.
+        for(int n=1;n<=2;n++){
+            List<Integer> al=new ArrayList<>(colsum.length);
+            for(int i=0;i<colsum.length;i++){
+                al.add(0);    
+            }
+            ans.add(al);
+        }
+        
+        for(int j=0;j<colsum.length;j++){
+            if(colsum[j]==1){  //THIS IF CASE I ADDED IN LATER. WHY? CUZ WHEN WE ONLY HAVE A SINGLE 1 TO BE ADDED IN A COLUMN, WE SHOULD BE SELECTIVE AND SIMPLY GIVING IT TO THE UPPER ROW WILL MAKE IT IMPOSSIBLE TO CONSTRUCT THE MATRIX EVEN WHEN IT COULD BE DONE WITH BETTER GREEDY SELECTION.
+                if(upper>lower){
+                    ans.get(0).set(j,ans.get(0).get(j)+1);
+                    upper--;
+                    colsum[j]--;
+                }
+                else{
+                    ans.get(1).set(j,ans.get(1).get(j)+1);
+                    lower--;
+                    colsum[j]--;
+                }
+            }
+            else{                
+                if(upper>0 && colsum[j]>0){
+                    // ans.get(0).get(j)++;
+                    ans.get(0).set(j,ans.get(0).get(j)+1);
+                    upper--;
+                    colsum[j]--;
+                }
+                if(lower>0 && colsum[j]>0){
+                    ans.get(1).set(j,ans.get(1).get(j)+1);
+                    lower--;
+                    colsum[j]--;
+                }
+                if(colsum[j]!=0){
+                    return new ArrayList<>();
+                }
+            }
+        }
+        if(upper!=0 || lower!=0)
+            return new ArrayList<>();
+        return ans;
+    }
+}

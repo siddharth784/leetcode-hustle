@@ -1,0 +1,26 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        //SLIDING WINDOW QUESTION. BELONGS TO A TYPE. LC2379 IS SIMILAR
+        int vowels=0;
+        for(int i=0;i<k;i++)
+            vowels=(isVowel(s.charAt(i)))?vowels+1:vowels;
+        
+        int i=0,j=k-1;
+        int maxvowels=Integer.MIN_VALUE;
+        while(j<s.length()){
+            maxvowels=Math.max(maxvowels,vowels);
+            if(isVowel(s.charAt(i)))
+                vowels--;
+            if(j<s.length()-1 && isVowel(s.charAt(j+1)))
+                vowels++;
+            i++;
+            j++;
+        }
+        return maxvowels;
+    }
+    
+    public boolean isVowel(char ch){
+        ch=Character.toLowerCase(ch);
+        return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u';
+    }
+}

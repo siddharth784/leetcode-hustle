@@ -1,0 +1,32 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        //APPROACH: CHALLENGE IS TO DO IT IN O(N). ALSO UNFORTUNATELY I SAW THE RELATED TOPICS AND IT SHOWS HASHMAP. SO APOROACH IS: MAKE A HASHMAP OF INTEGER,INTEGER WHERE KEY WILL BE ELEMENT THAT OCCURRED IN NUMS[], AND VALUE WILL BE THE CONSECUTIVE ELEMENTS LEADING UP TO IT.LIKE IN GIVEN TESTCASE 2 WILL HAVE VALUE 1. UPDATE: WRONG METHOD. CUZ LOT OF TIMES NUMS[i]-1 MIGHT COME LATER ON IN ARRAY SINCE IT'S UNSORTED. INSTEAD WHAT WORKS IS, GO THROUGH THE TREEMAP ELEMENTS, AND KEEP TRACK OF CURRENT SEQUENCE OF CONSECUTIVE ELEMENTS
+        if(nums.length<=1)
+            return nums.length;
+        Map<Integer,Integer> map=new TreeMap<>();
+        for(int i=0;i<nums.length;i++){
+         //   if(!map.containsKey(nums[i]-1))
+              map.put(nums[i],0);
+           // else{
+               // map.put(nums[i],map.get(nums[i]-1)+1);
+            //}
+        }
+        int prev=Integer.MAX_VALUE;
+        int currlen=0;
+        int ans=1;
+        for(int val:map.keySet()){
+         //   System.out.println(map.get(val));
+          //  ans=Math.max(ans,map.get(val)+1);
+            if(val==prev+1){
+                currlen++;
+                ans=Math.max(ans,currlen);
+            }
+            else{
+                currlen=1;
+
+            }
+            prev=val;
+        }
+        return ans;
+    }
+}

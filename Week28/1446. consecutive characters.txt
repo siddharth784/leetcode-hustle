@@ -1,0 +1,17 @@
+class Solution {
+    public int maxPower(String s) {
+        Set<Character> set=new HashSet<>();
+        int maxpower=1;
+        for(int i=0;i<s.length();i++){
+            set.add(s.charAt(i));
+            for(int j=i+1;j<=s.length();j++){
+                maxpower=Math.max(maxpower,j-i);
+                if(j==s.length() || !set.contains(s.charAt(j)))
+                    break;
+            }
+            set.clear();
+        }
+        
+        return maxpower;
+    }
+}

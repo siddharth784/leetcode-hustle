@@ -1,0 +1,38 @@
+class Solution {
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        //intuition: create a stack. then try to simulate the pushing and popping. how? keep pushing until peek element is the current pointed element in popped[]. if the peek element is popped[j], pop it off. repeat it for j+1.
+        
+        
+        
+        
+        // if(pushed.length<=1)
+        //     return true; //this edge case should be dealt beforehand specially, because otherwise it will agree the i==pushed.length and return false;
+        
+        Stack<Integer> st=new Stack<>();
+        int i=0,j=0;
+//         st.push(pushed[i]);
+//         i++;
+//         while(j<popped.length && !st.empty() && st.peek()!=popped[j]){
+//             if(i==pushed.length)
+//                 return false;
+//             st.push(pushed[i++]);
+//             while(j<popped.length && !st.empty() && st.peek()==popped[j]){
+//                 st.pop();
+//                 j++;
+//             }
+//             // System.out.println("st");
+//         }
+        
+        
+        while(i<pushed.length && j<popped.length){
+            while(i<pushed.length && (st.empty()||st.peek()!=popped[j]) ){
+                st.push(pushed[i++]);
+            }
+            while(j<popped.length && !st.empty() && st.peek()==popped[j]){
+                st.pop();
+                j++;
+            }
+        }
+        return st.empty(); //returning j==popped.length will also do
+    }
+}

@@ -1,0 +1,30 @@
+class Solution {
+    public String modifyString(String s) {
+        StringBuilder ans=new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch!='?')
+                ans.append(ch);
+            else{
+                for(char alpha='a';alpha<='z';alpha++){
+                    boolean goodtogo=true;
+                    if(i>0){
+                        // if(s.charAt(i-1)==alpha) this is wrong..cuz in case of 'j?qg??b' it will output 'jaqgaab' cuz the 2nd 'a' got passed since it was unequal to '?'
+                        if(ans.charAt(ans.length()-1)==alpha)
+                            goodtogo=false;
+                    }
+                    if(i<s.length()-1){
+                        if(s.charAt(i+1)==alpha)
+                            goodtogo=false;
+                    }
+                    
+                    if(goodtogo){
+                        ans.append(alpha);
+                        break;
+                    }
+                }
+            }
+        }
+        return ans.toString();
+    }
+}

@@ -1,0 +1,39 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+//DID MYSELF. THE CLUE THAT IT INVOLVES BINARY SEARCH HELPED. THAT IT WOULD REQUIRE SLIDING WINDOW WAS OBVIOUS EARLIER TOO. SO AFTER KNOWING THAT IT INVOLVES BINARY SEARCH AND SLIDING WINDOW, IT WAS PRETTY CLEAR THIS CAN BE SOLVED USING THE SAME APPROACH AS CONSECUTIVE ONES III         
+        int minlen=Integer.MAX_VALUE;
+        int lo=1,hi=nums.length;
+        while(lo<=hi){
+            int windowlen=(lo+hi)/2;
+            int i=0,j=windowlen-1;
+            int maxsum=Integer.MIN_VALUE;
+            int currsum=0;
+            //the following code used to find maxsum could also be done using prefix sum array
+            for(int idx=i;idx<=j;idx++)
+                currsum+=nums[idx];
+            
+            while(j<nums.length){
+                maxsum=Math.max(maxsum,currsum);
+                if(maxsum>=target)
+                    break;
+                currsum-=nums[i];
+                if(j!=nums.length-1)
+                currsum+=nums[j+1];
+                i++;
+                j++;
+            }
+            
+            if(maxsum>=target){
+                minlen=Math.min(minlen,windowlen);
+                hi=windowlen-1;
+            }
+            else{
+                lo=windowlen+1;
+            }
+                
+        }
+        if(minlen==Integer.MAX_VALUE)
+            return 0;
+        return minlen;
+    }
+}

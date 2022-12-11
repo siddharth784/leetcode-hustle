@@ -1,0 +1,60 @@
+class Solution {
+    public boolean checkPossibility(int[] nums) {
+//         //ANOTHER SIMPLE GREEDY APPROACH: JUST TRAVERSE FROM LEFT TO RIGHT. THEN IF YOU ENCOUNTER ONE ANOMALY TO INCREASING TREND, FORGIVE IT. IF YOU ENCOUNTER IT THE 2ND TIME, RETURN FALSE. UPDATE: GREEDY APPROACH IS NOT AS SIMPLE AND EASY. IT CAN BE A DILEMMA AS TO WHICH ELEMENT TO MODIFY IN CASE OF A DISCREPANCY. REFER THIS FOR CORRECT GREEDY SOLN: https://leetcode.com/problems/non-decreasing-array/discuss/106826/JavaC%2B%2B-Simple-greedy-like-solution-with-explanation
+//         int prev=Integer.MIN_VALUE;
+//         int anomalycount=0;
+//         for(int i=0;i<nums.length;i++){
+//             if(nums[i]>=prev){
+//                 prev=nums[i];
+//             }
+//             else{
+//                 anomalycount++;
+//                 if(anomalycount==2)
+//                     return false;
+//                 prev=nums[i];
+//                 // int l=0;
+//                 // if(i>0)
+//                 //     l=nums[i-1];
+//                 // int r=0;
+//                 // if(i<nums.length-1)
+//                 //     r=nums[i+1];
+//                 // nums[i]=(l+r)/2;
+//                 // prev=nums[i];
+                
+//                 // if(i!=nums.length-1)
+//                 //     prev=nums[i+1];
+//                 // else
+//                 //     return true;
+//             }
+//         }
+//         return true;
+//     }
+// }
+        
+        //let's try this: omit each number from left to right. then traverse the entire array without that one number and check if it is increasing. I AM GUESSING THIS O(n2) WOULD WORK SINCE NUMS.LENGTH<=10^4 SO O(N2) MIGHT GET ACCEPTED. UPDATE: WORKED BUT NOT OPTIMAL. IDK WHAT'S OPTIMAL APPROACH HERE I DON'T HAVE TIME RN TO CHECK DISCUSS SECTION. CHECK IT LATER.
+        int n=nums.length;
+        if(n<=1)
+            return true;
+        for(int i=0;i<n;i++){
+            int prev=nums[0];
+            if(i==0)
+                prev=nums[1];
+            boolean valid=true;
+            for(int j=1;j<n;j++){
+                if(j!=i){
+                    if(nums[j]>=prev)
+                        prev=nums[j];
+                    else{
+                        valid=false;
+                        break;
+                    }
+                }
+            }
+            if(valid)
+                return true;
+            else
+                continue;
+        }
+        return false;
+    }
+}

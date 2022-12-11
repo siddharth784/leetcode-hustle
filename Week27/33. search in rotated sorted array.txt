@@ -1,0 +1,42 @@
+class Solution {
+    public int search(int[] nums, int target) {
+//THIS QUESTION AND SOLUTION IS SIMILAR TO LC153 SO YOU CAN LOOK IT BEFORE THIS ONE        
+        int lo=0,hi=nums.length-1;
+        while(lo<=hi){
+            int mid=(lo+hi)/2;
+            if(nums[mid]==target)
+                return mid;
+            
+            if(nums[lo]<=nums[hi]){ //subarray is sorted
+                if(nums[mid]>target)
+                    hi=mid-1;
+                else
+                    lo=mid+1;
+            }
+            else{ //subarray contains min/first element of the original sorted array. 
+                if(nums[lo]<=nums[mid]){ //min/first element of sorted array is occurring in right subarray.also meaning left subarray is sorted
+                    if(nums[hi]>=target)
+                        lo=mid+1;
+                    else{
+                        if(nums[mid]<target)
+                            lo=mid+1;
+                        else
+                            hi=mid-1;
+                    }
+                }
+                else{ //min/first element of sorted array is occurring in left subarray.also meaning right subarray is sorted
+                    //the following code can only be understood if you visualise the smallest element in the left subarray 
+                    if(target>nums[hi])
+                        hi=mid-1;
+                    else{
+                        if(nums[mid]>target)
+                            hi=mid-1;
+                        else
+                            lo=mid+1;
+                    }                         
+                }
+            }
+        }
+        return -1;
+    }
+}

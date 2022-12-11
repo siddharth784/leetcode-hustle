@@ -1,0 +1,37 @@
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int[] ans=new int[2];
+        Map<Integer,Integer> tm=new TreeMap<>(); //frequency map
+        Map<Integer,Integer> indices=new TreeMap<>(); //first index of each number
+        for(int idx=0;idx<numbers.length;idx++){
+            tm.put(numbers[idx],tm.getOrDefault(numbers[idx],0)+1);
+            if(!indices.containsKey(numbers[idx]))
+            indices.put(numbers[idx],idx);
+        }
+        
+        for(int num:tm.keySet()){
+            if(target-num==num){
+                if(tm.get(num)>=2){
+                    // ans[0]=first index of num
+                    // ans[0]=(first index of num)+1;
+                    ans[0]=indices.get(num);
+                    ans[1]=indices.get(num)+1;
+                    ans[0]++;
+                    ans[1]++;
+                    return ans;
+                }
+            }
+            else if(tm.containsKey(target-num)){
+                // ans[0]=first index of num;
+                // ans[1]=first index of (target-num)
+                ans[0]=indices.get(num);
+                ans[1]=indices.get(target-num);
+                ans[0]++;
+                ans[1]++;
+                return ans;
+            }
+        }
+        
+        return new int[]{0,0};
+    }
+}

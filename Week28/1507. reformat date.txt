@@ -1,0 +1,28 @@
+class Solution {
+    public String reformatDate(String date) {
+        HashMap<String,String> hm=new HashMap<>();
+        hm.put("Jan","01");
+        hm.put("Feb","02");
+        hm.put("Mar","03");
+        hm.put("Apr","04");
+        hm.put("May","05");
+        hm.put("Jun","06");
+        hm.put("Jul","07");
+        hm.put("Aug","08");
+        hm.put("Sep","09");
+        hm.put("Oct","10");
+        hm.put("Nov","11");
+        hm.put("Dec","12");
+        
+        String ans=""+date.split(" ")[2]+"-";
+        ans+=hm.get(date.split(" ")[1])+"-";
+        if(date.split(" ")[0].length()==3){
+            ans+="0";
+            ans+=Character.getNumericValue(date.split(" ")[0].charAt(0));
+        }
+        else{
+            ans+=Integer.parseInt(date.split(" ")[0].substring(0,2));
+        }
+        return ans;
+    }
+}

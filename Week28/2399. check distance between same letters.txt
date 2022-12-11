@@ -1,0 +1,23 @@
+class Solution {
+    public boolean checkDistances(String s, int[] distance) {
+        int[][] dis=new int[26][2]; //dis[i][0] will store the starting position of ith character and dis[i][1] will store the last position of the same
+        for(int i=0;i<dis.length;i++)
+            dis[i][0]=-1;
+        
+        for(int i=0;i<s.length();i++){
+            if(dis[s.charAt(i)-'a'][0]!=-1)
+                dis[s.charAt(i)-'a'][1]=i;
+            else if(dis[s.charAt(i)-'a'][0]==-1)
+                dis[s.charAt(i)-'a'][0]=i;
+        }
+        
+        for(int i=0;i<26;i++){
+            if(dis[i][0]==-1)
+                continue;
+            if(dis[i][1]-dis[i][0]-1==distance[i])
+                continue;
+            return false;
+        }
+        return true;
+    }
+}

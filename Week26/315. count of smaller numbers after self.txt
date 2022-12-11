@@ -1,0 +1,73 @@
+class Solution {
+    List<Integer> ans=new ArrayList<>();
+    public List<Integer> countSmaller(int[] nums) {
+        int n=nums.length;
+        for(int i=0;i<n;i++)
+            ans.add(0);
+        
+        Pair[] pairs=new Pair[n];
+        for(int i=0;i<n;i++)
+            pairs[i]=new Pair(nums[i],i); //doing pairs[i].val=nums[i] and pairs[i].idx=i won't do. you WILL have to initialise Pair at each index first
+        
+        mergeSort(pairs,0,n-1);
+        return ans;
+    }
+    
+    public Pair[] mergeSort(Pair[] pairs, int lo, int hi){
+        if(lo==hi){
+            Pair[] base=new Pair[1];
+            // base[0].val=pairs[lo].val;
+            // base[0].idx=pairs[lo].idx;
+            base[0]=new Pair(pairs[lo].val,pairs[lo].idx);
+            return base;
+        }
+        
+        int mid=(lo+hi)/2;
+        Pair[] left=mergeSort(pairs,lo,mid);
+        Pair[] right=mergeSort(pairs,mid+1,hi);
+        return merge(left,right);
+    }
+    
+    public Pair[] merge(Pair[] left, Pair[] right){
+        Pair[] res=new Pair[left.length+right.length];
+        int i=0,j=0,k=0;
+        while(i<left.length && j<right.length){
+            if(left[i].val<=right[j].val){
+                int taridx=left[i].idx;
+                ans.set(taridx,ans.get(taridx)+j);
+                res[k]=new Pair(left[i].val,left[i].idx);
+                i++;
+                k++;
+            }
+            else{
+                res[k]=new Pair(right[j].val,right[j].idx);
+                j++;
+                k++;
+            }
+        }    
+        while(i<left.length){
+            int taridx=left[i].idx;
+            ans.set(taridx,ans.get(taridx)+j);
+            res[k]=new Pair(left[i].val,left[i].idx);
+            i++;
+            k++;
+        }
+        while(j<right.length){
+            res[k]=new Pair(right[j].val,right[j].idx);
+            j++;
+            k++;
+        }
+        return res;
+    }    
+}
+
+
+class Pair{
+        int val;
+        int idx;
+        Pair(){}
+        Pair(int num, int i){
+            this.val=num;
+            this.idx=i;
+        }
+}

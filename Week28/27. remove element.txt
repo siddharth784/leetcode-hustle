@@ -1,0 +1,26 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int n=nums.length;
+        int j=n-1;
+        while(j>=0 && nums[j]==val)
+            j--;
+        int duplicates=0;
+        for(int num:nums)
+            duplicates=(num==val?duplicates+1:duplicates);
+        
+        for(int i=0;i<n-duplicates;i++){
+            if(nums[i]==val){
+                swap(nums,i,j);
+                while(j>=0 && nums[j]==val)
+                    j--;
+            }
+        }
+        return n-duplicates;
+    }
+    
+    public void swap(int[] nums, int i, int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}

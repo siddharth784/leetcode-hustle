@@ -1,0 +1,37 @@
+class Solution {
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+// MY SUCCESSFUL APPROACH NO.1 AGAIN BUT MODIFIED IT SO THAT IT IS O(n2) BUT ALMOST IN ALL CASES RUNS WAYYY LESS THAN n2 AND BREAKS OUT OFTEN IN AROUND O(n). MADE THAT POSSIBLE USING SORTING BOTH ARRAYS:
+        int[] ans=new int[spells.length];
+        Arrays.sort(potions);
+        int[] spellsclone=new int[spells.length];  //cuz we can't sort the original spell array. that would mess the order of its elements, which we require in ordering the answer array
+        for(int i=0;i<spells.length;i++)
+            spellsclone[i]=spells[i];
+        Arrays.sort(spellsclone);
+        HashMap<Integer,Integer> hm=new HashMap<>(); // will store the no. of options for key spell
+        int j=0;
+        for(int i=spellsclone.length-1;i>=0;i--){
+            while(j<potions.length && (long)spellsclone[i]*(long)potions[j]<success)
+                j++;
+            hm.put(spellsclone[i],potions.length-j);
+        }
+        for(int i=0;i<spells.length;i++)
+            ans[i]=hm.get(spells[i]);
+        return ans;
+    }
+}
+
+        
+//MY APPROACH NO.1: TLE CUZ O(n2):        
+//         int[] ans=new int[spells.length];
+//         Arrays.sort(potions);
+//         for(int i=0;i<spells.length;i++){
+//             int j=0;
+//             while(j<potions.length && (long)spells[i]*(long)potions[j]<success){
+//                 j++;
+//             }
+//             ans[i]=(potions.length-j);
+
+//         }
+//         return ans;
+//     }
+// }

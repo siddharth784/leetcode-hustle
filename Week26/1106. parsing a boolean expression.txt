@@ -1,0 +1,60 @@
+class Solution {
+    public boolean parseBoolExpr(String expression) {
+        
+//I SOLVED THIS MYSELFFFFFFFFFFF. THANKS SUMIT SIR. WITHOUT KNOWING HOW TO TACKLE THIS 'TYPE' OF QUESTIONS(USING 2 STACKS) I WOULD'VE NEVER IN A MIL YRS WOULDVE DONE IT TYSM\        
+        Stack<Character> opnds=new Stack<>(); //will store operands, but just 'f' or 't' or '(' in the name of operands cuz after evaluation any sub-expression will come down to f or t 
+        Stack<Character> optors=new Stack<>(); //will store &,|,!
+        
+        for(char ch:expression.toCharArray()){
+            // if(!opnds.empty() && ch!='(')
+            // System.out.println(opnds+" when ch= "+ch);
+            
+            if(ch=='!'||ch=='&'||ch=='|')
+                optors.push(ch);
+            
+            else if(ch=='(')
+                opnds.push(ch);
+                // continue;
+                
+            else if(ch=='t'||ch=='f')
+                opnds.push(ch);
+            
+            else if(ch==')'){
+                // if(!optors.empty()){
+                    char optor=optors.pop();
+                    if(optor=='&'){
+                        boolean evaluation=true;
+                        while(!opnds.empty() && opnds.peek()!='('){
+                            if(!evaluation)
+                                opnds.pop();
+                            else
+                            evaluation=evaluation&&(opnds.pop()=='t');
+                        }
+                        opnds.pop();
+                        opnds.push(evaluation?'t':'f');
+                    }
+                    else if(optor=='|'){
+                        boolean evaluation=false;
+                        while(!opnds.empty() && opnds.peek()!='('){
+                            if(evaluation)
+                                opnds.pop();
+                            else
+                            evaluation=evaluation||(opnds.pop()=='t');
+                        }
+                        opnds.pop();
+                        opnds.push(evaluation?'t':'f');
+                    }
+                    else if(optor=='!'){
+                        boolean evaluation=opnds.pop()=='f';
+                        opnds.pop(); //popping off the ( opening bracket
+                        opnds.push(evaluation?'t':'f');
+                    }
+                // }
+            }
+            
+        }
+        
+        return opnds.peek()=='t';
+    }
+    
+}

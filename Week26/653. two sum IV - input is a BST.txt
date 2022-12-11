@@ -1,0 +1,78 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+// TRYING TO DO USING SOME APPROACH OTHER THAN FREAKING SIMPLE BRAIN HASHMAP APPROACH BUT TO NO SUCCESS:
+ // public boolean find(TreeNode root, int val){
+ //        if(root==null)
+ //            return false;
+ //        else if(root.val==val)
+ //            return true;
+ //        else if(root.val<val)
+ //            return find(root.right,val);
+ //        else
+ //            return find(root.left,val);
+ //    }
+ //    public boolean findTarget(TreeNode root, int k) {
+ //        if(root==null)
+ //            return false;
+ //        int hold=root.val;
+ //        if(find(root,k-hold)==true && hold!=k-hold)
+ //            return true;
+ //        return (findTarget(root.left,k) ||findTarget(root.right,k));
+ //    }
+
+//SIMPLE BRAIN HASHMAP SOLUTION:
+class Solution {
+    Map<Integer,Integer> tm=new TreeMap<>(); //frequency map
+    public boolean findTarget(TreeNode root, int k) {
+        traverse(root);
+        for(int val:tm.keySet()){
+            if(val==k-val){
+                if(tm.get(val)>=2)
+                    return true;
+            }
+            else if(tm.containsKey(k-val))
+                return true;
+        }
+        return false;
+    }
+    
+    public void traverse(TreeNode root){
+        if(root==null)
+            return;
+        tm.put(root.val,tm.getOrDefault(root.val,0)+1);
+        traverse(root.left);
+        traverse(root.right);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

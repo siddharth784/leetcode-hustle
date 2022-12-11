@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        Map<Integer,Integer> hm=new HashMap<>();
+        Queue<Integer> pq=new PriorityQueue<>((o1,o2)->{
+            if(hm.get(o1)==hm.get(o2))
+                return o1-o2;
+            return hm.get(o1)-hm.get(o2);
+        });
+        for(int ele:arr){
+            hm.put(ele,Math.abs(ele-x));
+            pq.offer(ele);
+        }
+        
+        
+        List<Integer> al=new ArrayList<>();
+        while(k--!=0){
+            al.add(pq.poll());
+        }
+        Collections.sort(al);
+        return al;
+    }
+}
