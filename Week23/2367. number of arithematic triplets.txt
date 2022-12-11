@@ -1,0 +1,24 @@
+class Solution {
+    public int arithmeticTriplets(int[] nums, int diff) {
+        //3 pointer approach
+        Map<Integer,Integer> map=new HashMap<>();
+        int i=0,j=0,k=0;
+        int count=0;
+        while(i<nums.length-2){
+            
+            while(j<nums.length-1 && nums[j]-nums[i]<diff)
+                j++;
+            
+            if(nums[j]-nums[i]==diff){
+                while(k<nums.length && nums[k]-nums[j]<diff)
+                    k++;
+                if(k<nums.length && nums[k]-nums[j]==diff)
+                    count++;
+                // else
+                //     j++;
+            }
+            i++;
+        }
+        return count;
+    }
+}

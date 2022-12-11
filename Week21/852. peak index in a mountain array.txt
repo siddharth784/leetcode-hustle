@@ -1,0 +1,22 @@
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int n=arr.length;
+        int lo=0,hi=n-1;
+        while(hi-lo+1>=2){  //there should be atleast 3 elements in the array
+            int mid=(lo+hi)/2;
+            if(arr[mid-1]<arr[mid]){
+                if(arr[mid]>arr[mid+1])
+                    return mid;
+                else
+                    lo=mid;
+            }
+            else if(arr[mid]>arr[mid+1]){
+                if(arr[mid-1]<arr[mid])
+                    return mid;
+                else
+                    hi=mid;
+            }
+        }
+        return 0;   //this will never run btw
+    }
+}

@@ -1,0 +1,18 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        int absentdays=0;
+        int consecutiveLates=0;
+        for(char ch:s.toCharArray()){
+            if(ch=='A')
+                absentdays++;
+            if(ch=='L'){
+                consecutiveLates++;
+                if(consecutiveLates>=3)
+                    return false;
+            }
+            else
+                consecutiveLates=0;
+        }
+        return absentdays<2;
+    }
+}

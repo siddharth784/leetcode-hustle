@@ -1,0 +1,43 @@
+class Solution {
+    public int thirdMax(int[] nums) {
+        //priorityqueue approach
+        Queue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        Set<Integer> hs=new HashSet<>();
+        for(int ele:nums){
+            if(!hs.contains(ele)){
+                pq.offer(ele);
+                hs.add(ele);
+            }
+        }
+        
+        
+        if(pq.size()<3)
+            return pq.peek();
+        // else{
+            pq.remove();
+            pq.remove();
+            return pq.peek();
+        // }
+    }
+}
+        
+        
+//         // treemap approach
+//         Map<Integer,Boolean> tm=new TreeMap<>(Collections.reverseOrder());
+//         for(int ele:nums)
+//             tm.put(ele,true);
+//         if(tm.size()<3){
+//             for(int key:tm.keySet())
+//                 return key;
+//         }
+//         else{
+//             int sno=1;
+//             for(int key:tm.keySet()){
+//                 if(sno==3)
+//                     return key;
+//                 sno++;
+//             }
+//         }
+//         return 0;
+//     }
+// }

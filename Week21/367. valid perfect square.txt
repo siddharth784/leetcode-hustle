@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        // O(sqrt(num)) approach faster than 100% 
+        int lo=1,hi=num;
+        while(lo<=hi){
+            long mid=(lo+hi)/2; //using long for mid is imp. so that mid*mid doesn't go out of scope
+            long prod=mid*mid;
+            if(prod==num)
+                return true;
+            else if(prod>num)
+                hi=(int)mid-1;
+            else
+                lo=(int)mid+1;
+        }
+        return false;
+    }
+}
+        
+//         for(int i=1;i<=num/2+1;i++){
+//             if(i*i==num)
+//                 return true;
+//             if(i*i>num)
+//                 return false;
+//         }
+//         return false;
+//     }
+// }

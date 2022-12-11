@@ -1,0 +1,47 @@
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        
+//  MY VERY ORIGINAL STELLAR DP SOLUTION         
+        int n=nums.length;
+        int[][] dp=new int[n][2002]; //where dp[idx][s] denotes the no. of unique combinations/expressions that can be made using ALL elements in [0,idx] which evaluate to s-1001. sum(nums) can reach down to -1000 and we can't create -ve indices, that's why we are shifting all indices by adding 10001.
+        //also, dp[][1001] is the anchor point. like idx=1001 represents target=0.
+        for(int i=0;i<n;i++){
+            for(int j=0;j<2002;j++){
+                if(i==0){
+                    if(j==1001 && nums[0]==0) // I had missed this earlier but then a testcase showed me the bug which was lack of this condition. the testcase btw was: nums=[0,0,0,0,0,0,0,0,1],target=1. and the loophole was revealed when I printed dp[0][1001] which should've given 2 cuz there are 2 combinations in array [0] which amount to 0, viz. -0 and +0. but cuz I was right away doing dp[0][j]=1 if j==1001+nums[0], I wasn't noting that if nums[0]==0, then not 1, but it would be 2 cuz unlike other nos. 1001 + or - both give common number 1001(which represents 1001 btw).
+                        dp[i][j]=2;
+                    else
+                        dp[i][j]=(j==1001+nums[0]||j==1001-nums[0])?1:0;     
+                }
+                else{
+                    int plusthis=0,negativethis=0;
+                    if(j-nums[i]>=0)
+                        plusthis=dp[i-1][j-nums[i]];
+                    if(j+nums[i]<=2001)
+                        negativethis=dp[i-1][j+nums[i]];
+                    dp[i][j]=plusthis+negativethis;
+                }
+            }
+        }
+        return dp[n-1][1001+target];
+    }
+}
+
+    
+    
+    // SOLVED IT USING BACKTRACKING BUT V BAD TIME EFFICIENCY..THIS QUES. IS SUPPOSED TO BE SOLVED EFFICIENTLY USING DP
+//     int count=0;
+//     public int findTargetSumWays(int[] nums, int target) {
+//         backtrack(0,0,nums,target);
+//         return count;
+//     }
+//     public void backtrack(int idx, int sum, int[] nums, int target){
+//         if(idx==nums.length){
+//             if(sum==target)
+//                 count++;
+//             return;
+//         }
+//         backtrack(idx+1,sum+nums[idx],nums,target);
+//         backtrack(idx+1,sum-nums[idx],nums,target);
+//     }
+// }

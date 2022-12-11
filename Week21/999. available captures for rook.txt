@@ -1,0 +1,54 @@
+class Solution {
+    public int numRookCaptures(char[][] board) {
+        int n=board.length;
+        int sti=0,stj=0;
+        boolean breakout=false;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]=='R'){
+                    sti=i;
+                    stj=j;
+                    breakout=true;
+                    break;
+                }
+            }
+            if(breakout)
+                break;
+        }
+        int pawns=0;
+        for(int i=sti-1;i>=0;i--){
+            if(board[i][stj]=='B')
+                break;
+            else if(board[i][stj]=='p'){
+                pawns++;
+                break;
+            }
+        }
+        for(int i=sti+1;i<n;i++){
+            if(board[i][stj]=='B')
+                break;
+            else if(board[i][stj]=='p'){
+                pawns++;
+                break;
+            }
+        }
+        for(int j=stj-1;j>=0;j--){
+            if(board[sti][j]=='B')
+                break;
+            else if(board[sti][j]=='p'){
+                pawns++;
+                break;
+            }
+        }
+        for(int j=stj+1;j<n;j++){
+            if(board[sti][j]=='B')
+                break;
+            else if(board[sti][j]=='p'){
+                pawns++;
+                break;
+            }
+        }
+        return pawns;
+        
+    }
+}

@@ -1,0 +1,34 @@
+class Solution {
+    public int splitArray(int[] nums, int m) {
+        // REFER PENDING WATCHLIST/LC 410 EXPLANATION.MP4!!!! THIS QUESTION IS VVVV IMPORTANT. THIS IS A POPULAR TYPE OF QUESTIONS, CAN BE SEEN IN LC1011,LC875 AS WELL.
+        int n=nums.length;
+        int highestSubSum=0;
+        int lowestSubSum=Integer.MIN_VALUE;
+        for(int ele:nums){
+            lowestSubSum=Math.max(lowestSubSum,ele);
+            highestSubSum+=ele;
+        }
+        
+        while(lowestSubSum<highestSubSum){
+            int allowedSum=(lowestSubSum+highestSubSum)/2;
+            int currSubSum=0;
+            int countPartitions=1;
+            for(int num:nums){
+                if(currSubSum+num<=allowedSum){
+                    currSubSum+=num;
+                }
+                else{
+                    currSubSum=num;
+                    countPartitions++;
+                }
+            }
+            
+            if(countPartitions>m)
+                lowestSubSum=allowedSum+1;
+            else
+                highestSubSum=allowedSum;
+        }
+        return highestSubSum; //returning lowestSubSum will give same answer as well       
+        
+    }
+}

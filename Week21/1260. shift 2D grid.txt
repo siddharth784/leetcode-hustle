@@ -1,0 +1,52 @@
+class Solution {
+    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+        List<List<Integer>> ans=new ArrayList<>();
+        int m=grid.length,n=grid[0].length;
+        for(int shift=1;shift<=k;shift++){
+        // role all rows clockwise and then roll the first column clockwise too
+            for(int i=0;i<m;i++){
+                int first=grid[i][n-1];
+                for(int j=n-1;j>=1;j--)
+                    grid[i][j]=grid[i][j-1];
+                grid[i][0]=first;
+            }
+            int firstcollastele=grid[m-1][0];
+            for(int i=m-1;i>=1;i--)
+                grid[i][0]=grid[i-1][0];
+            grid[0][0]=firstcollastele;
+            
+        }
+        for(int[] row:grid){
+            List<Integer> al=new ArrayList<>();
+            for(int i:row)
+                al.add(i);
+            ans.add(al);
+        }
+        return ans;
+    }
+}        
+        
+                
+                
+                
+//          THIS FOLLOWING STRATEGY WON'T WORK BECAUSE WE ARE CHANGING MATRIX VALUES IN AN ORDER SUCH THAT ONE CHANGE WOULD DISRUPT OTHER ONES                    
+//                     if(i==0 && j==0)
+//                         grid[i][j]=grid[m-1][n-1];
+//                     else if(j==0)
+//                         grid[i][j]=grid[i-1][n-1];
+//                     else
+//                         grid[i][j]=grid[i][j-1];
+//                 }
+//             }
+            
+//         }
+        
+//         for(int[] row:grid){
+//             List<Integer> al=new ArrayList<>();
+//             for(int i:row)
+//                 al.add(i);
+//             ans.add(al);
+//         }
+//         return ans;
+//     }
+// }

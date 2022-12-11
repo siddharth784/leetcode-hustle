@@ -1,0 +1,27 @@
+class Solution {
+    public long countBadPairs(int[] nums) {
+//bad pairs are where nums[j]-nums[i]!=j-i. Doesn't it also mean they are also the ones for which nums[j]-j!=nums[i]-i. simple logic.
+        int n=nums.length;
+        int count=0;
+        // int[] dp=new int[n];
+        Map<Integer,Integer> tm=new TreeMap<>();
+        for(int i=0;i<n;i++)
+            // dp[i]=nums[i]-i;
+            tm.put(nums[i]-i,tm.getOrDefault(nums[i]-i,0)+1);
+        
+        long goodpairs=0;
+        for(int val:tm.keySet()){
+            int freq=tm.get(val);
+            goodpairs+=pairs(freq);
+            // goodpairs+= (factorial(freq)/(factorial(2)*factorial(freq-2)));
+        }
+        // return (factorial(n)/(factorial(2)*factorial(n-2)) - goodpairs);
+        return pairs(n)-goodpairs;
+    }
+    
+    public long pairs(int n){ // basically return nC2, viz. no. of pairs that can be formed among n elements
+        long prod=n;
+        prod*=n-1;
+        return prod/2;
+    }
+}

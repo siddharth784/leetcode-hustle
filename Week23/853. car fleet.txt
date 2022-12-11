@@ -1,0 +1,63 @@
+class Solution {
+    public int carFleet(int target, int[] position, int[] speed) {
+// SEE EXTENSIVE EXPLANATION: https://leetcode.com/problems/car-fleet/discuss/139850/C%2B%2BJavaPython-Straight-Forward
+        
+USING ARRAY APPROACH        
+        int n=speed.length;
+        double[][] cars=new double[n][2]; //to store (position,time to reach destination) for each of the n cars
+        for(int i=0;i<n;i++){
+            cars[i][0]=position[i];
+            cars[i][1]=(double)(target-position[i])/speed[i];
+        }
+        Arrays.sort(cars,(o1,o2)->{
+            return Double.compare(o1[0],o2[0]);
+        });
+        
+        double curleasttime=0;
+        int fleets=0;
+        for(int i=n-1;i>=0;i--){
+            if(curleasttime>=cars[i][1]){
+                continue;
+            }
+            else if(curleasttime<cars[i][1]){
+                curleasttime=cars[i][1];
+                fleets++;
+            }
+        }
+        return fleets;
+    }
+}
+
+// USING TREEMAP
+    Map<Integer,Integer> tm=new TreeMap<>(Collections.reverseOrder());
+    for(int i=0;i<speed.length;i++)
+        tm.put(position[i],speed[i]);
+
+    double curleasttime=0;
+    int fleets=0;
+    for(Map.Entry<Integer,Integer> pair:tm.entrySet()){
+        double time = (double)(target-pair.getKey())/(pair.getValue());
+        if(time<=curleasttime){
+            
+        }
+        else{
+            curleasttime=time;
+            fleets++;
+        }
+    }
+    return fleets;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+        
+        

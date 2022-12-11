@@ -1,0 +1,12 @@
+class Solution {
+    public int minMoves(int[] nums) {
+        // SUMIT SIR'S APPROACH: EK TIME PE (N-1) ELEMENTS KO DECREASE KRNA BY 1, SHOULDN'T DOING THIS BE EQUAL TO EK TIME PE EK ELEMENT KO 1 SE INCREASE KRNA?? HENCE WE INSTEAD CALCULATE KI KITNE STEPS MEIN WE CAN EQUAL THEM, WHERE AT EACH STEP WE CAN DECREASE ONE IN ANY ELEMENT. WHICH MEANS KI PICK THE MINIMUM ELEMENT, THEN SEE HOW MUCH OTHER NOS. WILL HAVE TO BE DECREASED BY TO REACH IT. THEN ADD THEM
+        int min=nums[0];
+        for(int ele:nums)
+            min=Math.min(min,ele);
+        int delta=0;
+        for(int ele:nums)
+            delta+=Math.abs(min-ele);
+        return delta;
+    }
+}

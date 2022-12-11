@@ -1,0 +1,16 @@
+class Solution {
+    public int maximumProduct(int[] nums) {
+//         I MADE CASES AND FOUND OUT:
+        
+//         If the greatest 3 nos. in nums(found after sorting) are:
+// 		2-ves 1+ve = nums[0]*nums[1]*nums[n-1];
+// 		zeros is present anywhere in greatest 3 nos.= nums[0]*nums[n-1];
+// 		3-ves = nums[n-1]nums[n-2]*nums[n-3]
+// 		1-ve 2+ves = nums[n-1]*nums[n-2]*nums[n-3];
+// 		3 +VES: nums[n-1]nums[n-2]*nums[n-3]
+        
+        Arrays.sort(nums);
+        int n=nums.length;
+        return Math.max(nums[n-1]*nums[n-2]*nums[n-3],nums[0]*nums[1]*nums[n-1]);
+    }
+}

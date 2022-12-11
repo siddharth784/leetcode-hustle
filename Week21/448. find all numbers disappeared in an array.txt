@@ -1,0 +1,30 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        // no extra space approach:
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            int val=Math.abs(nums[i]);
+            if(nums[val-1]>0)
+                nums[val-1]=-nums[val-1];
+        }
+        List<Integer> al=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(nums[i]>0)
+                al.add(i+1);
+        }
+        return al;
+    }
+}
+// extra space approach:
+//         boolean[] check=new boolean[n+1];
+//         check[0]=true;
+//         for(int num:nums)
+//             check[num]=true;
+//         List<Integer> ans=new ArrayList<>();
+//         for(int i=1;i<=n;i++){
+//             if(check[i]==false)
+//                 ans.add(i);
+//         }
+//         return ans;
+//     }
+// }

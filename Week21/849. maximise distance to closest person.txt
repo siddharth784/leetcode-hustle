@@ -1,0 +1,25 @@
+class Solution {
+    public int maxDistToClosest(int[] seats) {
+//NOTE THAT WE DO HAVE THE CASE WHERE WE CAN SIMPLY PLACE HIM ON FIRST CHAIR OR LAST CHAIR AND ITS DISTANCE FROM CLOSEST PERSON IN BOTH CASES WON'T BE ZEROS+1/2 BUT EQUAL TO THE ZEROS B/W THEM. 
+        int n=seats.length;
+        // int zeros=0,maxzeros=0; //stores max. zeros in a row
+        int zeros=0,maxdis=0;
+        boolean left1=false;
+        for(int i=0;i<n;i++){
+            if(seats[i]==0){
+                zeros++;
+            }
+            else{
+                if(left1==false)
+                maxdis=Math.max(maxdis,zeros);
+                else
+                    maxdis=Math.max(maxdis,(zeros+1)/2);
+                left1=true;
+                zeros=0;
+            }
+            if(i==n-1)
+                maxdis=Math.max(maxdis,zeros);
+        }
+        return maxdis;
+    }
+}

@@ -1,0 +1,19 @@
+class Solution {
+    public double calculateTax(int[][] brackets, int income) {
+        double tax=0;
+        int n=brackets.length;
+        int taxed=0; //or, already taxed amount 
+        for(int i=0;i<n && income>taxed;i++){
+            double taxable=(double)Math.min(income,brackets[i][0])-taxed;
+            taxed+=taxable;
+            tax+=(double)brackets[i][1]*(double)taxable/100;
+            // int dollars=brackets[i][0];
+            // int taxpercent=brackets[i][1];
+            // int taxable=income>=dollars?dollars:income;
+            // tax+=(double)taxpercent*(double)taxable/100;
+            // income-=taxable;
+            // System.out.println(income);
+        }
+        return tax;
+    }
+}

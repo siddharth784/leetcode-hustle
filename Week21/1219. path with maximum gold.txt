@@ -1,0 +1,25 @@
+class Solution {
+    int maxgold=0;
+    public int getMaximumGold(int[][] grid) {
+        int m=grid.length,n=grid[0].length;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]!=0)
+                backtracking(grid,i,j,0,new boolean[m][n]);
+            }
+        }
+        return maxgold;
+    }
+    public void backtracking(int[][] grid, int row, int col, int gold, boolean[][] visited){
+        if(row<0||col<0||row>=grid.length||col>=grid[0].length||grid[row][col]==0||visited[row][col]==true){
+            maxgold=Math.max(maxgold,gold);
+            return;
+        }
+        visited[row][col]=true;
+        backtracking(grid,row+1,col,gold+grid[row][col],visited);
+        backtracking(grid,row-1,col,gold+grid[row][col],visited);
+        backtracking(grid,row,col+1,gold+grid[row][col],visited);
+        backtracking(grid,row,col-1,gold+grid[row][col],visited);
+        visited[row][col]=false;
+    }
+}

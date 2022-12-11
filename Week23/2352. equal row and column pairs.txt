@@ -1,0 +1,47 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+// n^2 smart approach        
+        Map<String,Integer> freqmap=new HashMap<>();
+        for(int[] row:grid){
+            StringBuilder sb=new StringBuilder();
+            for(int ele:row)
+                sb.append(ele+"+");
+            String rowstr=sb.toString().substring(0,sb.length()-1);
+            freqmap.put(rowstr,freqmap.getOrDefault(rowstr,0)+1);
+        }
+        
+        int n=grid.length;
+        int ans=0;
+        for(int j=0;j<n;j++){
+            StringBuilder sb=new StringBuilder();
+            for(int i=0;i<n;i++)
+                sb.append(grid[i][j]+"+");
+            String colstr=sb.toString().substring(0,sb.length()-1);
+            if(freqmap.containsKey(colstr))
+            ans+= (freqmap.get(colstr));
+            // freqmap.put(colstr,freqmap.getOrDefault(colstr,0)+1);
+        }
+        return ans;
+    }
+}
+        
+        
+// n^3 approach:        
+//         int n=grid.length;
+//         int ans=0;
+//         for(int[] row:grid){
+//             for(int j=0;j<n;j++){
+//                 boolean check=true;
+//                 for(int k=0;k<n;k++){
+//                     if(grid[k][j]!=row[k]){
+//                         check=false;
+//                         break;
+//                     }
+//                 }
+//                 if(check)
+//                     ans++;
+//             }
+//         }
+//         return ans;
+//     }
+// }

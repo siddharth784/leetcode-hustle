@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isToeplitzMatrix(int[][] matrix) {
+        int m=matrix.length,n=matrix[0].length;
+        for(int gap=-(m-1);gap<n;gap++){
+            int i=gap<0?-gap:0;
+            int j=gap<=0?0:gap;
+            int last=matrix[i][j];
+            while(i<m && j<n){
+                if(matrix[i][j]!=last)
+                    return false;
+                last=matrix[i][j];
+                i++;
+                j++;
+            }
+        }
+        return true;
+    }
+}

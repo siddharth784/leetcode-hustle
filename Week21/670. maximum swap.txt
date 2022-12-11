@@ -1,0 +1,76 @@
+class Solution {
+    public int maximumSwap(int num) {
+        // 992581 => 998521 not 995281
+        
+        // har number mein, max digit needs to be leftmost. if there is, then we need to check the same for number.subarray(1). thus, we will check that for each leftmost digit, it's the highest digit present in the subarray starting from that bit to the end of array. if not, we swap that digit with the maximum one. if the maximum occurs more than once on the right(subarray), then we pick the rightmost one cuz rightmost bit is least significant and we want the lesser digits to be towards the right.
+        
+        char[] digits=(""+num).toCharArray();
+        boolean done=false;
+        for(int i=0;i<digits.length;i++){
+            int digit=digits[i]-'0';
+            int max=digit;
+            int idx=i;
+            for(int j=i+1;j<digits.length;j++){
+                if( (digits[j]-'0') >= max){    //it's important to do >= not >, because otherwise for 1993 we'll print 9193 while the right answer is 9913. it's these testcases that are hidden in coding rounds and fuck with your mind so bad you implode
+                    max=digits[j]-'0';
+                    idx=j;
+                }
+            }
+            if(max!=digit){
+                char hold=digits[idx];
+                digits[idx]=digits[i];
+                digits[i]=hold;
+                break;
+            }
+        }
+        String s=new String(digits);
+        return Integer.valueOf(s);
+    }
+}
+        
+        
+        
+        
+//         // TreeMap<Integer,Integer> tm=new TreeMap<>(Collections.reverseOrder());    //frequency map of digits
+//         char[] digits=(""+num).toCharArray();
+//         // for(char digit:digits)
+//         //     tm.put(digit-'0',tm.getOrDefault(digit-'0',0)+1);
+        
+//         boolean done=false;
+//         for(int i=0;i<digits.length;i++){
+//             // int digit=Integer.valueOf(digits[i]);
+//             // int digit=digits[i]-'0';
+//             int digit=Character.getNumericValue(digits[i]);
+//             int max=digit;
+//             System.out.println(max);
+//             for(int j=i+1;j<digits.length;j++){
+//                 if(Integer.valueOf(digits[j])>max){
+//                     // swap(digits,i,j);
+//                     // System.out.println(j);
+//                     char temp=digits[i];
+//                     digits[i]=digits[j];
+//                     digits[j]=temp;
+//                     done=false;
+//                     break;
+//                 }
+//             }
+//             if(done)
+//                 break;
+//         }
+//         return Integer.valueOf(String.valueOf(digits));
+//     }
+// }
+        
+        
+//         char[] digits=String.valueOf(""+num).toCharArray();
+//         int max=0;
+//         for(int i=digits.length-1;i>=0;i--){
+//             int digit=Integer.valueOf(digits[i]);
+//             max=Math.max(max,digit);
+//             if(max==digit)
+//                 continue;
+//             else{
+//                 if()
+//             }
+//         }
+        

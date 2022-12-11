@@ -1,0 +1,18 @@
+class Solution {
+    public int consecutiveNumbersSum(int n) {
+        // Explanation in DSA-2 notebook && pending watchlist
+        // USE EQUATIONS x+(x+1)+(x+2)+...+(x+(k-1))=n --(1)
+        // kx+k(k-1)/2=n --(2)
+        // k(k-1)/2<n --(3) cuz kx>=1
+        int ans=0;
+        int k=1;    //k is the no. of consecutive natural nos. which can/cant sum up to n.
+        int check=k*(k-1)/2;
+        while(check < n){
+            if((n-check)%k==0)
+                ans++;
+            k++;
+            check=k*(k-1)/2;
+        }
+        return ans;
+    }
+}

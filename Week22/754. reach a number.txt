@@ -1,0 +1,28 @@
+class Solution {
+    public int reachNumber(int target) {
+        // not a question you can come up with on your own.rote learn.
+// for each numMoves from [1,infinity), we find out that we can reach all odd nos. in [-range,range](range=x*x+1/2) if numMoves is odd; and we can reach all even nos. in [-range,range] if numMoves is even. Hence we make a variable x and hit and trial on it to eventually make it the correct numMoves        
+        int x=0;
+        target=Math.abs(target);
+            
+        while(true){
+            int range= x*(x+1)/2;
+            if(range>=target && range%2==target%2)
+                break;
+            x++;
+        }
+        
+        return x;
+    }
+}
+        // not a single soul in discussion forum has done this using dp/backtracking/recursion so I better leave my attempt at doing it that way here and now.
+//         f(0,0,target);
+//     }
+//     public int f(int idx, int steps, int target){
+//         if(idx==target)
+//             return steps+1;
+//         steps++;
+//         f(idx+steps,steps,target);
+//         f(idx-steps,steps,target);
+//     }
+// }

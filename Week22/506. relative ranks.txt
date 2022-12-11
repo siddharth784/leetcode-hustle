@@ -1,0 +1,21 @@
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        String[] ans=new String[score.length];
+        TreeMap<Integer,Integer> tm=new TreeMap<>(Collections.reverseOrder());
+        for(int i=0;i<score.length;i++)
+            tm.put(score[i],i);
+        int sno=0;
+        for(int i:tm.keySet()){
+            if(sno==0)
+                ans[tm.get(i)]="Gold Medal";
+            else if(sno==1)
+                ans[tm.get(i)]="Silver Medal";
+            else if(sno==2)
+                ans[tm.get(i)]="Bronze Medal";
+            else
+                ans[tm.get(i)]=""+(int)(sno+1);
+            sno++;
+        }
+        return ans;
+    }
+}

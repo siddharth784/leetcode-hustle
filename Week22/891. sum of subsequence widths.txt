@@ -1,0 +1,24 @@
+class Solution {
+    public int sumSubseqWidths(int[] nums) {
+        // approach based on pepcoding's explanation of this question:https://www.youtube.com/watch?v=kSo8W6ZGYqw&t=642s
+        int n=nums.length;
+        long sumwidth=0;
+        int mod=1000000007;
+        Arrays.sort(nums);
+        long[] pow2=new long[n];
+        pow2[0]=1;
+        for(int i=1;i<n;i++)
+            pow2[i]=(pow2[i-1]*2)%mod;
+        
+        for(int i=0;i<n;i++){
+            //even though, this following 4 line code is correct, it gets wrong answers on some cases, because maybe Math.pow(2,n) can also exceed mod so we need to also do them mod beforehand. so it's better to make an array of 2's exponents where the exponents which exceed mod are moduloed.
+            // long thisMinSubsequences=(long)Math.pow(2,n-1-i);
+            // long thisMaxSubsequences=(long)Math.pow(2,i);
+            // sumwidth += nums[i]*(thisMaxSubsequences-thisMinSubsequences);
+            // sumwidth=sumwidth%mod;
+            
+            sumwidth= ( sumwidth + nums[i]*(pow2[i]-pow2[n-1-i]) )%mod ;
+        }
+        return (int)sumwidth;
+    }
+}

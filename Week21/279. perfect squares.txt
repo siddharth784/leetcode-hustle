@@ -1,0 +1,29 @@
+class Solution {
+    public int numSquares(int n) {
+        int[] dp=new int[n+1];  //where dp[n] denotes the least no. of perfect square numbers that sum to n
+        Arrays.fill(dp,100001); //v important step. wont work without this
+        for(int i=1;i<=n;i++){
+            if(isPerfectSquare(i)){
+                dp[i]=1;
+                continue;
+            }
+            // HOW I DID IT:(CHECKING MINIMUM THROUGH ALL NOS. LESS THAN I)
+            // for(int j=1;j<i;j++)
+            //     dp[i]=Math.min(dp[i], dp[j]+dp[i-j]);
+            // HOW IT SHOULD BE DONE TO MAKE CODE 200 TIMES FASTER: CHECK MINIMUM ONLY THROUGH THE (i-Z) WHERE Z ARE ALL PERFECT SQUARES AND NOT ALL NOS.
+            int j=1;
+            while(i-j*j>=1){
+                dp[i]=Math.min(dp[i],dp[i-j*j]+1);
+                j++;
+            }
+        }
+        
+        return dp[n];
+    }
+    public boolean isPerfectSquare(int n){
+        int floor = (int)Math.sqrt(n);
+        return (floor*floor==n);
+    }       
+}
+        
+        

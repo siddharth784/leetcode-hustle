@@ -1,0 +1,42 @@
+class Solution {
+    public String bestHand(int[] ranks, char[] suits) {
+        Set<Character> uniquesuits=new HashSet<>();
+        for(char suit:suits)
+            uniquesuits.add(suit);
+        if(uniquesuits.size()==1)
+            return "Flush";
+        
+        int[] rankfreq=new int[13];
+        for(int rank:ranks)
+            rankfreq[rank-1]++;
+        
+        int maxfreq=0;
+        for(int freq:rankfreq)
+            maxfreq=Math.max(maxfreq,freq);
+        if(maxfreq>=3)
+            return "Three of a Kind";
+        if(maxfreq==2)
+            return "Pair";
+        return "High Card";
+    }
+}
+        
+        
+        
+// FAIL APPROACH CUZ HASHSET APPROACH FAILS FOR CASES LIKE [2,10,7,10,7] WHERE "PAIR" IS THE ANSWER BUT THIS PRINTS "THREE OF A KIND"
+//         Set<Character> uniquesuits=new HashSet<>();
+//         for(char suit:suits)
+//             uniquesuits.add(suit);
+//         if(uniquesuits.size()==1)
+//             return "Flush";
+        
+//         Set<Integer> uniqueranks=new HashSet<>();
+//         for(int rank:ranks)
+//             uniqueranks.add(rank);
+//         if(uniqueranks.size()<=3)
+//             return "Three of a Kind";
+//         if(uniqueranks.size()==4)
+//             return "Pair";
+//         return "High Card";
+//     }
+// }

@@ -1,0 +1,18 @@
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+//The question is v simple. no need to use dp or anything. just simply count and add up, the no. of subarrays that can be formed from all the zero filled subarrays. O(n).
+        int n=nums.length;
+        int currzeros=0;
+        long ans=0;
+        for(int i=0;i<=n;i++){
+            if(i==n || nums[i]!=0){
+                ans+= (long)currzeros*(long)(currzeros+1)/2; //cuz the no. of subarrays for an array of size n is given by n*(n+1)/2.
+                currzeros=0;
+            }
+            else 
+                currzeros++;
+            
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,82 @@
+class Solution {
+    public int fillCups(int[] amount) {
+//This approach ensures that we keep numbers as far from becoming zero as possible, so that they can be utilised for longer time to be kept in pairs.       
+        int seconds=0;
+        Queue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        pq.offer(amount[0]);
+        pq.offer(amount[1]);
+        pq.offer(amount[2]);
+        while(true){
+            int max1=0,max2=0;
+            if(!pq.isEmpty())
+            max1=pq.poll();
+            if(!pq.isEmpty())
+            max2=pq.poll();
+            if(max1==0 && max2==0)
+                break;
+            else if(max1!=0 && max2!=0){
+                max1--;
+                max2--;
+                pq.offer(max1);
+                pq.offer(max2);
+                seconds++;
+            }
+            else if(max1!=0){
+                max1--;
+                pq.offer(max1);
+                seconds++;
+            }
+            else if(max2!=0){
+                max2--;
+                pq.offer(max2);
+                seconds++;
+            }            
+        }
+        return seconds;
+    }
+}
+        
+        
+        
+        
+        // wrong intuition:
+//         Arrays.sort(amount);
+//         int seconds=0;
+//         while(amount[2]!=0 && amount[1]!=0){
+//             amount[2]--;
+//             amount[1]--;
+//             seconds++;
+//         }    
+//         for(int i:amount)
+//         System.out.println(i);
+//         System.out.println("seconds taken till now "+seconds);
+
+//         while(amount[2]!=0 && amount[0]!=0){
+//             amount[2]--;
+//             amount[0]--;
+//             seconds++;
+//         }    
+
+//         for(int i:amount)
+//         System.out.println(i);
+//         System.out.println("seconds taken till now "+seconds);
+
+//         while(amount[2]!=0){
+//             amount[2]--;
+//             seconds++;
+//         }
+
+//         while(amount[1]!=0){
+//             amount[1]--;
+//             seconds++;
+//         }
+//         while(amount[0]!=0){
+//             amount[0]--;
+//             seconds++;
+//         }
+//         for(int i:amount)
+//         System.out.println(i);
+//         System.out.println("seconds taken till now "+seconds);
+//         return seconds;
+//     }
+// }

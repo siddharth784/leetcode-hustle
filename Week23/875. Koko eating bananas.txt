@@ -1,0 +1,27 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+// SOLVED IT MYSELF. VERY EASY ONCE YOU UNDERSTAND THIS 'TYPE' OF QUESTIONS. THIS QUES, LC410, LC1011, GFG-PAINTERS_PARTITION_PROBLEM_2, ARE ALL SAME. FOR REFERENCE TO THIS TYPE OF QUESTIONS, SOLVE LC410 WITH EXPLANATION IN PENDING WATCHLIST/LC410 EXPLANATION.MP4
+        
+        int lowestSpeed=1; //with this speed she will eat all bananas in most time if we ignore the hours limit
+        int highestSpeed=Integer.MIN_VALUE; //with this speed she will eat all bananas in least time if we ignore the hours limit
+        for(int num:piles)
+            highestSpeed=Math.max(highestSpeed,num);
+        
+        while(lowestSpeed<highestSpeed){
+            int speed=(lowestSpeed+highestSpeed)/2;
+            int currHrs=0; //the no. of hours koko will take to finish bananas with a speed 'speed'
+            for(int num:piles){
+                if(num<=speed)
+                    currHrs++;
+                else
+                    currHrs+= (num/speed) + (num%speed!=0?1:0);
+            }
+            if(currHrs<=h)
+                highestSpeed=speed;
+            else
+                lowestSpeed=speed+1;
+        }
+        return highestSpeed;
+        
+    }
+}

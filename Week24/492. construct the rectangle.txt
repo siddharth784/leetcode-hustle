@@ -1,0 +1,14 @@
+class Solution {
+    public int[] constructRectangle(int area) {
+        int w=(int)Math.sqrt(area);
+        for(int width=w;width>=1;width--){
+            if(area%width==0){
+                int[] ans=new int[2];
+                ans[0]=area/width;
+                ans[1]=width;
+                return ans;
+            }
+        }
+        return new int[2];
+    }
+}

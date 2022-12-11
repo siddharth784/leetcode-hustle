@@ -1,0 +1,47 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+        
+        // SUMIT SIR'S PREFIX-SUFFIX APPROACH WHICH LIES ON THE FACT THAT THE MAX PROD SUBARRAY WILL ALWAYS BE A PREFIX/SUFFIX SUBARRAY, EXCEPT IF 0 IS THERE IN THE ARRAY.
+        int maxprod=Integer.MIN_VALUE;
+        int prod=1;
+        for(int i=0;i<nums.length;i++){
+            prod*=nums[i];
+            maxprod=Math.max(maxprod,prod);
+            if(prod==0)
+                prod=1;
+        }
+        prod=1;
+        for(int i=nums.length-1;i>=0;i--){
+            prod*=nums[i];
+            maxprod=Math.max(maxprod,prod);
+            if(prod==0)
+                prod=1;
+        }
+        return maxprod;
+    }
+}
+        
+        
+        
+        
+//         //SUMIT SIR'S KADANE'S ALGORITHM KE EXTENSION SE SOLVE KRNE WALI APPROACH
+//         int ans = nums[0];
+//         int max = nums[0];
+//         int min = nums[0];
+        
+//         for(int i = 1; i < nums.length; i++){
+//             if(nums[i] >= 0){
+//                 max = Math.max(max * nums[i], nums[i]);
+//                 min = Math.min(min * nums[i], nums[i]);
+//             } else {
+//                 int temp = max;
+//                 max = Math.max(min * nums[i], nums[i]);
+//                 min = Math.min(temp * nums[i], nums[i]);
+//             }
+            
+//             ans = Math.max(ans, max);
+//         }
+        
+//         return ans;
+//     }
+// }

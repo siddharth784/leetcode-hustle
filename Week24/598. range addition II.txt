@@ -1,0 +1,29 @@
+class Solution {
+    public int maxCount(int m, int n, int[][] ops) {
+        //basically find the rows and columns which were updated in all operationsa
+        int minrow=m,mincol=n;
+        for(int[] op:ops){
+            minrow=Math.min(minrow,op[0]);
+            mincol=Math.min(mincol,op[1]);
+        }
+        return minrow*mincol;
+    }
+}
+        //MEMORY LIMIT EXCEEDED
+//         int[][] mat=new int[m][n];
+//         for(int[] op:ops){
+//             for(int i=0;i<op[0];i++){
+//                 for(int j=0;j<op[1];j++)
+//                     mat[i][j]++;
+//             }
+//         }
+//         int ans=0;
+//         for(int i=0;i<m;i++){
+//             for(int j=0;j<n;j++){
+//                 if(mat[i][j]==mat[0][0])
+//                     ans++;
+//             }
+//         }
+//         return ans;
+//     }
+// }

@@ -1,0 +1,68 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        // THE CORRECT APPROACH IS WHAT'S ALSO USED IN LC410. FOR REFERENCE WATCH PENDING WATCHLIST/LC 410 EXPLANATION. AFTER IT I WAS ABLE TO DO THIS QUES. MYSELF. BTW FOR REFERENCE, 
+// lowest_cap: lowest possible capacity the ship can have if we ignore how many days shipment will take
+// highest_cap: highest possible capacity the ship can have if we ignore how many days shipment will take
+// limit: the ship capacity we are checking rn
+// currdays: if ship has 'limit' capacity,how many days it shipment gonna take
+// currWeight: just a tool to update currdays 
+        
+        int lowest_cap=Integer.MIN_VALUE;;
+        int highest_cap=0;
+        for(int ele:weights){
+            highest_cap+=ele;
+            lowest_cap=Math.max(lowest_cap,ele);
+        }
+        
+        while(lowest_cap<highest_cap){
+            int limit=(lowest_cap+highest_cap)/2;
+            int currdays=1;
+            int currWeight=0;
+            for(int weight:weights){
+                if(currWeight+weight<=limit){
+                    currWeight+=weight;
+                }
+                else{
+                    currWeight=weight;
+                    currdays++;
+                }
+            }
+            if(currdays<=days)
+                highest_cap=limit;
+            else 
+                lowest_cap=limit+1;
+        }
+        return lowest_cap;
+           
+        
+    }
+}   
+        //FAIL
+//         int netwt=0;
+//         int maxwt=0;
+//         for(int weight:weights){
+//             netwt+=weight;
+//             maxwt=Math.max(maxwt,weight);
+//         }
+//         int capacity=maxwt;
+//         while(capacity<=netwt){ //in the case of capacity == netwt, days should be 1
+//             int idx=0;
+//             int tempcap=0;
+//             int takesdays=0;
+//             while(idx<weights.length){
+//                 if(weights[idx]+tempcap<=capacity)
+//                     tempcap+=weights[idx];
+//                 else{
+//                     tempcap=weights[idx];
+//                     takesdays--;
+//                 }
+//                 idx++;
+//             }
+//             if(takesdays+1<=days)
+//                 return capacity;
+//             else
+//                 capacity++;
+//         }
+//         return 0; 
+//     }
+// }

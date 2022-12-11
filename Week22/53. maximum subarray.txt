@@ -1,0 +1,46 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        //KADANE'S ALGORITHM
+        //BRILLIANT EXPLANATION OF THIS IN "PENDING WATCHLIST/KADANE'S ALGO-MAX SUM SUBARRAY EXPLANATION.MP4"
+        int n=nums.length;
+        int sum=0;
+        int maxsum=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            if(sum>0)
+                sum+=nums[i];
+            else
+                sum=nums[i];
+            maxsum=Math.max(maxsum,sum);
+        }
+        return maxsum;
+    }
+}
+        
+        // // MY INCORRECT + TLE DP APPROACH:
+        // if(nums.length==1)
+        //     return nums[0];
+        // int max=Integer.MIN_VALUE;
+        // for(int i=0;i<nums.length;i++){
+        //     for(int j=i+1;j<=nums.length;j++){
+        //         int tempmax=maxSubArray(Arrays.copyOfRange(nums,i,j));
+        //         max=max>tempmax?max:tempmax;
+        //     }
+        // }
+        // return max;
+    // }
+// }
+        
+        // int sum=Integer.MIN_VALUE;
+        // for(int i=0;i<nums.length;i++){
+        //     for(int j=i;j<nums.length;j++){
+        //         int tempsum=0;
+        //         for(int k=i;k<=j;k++){
+        //             tempsum+=nums[k];
+        //         }
+        //         if(tempsum>sum)
+        //             sum=tempsum;
+        //     }
+        // }
+        // return sum;
+    // }
+// }

@@ -1,0 +1,19 @@
+class Solution {
+    public String largestGoodInteger(String num) {
+        String ans="";
+        int maxgoodint=-1;
+        for(int i=0;i<=num.length()-3;i++){
+            String sub=num.substring(i,i+3);
+            if(sub.charAt(0)==sub.charAt(1) && sub.charAt(0)==sub.charAt(2) && Integer.parseInt(sub)>maxgoodint){
+                ans=sub;
+                maxgoodint=Integer.parseInt(sub);
+            }
+                // maxgoodint=Math.max(maxgoodint,Integer.parseInt(sub)); //wrong cuz parseInt takes "000" as 0 and returns "0" finally
+
+        }
+        return ans;
+        // if(maxgoodint!=-1)
+        //     return ""+maxgoodint;
+        // return "";
+    }
+}

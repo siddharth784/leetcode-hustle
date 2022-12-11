@@ -1,0 +1,13 @@
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+        int[] numfreq=new int[101];
+        for(int num:nums)
+            numfreq[num]++;
+        int[] ans=new int[2];
+        for(int num=0;num<=100;num++){
+            ans[0]+=numfreq[num]/2;
+            ans[1]+=numfreq[num]%2;
+        }
+        return ans;
+    }
+}

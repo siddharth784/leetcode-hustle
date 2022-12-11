@@ -1,0 +1,38 @@
+class Solution {
+    public int partitionDisjoint(int[] nums) {
+        // Sumit sir's O(n) approach:
+// the algo is: keep account of the end index of left subarray and the max element in left subarray. And keep traversing the whole nums array. If you find any i which is greater than leftend and the element on it is less than the max. in left subarray, it shows an illegality. no right subarray element can be less than the max. of left[]. hence we update max. of left(mtl) with max. till i(mti) and also update leftend. 
+        int n=nums.length;
+        int curmax=nums[0];
+        int leftend=0;
+        int mti=nums[0];    //max will i(max element from [0,i])
+        int mtl=nums[0];    //max till left(max element in left subarray)
+        for(int i=1;i<n;i++){
+            mti=Math.max(mti,nums[i]);
+            if(nums[i]<mtl){
+                leftend=i;
+                mtl=Math.max(mtl,mti);
+            }
+        }
+        return leftend+1;
+    }
+}
+//         // MY TLE nlog(n) approach:
+//         int n=nums.length;
+//         Queue<Integer> lmaxpq=new PriorityQueue<>(Collections.reverseOrder());
+//         Queue<Integer> rminpq=new PriorityQueue<>();
+//         lmaxpq.offer(nums[0]);
+        
+//         for(int i=1;i<n;i++)
+//             rminpq.offer(nums[i]);
+        
+//         for(int pivot=0;pivot<n-1;pivot++){ //left lies in [0,pivot] while right lies in (pivot,nums.length-1]
+//             if(lmaxpq.peek()<=rminpq.peek()) 
+//                 return pivot+1;
+//             int temp=nums[pivot+1];
+//             lmaxpq.offer(temp);
+//             rminpq.remove(temp);
+//         }
+//         return 0;
+//     }
+// }

@@ -1,0 +1,39 @@
+class Solution {
+    public String pushDominoes(String dominoes) {
+        char[] arr=("L"+dominoes+"R").toCharArray(); //cuz we've got to assign L/R to first and last indices cuz otherwise the last non L/R dominos won't get dealt with
+        int previdx=0;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]=='R'){
+                if(arr[previdx]=='R'){
+                    for(int j=previdx+1;j<i;j++)
+                        arr[j]='R';
+                }
+                // else if(arr[prev]=='L')
+                //     do nothing
+                previdx=i;
+            }
+            else if(arr[i]=='L'){
+                if(arr[previdx]=='L'){
+                    for(int j=previdx+1;j<i;j++)
+                        arr[j]='L';
+                }
+                else{
+                    int lo=previdx+1;
+                    int hi=i-1;
+                    while(lo<hi){
+                        arr[lo]='R';
+                        arr[hi]='L';
+                        lo++;
+                        hi--;
+                    }
+                }
+                previdx=i;
+            }
+        }
+        
+        StringBuilder sb=new StringBuilder();
+        for(int i=1;i<arr.length-1;i++)
+            sb.append(arr[i]);
+        return sb.toString();
+    }
+}

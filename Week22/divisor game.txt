@@ -1,0 +1,6 @@
+/* hint given:If the current number is even, we can always subtract a 1 to make it odd. If the current number is odd, we must subtract an odd number to make it even.*/
+class Solution {
+    public boolean divisorGame(int n) {
+        return n%2==0;
+    }
+}

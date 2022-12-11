@@ -1,0 +1,15 @@
+class Solution {
+    List<String> al=new ArrayList<>();
+    public List<String> generateParenthesis(int n) {
+        backtrack(n,0,0,"");   
+        return al;
+    }
+    public void backtrack(int n, int opened, int closed, String ssf){
+        if(opened==n && closed==n)
+            al.add(ssf);
+        if(opened<n)
+        backtrack(n,opened+1,closed,ssf+"(");
+        if(closed<opened && closed<n)
+        backtrack(n,opened,closed+1,ssf+")");        
+    }
+}
