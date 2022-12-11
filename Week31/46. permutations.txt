@@ -1,0 +1,51 @@
+class Solution {
+    //SUCCESS ATTEMPT 4 FROM DISCUSS SECTION(SIMPLEST APPROACH):
+    List<List<Integer>> ans=new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        permute(new ArrayList<>(),nums);
+        return ans;
+    }
+    public void permute(List<Integer> li, int[] nums){
+        if(li.size()==nums.length){
+            ans.add(new ArrayList<>(li));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(li.contains(nums[i]))
+                continue;
+            li.add(nums[i]);
+            permute(li,nums);
+            li.remove(li.size()-1);
+        }
+    }
+}
+    
+
+    
+    //MY SUCCESS ATTEMPT(INSPIRED FROM LVL2 PERMUTATIONS QUESTION) 3:
+//     List<List<Integer>> ans=new ArrayList<>();
+//     public List<List<Integer>> permute(int[] nums) {
+//         int n=nums.length;
+//         List<Integer> li=new ArrayList<>();
+//         for(int i=0;i<n;i++)
+//             li.add(-1);
+//         boolean[] vis=new boolean[n];
+//         permute(0,li,nums,vis);
+//         return ans;
+//     }
+//     public void permute(int idx, List<Integer> li, int[] nums, boolean[] vis){
+//         if(idx==nums.length){
+//             ans.add(new ArrayList<>(li));
+//             // ans.add(li);
+//             return;
+//         }
+//         for(int i=0;i<li.size();i++){
+//             if(vis[i]==false){
+//                 li.set(i,nums[idx]);
+//                 vis[i]=true;
+//                 permute(idx+1,li,nums,vis);
+//                 vis[i]=false;
+//             }
+//         }
+//     }
+// }

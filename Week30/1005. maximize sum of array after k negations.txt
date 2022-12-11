@@ -1,0 +1,25 @@
+class Solution {
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        Queue<Integer> negatives=new PriorityQueue<>();
+        Queue<Integer> positives=new PriorityQueue<>();
+        int allsum=0;
+        for(int num:nums){
+            if(num<0)
+                negatives.offer(num);
+            else
+                positives.offer(num);
+            allsum+=num;
+        }
+        while(k-->0){
+            if(negatives.isEmpty()){
+                allsum-=2*positives.peek();
+                negatives.add(-1*positives.remove());
+            }
+            else{
+                allsum+=2*Math.abs(negatives.peek());
+                positives.add(Math.abs(negatives.remove()));
+            }
+        }
+        return allsum;
+    }
+}

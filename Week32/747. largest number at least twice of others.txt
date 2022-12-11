@@ -1,0 +1,15 @@
+class Solution {
+    public int dominantIndex(int[] nums) {
+        int idx=0,max=nums[0];
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]>max){
+                max=nums[i];
+                idx=i;
+            }
+        }
+        Arrays.sort(nums);
+        if(nums[nums.length-2]*2<=nums[nums.length-1])
+            return idx;
+        return -1;
+    }
+}

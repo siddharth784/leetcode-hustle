@@ -1,0 +1,27 @@
+class Solution {
+    public List<String> removeAnagrams(String[] words) {
+        Map<Integer,String> og=new HashMap<>();
+        HashMap<Integer,char[]> hm=new HashMap<>();
+        int idx=0;
+        for(String word:words){
+            char[] arr=word.toCharArray();
+            Arrays.sort(arr);
+            hm.put(idx,arr);
+            og.put(idx,word);
+            idx++;
+        }
+        Stack<Integer> st=new Stack<>(); //last put string ka index
+        st.push(0);
+        for(int i=1;i<words.length;i++){
+            // if(hm.get(st.peek())==hm.get(i))
+            if(!Arrays.equals(hm.get(st.peek()),hm.get(i)))
+                st.push(i);
+        }
+        
+        List<String> ans=new ArrayList<>();
+        while(!st.empty())
+            ans.add(0,og.get(st.pop()));
+    
+        return ans;
+    }
+}

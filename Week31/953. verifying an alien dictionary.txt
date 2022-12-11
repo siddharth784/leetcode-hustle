@@ -1,0 +1,23 @@
+class Solution {
+    //also check out alien dictionary question of gfg for more relation
+    public boolean isAlienSorted(String[] words, String order) {
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(int i=0;i<26;i++)
+            hm.put(order.charAt(i),i);
+        
+        for(int i=0;i<words.length-1;i++){
+            String first=words[i];
+            String second=words[i+1];
+            int ptr=0;
+            while(ptr<first.length() && ptr<second.length() && first.charAt(ptr)==second.charAt(ptr))
+                ptr++;
+            if(ptr==second.length() && ptr!=first.length()) //for case:["apple","app"],"abcdefghijklmnopqrstuvwxyz"
+                return false;
+            if(ptr<first.length() && ptr<second.length()){
+                if( hm.get(first.charAt(ptr)) > hm.get(second.charAt(ptr)) )
+                return false;
+            }
+        }
+        return true;
+    }
+}

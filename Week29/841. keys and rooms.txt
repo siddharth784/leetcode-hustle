@@ -1,0 +1,22 @@
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        boolean[] visited=new boolean[rooms.size()];
+        //do bfs for instance, then check if all rooms get covered in the traversal
+        Queue<Integer> q=new ArrayDeque<>();
+        q.add(0);
+        visited[0]=true;
+        while(q.isEmpty()==false){
+            int node=q.poll();
+            visited[node]=true;
+            for(int nbr:rooms.get(node)){
+                if(visited[nbr]==false)
+                    q.offer(nbr);
+            }
+        }
+        for(int i=0;i<rooms.size();i++){
+            if(visited[i]==false)
+                return false;
+        }
+        return true;
+    }
+}

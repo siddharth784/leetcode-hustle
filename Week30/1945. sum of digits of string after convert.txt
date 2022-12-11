@@ -1,0 +1,19 @@
+class Solution {
+    public int getLucky(String s, int k) {
+        StringBuilder sb=new StringBuilder();
+        for(char ch:s.toCharArray())
+            sb.append(ch-'a'+1);
+        s=sb.toString();
+        k--;
+        while(k-->0){
+            int dsum=0;
+            for(char ch:s.toCharArray())
+                dsum+=Character.getNumericValue(ch);    
+            s=""+dsum;
+        }
+        int dsum=0;
+            for(char ch:s.toCharArray())
+                dsum+=Character.getNumericValue(ch);    
+        return dsum;
+    }
+}

@@ -1,0 +1,44 @@
+class Solution {
+    List<List<String>> ans=new ArrayList<>();
+    public List<List<String>> partition(String s) {
+        backtrack(s,0,new ArrayList<>());
+        return ans;
+    }
+    public void backtrack(String s, int idx, List<String> al){
+        if(idx==s.length()){
+            if(isPalindrome(al.get(al.size()-1)))
+            ans.add(new ArrayList<>(al));
+            return;
+        }
+        if(al.isEmpty()){
+            al.add(""+s.charAt(idx));
+            backtrack(s,idx+1,al);
+            return;
+        }
+        
+        //first we add current character as a new string to the list
+        String pre=al.get(al.size()-1);
+        boolean palindrome=isPalindrome(pre);
+        if(palindrome){
+            al.add(""+s.charAt(idx));
+            backtrack(s,idx+1,al);
+            al.remove(al.size()-1);
+        }
+        //we also append current character to the most recent string in the list       
+        al.set(al.size()-1,""+pre+s.charAt(idx));
+        backtrack(s,idx+1,al);
+        //we reset the list to how it was in the beginning
+        al.set(al.size()-1,pre.substring(0,pre.length()-1));        
+    }
+    
+    public boolean isPalindrome(String s){
+        int i=0,j=s.length()-1;
+        while(i<j){
+            if(s.charAt(i)!=s.charAt(j))
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+}

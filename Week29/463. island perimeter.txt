@@ -1,0 +1,40 @@
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int m=grid.length,n=grid[0].length;
+        boolean[][] vis=new boolean[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1)
+                    return dfs(grid,i,j,vis);  
+            }
+        }
+        return 0;
+    }
+    
+    public int dfs(int[][] grid, int row, int col, boolean[][] vis){ //function will not only traverse using dfs but also return the perimeter of the island
+        vis[row][col]=true;
+        
+        int peri=0;
+        //following 4 if's account for perimeter addition corresponding to the boundary of the current cell
+        if(row==0 || grid[row-1][col]==0)
+            peri++;
+        if(col==0 || grid[row][col-1]==0)
+            peri++;
+        if(row==grid.length-1 || grid[row+1][col]==0)
+            peri++;
+        if(col==grid[0].length-1 || grid[row][col+1]==0)
+            peri++;
+        
+        //following 4 if's will traverse in 4 directions of current cell and accumulate their perimeter as well
+        if(row>0 && grid[row-1][col]==1 && vis[row-1][col]==false)
+            peri+=dfs(grid,row-1,col,vis);
+        if(row<grid.length-1 && grid[row+1][col]==1 && vis[row+1][col]==false)
+            peri+=dfs(grid,row+1,col,vis);
+        if(col>0 && grid[row][col-1]==1 && vis[row][col-1]==false)
+            peri+=dfs(grid,row,col-1,vis);
+        if(col<grid[0].length-1 && grid[row][col+1]==1 && vis[row][col+1]==false)
+            peri+=dfs(grid,row,col+1,vis);
+        
+        return peri;
+    }
+}

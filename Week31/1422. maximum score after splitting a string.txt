@@ -1,0 +1,14 @@
+class Solution {
+    public int maxScore(String s) {
+        int n=s.length();
+        int[] presum=new int[n];
+        presum[0]=Character.getNumericValue(s.charAt(0));
+        for(int i=1;i<n;i++)
+            presum[i]=presum[i-1]+Character.getNumericValue(s.charAt(i));
+        int maxscore=0;
+        for(int i=1;i<n;i++)
+            maxscore=Math.max(maxscore,i-presum[i-1]+presum[n-1]-presum[i-1]);
+        return maxscore;
+        
+    }
+}

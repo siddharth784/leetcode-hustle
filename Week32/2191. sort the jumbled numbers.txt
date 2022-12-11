@@ -1,0 +1,27 @@
+class Solution {
+    public int[] sortJumbled(int[] mapping, int[] nums) {
+        HashMap<Integer,Integer> mapped=new HashMap<>();
+        for(int num:nums)
+            mapped.put(num,mappedval(num,mapping));
+        
+        Integer[] clone=new Integer[nums.length];
+        for(int i=0;i<clone.length;i++)
+            clone[i]=Integer.valueOf(nums[i]);
+        
+        Arrays.sort(clone,(o1,o2)->{
+                return mapped.get(o1)-mapped.get(o2);
+        });
+        for(int i=0;i<nums.length;i++)
+            nums[i]=clone[i];
+        return nums;
+    }
+    
+    public int mappedval(int n, int[] mapping){
+        String ans="";
+        int i=0;
+        String num=""+n;
+        while(i<num.length())
+            ans+=mapping[num.charAt(i++)-'0'];
+        return Integer.valueOf(ans);
+    }
+}

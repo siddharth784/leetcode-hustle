@@ -1,0 +1,16 @@
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int count=0; //count the no. of bottles I drank
+        int spare=0; //count the no. of spare bottles I have, which haven't yet been exchanged 
+        while(numBottles>0){
+            numBottles--;
+            count++;
+            spare++;
+            if(spare==numExchange){
+                spare=0;
+                numBottles++;
+            }
+        }
+        return count;
+    }
+}

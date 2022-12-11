@@ -1,0 +1,220 @@
+class Solution {
+    //5TH ATTEMPT SUCCESS: USING TOPOLOGICAL SORT(https://www.youtube.com/watch?v=2gtg3VsDGyc&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=25):
+    
+    public List<Integer> eventualSafeNodes(int[][] graph){
+        List<List<Integer>> revAdj=new ArrayList<>(); //adjacency list but directions of edges reversed
+        int v=graph.length;
+        for(int i=0;i<v;i++)
+            revAdj.add(new ArrayList<>());
+        int[] outdegree=new int[v];
+        for(int i=0;i<v;i++){
+            for(int nbr:graph[i]){
+                revAdj.get(nbr).add(i);
+                outdegree[i]++;
+            }
+        }
+        Queue<Integer> q=new ArrayDeque<>();
+        for(int i=0;i<v;i++){
+            if(outdegree[i]==0)
+                q.add(i); //terminal nodes added 
+        }
+        List<Integer> ans=new ArrayList<>();
+        while(!q.isEmpty()){
+            int node=q.remove();
+            ans.add(node);
+            for(int director:revAdj.get(node)){
+                outdegree[director]--;
+                if(outdegree[director]==0)
+                    q.add(director);
+            }
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+}
+        
+    
+    
+    
+    
+    //4TH ATTEMPT SUCCESSFUL: RUN THE FUNCTION DETECT CYCLE IN DIRECTED GRAPH AND FOR THOSE NODES THAT IT RETURNS FALSE, MAKE THEM SAFE NODES. UPDATE: KEEPING A COMMON PATHVIS IN MAIN FUNCTION INSTEAD OF NEW BOOLEAN EVERYTIME SOLVED THE QUESTION FOR SOME UNKNOWN REASON
+//     List<Integer> cyclenodes=new ArrayList<>();
+//     public List<Integer> eventualSafeNodes(int[][] graph){
+//         int n=graph.length;
+//         boolean[] vis=new boolean[n];
+//         boolean[] pathVis=new boolean[n];
+//         for(int i=0;i<n;i++){
+//             if(vis[i]==false)
+//                 dfsCheckCycle(i,graph,vis,pathVis);
+//         }
+//         List<Integer> ans=new ArrayList<>();
+//         for(int i=0;i<n;i++){
+//             if(cyclenodes.contains(i)==false)
+//                 ans.add(i);
+//         }
+//         return ans;
+//     }
+    
+//     public boolean dfsCheckCycle(int node, int[][] adj, boolean[] vis, boolean[] pathVis){
+//         vis[node]=true;
+//         pathVis[node]=true;
+//         // if(adj[node].length==0){
+//         //     pathVis[node]=false;
+//         //     return false;
+//         // }
+//         for(int nbr:adj[node]){
+//             if(vis[nbr]==false){
+//                 if(cyclenodes.contains(nbr) || dfsCheckCycle(nbr,adj,vis,pathVis)){
+//                     cyclenodes.add(node);
+//                     return true;
+//                 }
+//             }
+//             else if(pathVis[nbr]){
+//                 cyclenodes.add(node);
+//                 return true;
+//             }
+//         }
+//         pathVis[node]=false;
+//         return false;
+//     }
+// }
+    
+    
+
+
+
+    //3RD ATTEMPT: SAME AS 2ND BUT FROM WHAT I AM GETTING FROM OUTPUTS, A DIFFERENT BOOLEAN ARRAY FOR PATHVIS IS NEEDED.  UPDATE: FAIL FOR UNKNOWN REASON
+//     List<Integer> leadsToTerminal=new ArrayList<>();
+//     public List<Integer> eventualSafeNodes(int[][] graph) {
+//         int n=graph.length;
+//         boolean[] vis=new boolean[n];
+//         for(int i=0;i<n;i++){
+//             if(vis[i]==false)
+//                 terminates(i,graph,vis,new boolean[n]);
+//         }
+//         List<Integer> ans=new ArrayList<>();
+//         for(int i=0;i<n;i++){
+//             if(leadsToTerminal.contains(i))
+//                 ans.add(i);
+//         }
+//         // System.out.println(terminates(1,graph,new boolean[n],new boolean[n]));
+//         // return new ArrayList<>();
+//         return ans;
+//     }
+    
+//     public boolean terminates(int node, int[][] graph, boolean[] vis, boolean[] pathVis){
+//         vis[node]=true;
+//         pathVis[node]=true;
+//         if(graph[node].length==0){
+//             leadsToTerminal.add(node);
+//             pathVis[node]=false;
+//             return true;
+//         }
+        
+//         //if any neighbour node is non terminating, return false cuz that makes this node non terminating as well. but for the node to be terminating we've to ensure no neighbour node/path is terminating at all.
+//         for(int nbr:graph[node]){
+//             if(vis[nbr]==false){
+//                 if(!terminates(nbr,graph,vis,pathVis))
+//                     return false;
+//             }
+//             else if(pathVis[nbr]){
+//                 return false;
+//             }
+//         }
+//         pathVis[node]=false;
+//         leadsToTerminal.add(node);        
+//         return true;
+//     }
+// }
+
+
+        
+    
+    
+    //2ND ATTEMPT: LET'S MAKE A FUNCN WHICH WILL RETURN TRUE IF ANY DEEP DOWN THE STACK ANY TERMINAL NODE IS ENCOUNTERED
+//     List<Integer> leadsToTerminal=new ArrayList<>();
+//     public List<Integer> eventualSafeNodes(int[][] graph) {
+//         int n=graph.length;
+//         boolean[] vis=new boolean[n];
+//         for(int i=0;i<n;i++){
+//             if(vis[i]==false){
+//                 terminates(i,graph,vis);
+//             }
+//         }
+//         List<Integer> ans=new ArrayList<>();
+//         for(int i=0;i<n;i++){
+//             if(leadsToTerminal.contains(i)==false)
+//                 ans.add(i);
+//         }
+//         System.out.println(terminates(5,graph,new boolean[n]));
+//         return ans;
+//     }
+//     public boolean terminates(int node, int[][] graph, boolean[] vis){
+//         vis[node]=true;
+//         if(graph[node].length==0){
+//             leadsToTerminal.add(node);
+//             return true;
+//         }
+//         for(int nbr:graph[node]){
+//             if(vis[nbr])
+//                 return false;
+//             else{
+//                 if(!terminates(nbr,graph,vis))
+//                     return false;
+//             }
+//         }
+//         leadsToTerminal.add(node);
+//         return true;
+//     }
+// }
+    
+    
+    //FAIL ATTEMPT OF TRACKING NODES WHICH ARE NEITHER PRESENT IN ANY CYCLE NOR CONNECTED TO ONE:
+//     List<Integer> cyclenodes=new ArrayList<>();
+//     public List<Integer> eventualSafeNodes(int[][] graph) {
+//         //it's obvious that only the nodes that don't come in any cycle and are neither connected to any cycle, will be safe nodes
+//         int n=graph.length;
+//         boolean[] vis=new boolean[n];
+//         for(int i=0;i<n;i++){
+//             if(vis[i]==false)
+//                 checkCycle(i,graph,vis,new boolean[n]);
+//         }
+//         List<Integer> ans=new ArrayList<>();
+//         for(int i=0;i<n;i++){
+//             if(cyclenodes.contains(i)==false && connectedToCycle(i,graph,cyclenodes)==false)
+//                 ans.add(i);
+//         }
+//         return ans;
+//     }
+    
+//     public boolean checkCycle(int node, int[][] adj, boolean[] vis, boolean[] pathVis){
+//         vis[node]=true;
+//         pathVis[node]=true;
+//         for(int nbr:adj[node]){
+//             if(vis[nbr]==false){
+//                 if(checkCycle(nbr,adj,vis,pathVis)){
+//                     cyclenodes.add(node);
+//                     cyclenodes.add(nbr);
+//                     return true;
+//                 }
+//             }
+//             else if(pathVis[node]){
+//                 cyclenodes.add(node);
+//                 cyclenodes.add(nbr);
+//                 return true;
+//             }
+//         }
+//         pathVis[node]=false;
+//         return false;
+//     }
+    
+//     public boolean connectedToCycle(int node, int[][] adj, List<Integer> cyclenodes){
+//         if(cyclenodes.contains(node))
+//             return true;
+//         for(int nbr:adj[node]){
+//             if(connectedToCycle(nbr,adj,cyclenodes))
+//                 return true;
+//         }
+//         return false;
+//     }
+// }

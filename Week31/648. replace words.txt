@@ -1,0 +1,24 @@
+class Solution {
+    public String replaceWords(List<String> dictionary, String sentence) {
+        StringBuilder sb=new StringBuilder();
+        String[] words=sentence.split(" ");
+        for(String word:words){
+            String shortestroot="";
+            for(String root:dictionary){
+                if(word.startsWith(root)){
+                    if(!shortestroot.equals("")){
+                        if(root.length()<shortestroot.length())
+                            shortestroot=root;
+                    }
+                    else
+                        shortestroot=root;
+                }
+            }
+            if(!shortestroot.equals(""))
+                sb.append(shortestroot+" ");
+            else
+                sb.append(word+" ");
+        }
+        return sb.toString().trim();
+    }
+}

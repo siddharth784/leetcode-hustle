@@ -1,0 +1,31 @@
+class Solution {
+    public int maximumDifference(int[] nums) {
+        //efficient O(n) approach:
+        int min=nums[0];
+        int max=nums[0];
+        int maxdiff=-1;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]<min){
+                min=nums[i];
+                max=nums[i]; //max also needs to be updated cuz max can only be to the right or same place of min
+            }
+            else if(nums[i]>min && nums[i]>max){
+                max=nums[i];
+                maxdiff=Math.max(maxdiff,max-min);
+            }
+        }
+        return maxdiff;
+    }
+}
+        
+        //inefficient O(n2) approach:
+//         int maxdiff=-1;
+//         for(int i=0;i<nums.length;i++){
+//             for(int j=i+1;j<nums.length;j++){
+//                 if(nums[j]>nums[i])
+//                 maxdiff=Math.max(maxdiff,nums[j]-nums[i]);
+//             }
+//         }
+//         return maxdiff;
+//     }
+// }

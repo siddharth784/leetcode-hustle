@@ -1,0 +1,23 @@
+class Solution {
+    public int minimumDeletions(int[] nums) {
+        //THERE ARE ONLY 3 POSSIBILITIES: WE DELETE BOTH FROM THE LEFT, WE DELETE BOTH FROM THE RIGHT, OR WE DELETE ONE FROM THE LEFT THE OTHER FROM THE RIGHT. SO DO GREEDY ALGO AND SIMPLY RETURN MINIMUM OUT OF THE 3
+        int n=nums.length;
+        if(n==1)
+            return 1;
+        int minidx=0,maxidx=0;
+        int min=nums[0],max=nums[0];
+        for(int i=0;i<n;i++){
+            if(nums[i]>max){
+                max=nums[i];
+                maxidx=i;
+            }
+            if(nums[i]<min){
+                min=nums[i];
+                minidx=i;
+            }
+        }
+        int l=Math.min(maxidx,minidx),r=Math.max(maxidx,minidx);
+        return Math.min(r+1,Math.min(n-l,l+1+n-r));
+        
+    }
+}

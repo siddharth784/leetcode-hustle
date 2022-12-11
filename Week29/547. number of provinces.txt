@@ -1,0 +1,41 @@
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+        List<List<Integer>> adj=new ArrayList<>(); //adjacency list
+        int n=isConnected.length;
+        for(int i=0;i<n;i++)
+            adj.add(new ArrayList<>());
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(isConnected[i][j]==1 && i!=j)
+                    adj.get(i).add(j);
+            }
+        }
+        //RIGHT APPROACH: GO THROUGH ALL NUMBERS 1 TO N, IF iTH NODE IS UNVISITED, MAKE IT DFS/BFS AND MAKE ALL NODES IN ITS PATH VISITED=TRUE. INCREASE COUNT/ANS WITH EACH UNVISITED NODE.
+        
+        boolean[] visited=new boolean[n];
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(visited[i])
+                continue;
+            for(int nbr:adj.get(i)){
+                if(visited[nbr]==false){
+                    dfs(nbr,adj,visited);
+                    count++;
+                }
+            }
+            if(adj.get(i).isEmpty() && visited[i]==false)
+                count++;
+            
+            visited[i]=true;
+        }
+        return count;
+    }
+    
+    public void dfs(int node, List<List<Integer>> adj, boolean[] visited){
+        visited[node]=true;
+        for(int nbr:adj.get(node)){
+            if(visited[nbr]==false)
+                dfs(nbr,adj,visited);
+        }
+    }
+}

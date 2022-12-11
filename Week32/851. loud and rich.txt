@@ -1,0 +1,185 @@
+class Solution {
+    public int[] loudAndRich(int[][] richer, int[] quiet) {
+//SUCCESS ATTEMPT 4: OPTIMUM SOLUTION USING https://leetcode.com/problems/loud-and-rich/discuss/1588417/Java-DFS-Topological-Sort-using-Adjacency-List-in-O(N)-time    AND https://leetcode.com/problems/loud-and-rich/discuss/1038943/Java-Solution-oror-DFS%2BMemoization-oror-O(n2)-oror-beats-100-oror-5ms
+        int n=quiet.length;
+        List<List<Integer>> adj=new ArrayList<>();
+        for(int i=0;i<n;i++)
+            adj.add(new ArrayList<>());
+        for(int[] edge:richer)
+            adj.get(edge[1]).add(edge[0]);
+        boolean[] vis=new boolean[n];
+        int[] ans=new int[n];
+        for(int i=0;i<n;i++){
+            if(vis[i]==false)
+                dfsLoudAndRich(i,adj,vis,ans,quiet);
+        }
+        return ans;
+    }
+    
+    public int dfsLoudAndRich(int node, List<List<Integer>> adj, boolean[] vis, int[] ans, int[] quiet){
+        if(vis[node])
+            return ans[node];
+        vis[node]=true;
+        int currquiet=quiet[node];
+        int answer=node;
+        for(int nbr:adj.get(node)){
+            // if(vis[nbr]==false){ //this condition shouldn't be put here. cuz of cases like richer=[[0,1]],quiet=[0,1], where we want the loudAndRich of visited nodes also. so instead put if(vis[node]) return ans[node] but do let the visited neighbours also get their best shot at finding loudnrich for node.
+                int nbrAnswer=dfsLoudAndRich(nbr,adj,vis,ans,quiet); //nbrAnswer refers to the loudest and richer person than node
+                if(quiet[nbrAnswer]<currquiet){
+                    currquiet=quiet[nbrAnswer];
+                    answer=nbrAnswer;
+                }
+            // }
+        }
+        ans[node]=answer;
+        return answer;
+    }
+}
+        
+        
+        
+//SUCCESS ATTEMPT 3: I MAYBE NOW UNDERSTAND WHAT TO DO. I DON'T HAVE TO TOPO SORT PEHLE SE. I HAVE TO FIND THE NODE IN THE ADJACENCY LIST, THEN FROM THEN N THERE I HAVE TO TRAVERSE ITS NEIGHBOURS AND SO ON. VISITED[] WILL HAVE NO ROLE. AND I HAVE TO STORE THE NEIGHBOURS OF THAT NODE SINCE THEY'RE RICHER THAN IT AND FIND LOUDEST OF THEM ALL. WHY THIS WORKS IS CUZ AGAR NODE=2 SE NODE=3 AUR NODE=4 KO EDGE HAIN, TO YE TO DEFINITE HAI KI 2 SE RICHER HAIN 3 N 4, EVEN IF 3 AUR 4 MEIN AAPAS MEIN KOI RELATION ESTABLISH KRNA POSSIBLE NAHI. UPDATE: SOLVED. BUT V BAD RUNTIME. REASON? I USED PLAIN DFS AND NOT THIS SMART APPROACH-https://leetcode.com/problems/loud-and-rich/discuss/1588417/Java-DFS-Topological-Sort-using-Adjacency-List-in-O(N)-time 
+//INTERESTINGLY THEY ARE CALLING THIS TOPOLOGICAL SORT..BUT I DON'T UNDERSTAND HOW IT'S NOT MERELY SIMPLE DFS         
+        
+//         int n=quiet.length;
+//         List<List<Integer>> adj=new ArrayList<>();
+//         for(int i=0;i<n;i++)
+//             adj.add(new ArrayList<>());
+//         for(int[] edge:richer)
+//             adj.get(edge[1]).add(edge[0]); //poor to rich
+        
+//         int[] ans=new int[n];
+//         for(int i=0;i<n;i++){
+//             List<Integer> path=new ArrayList<>();
+//             dfs(i,adj,path,new boolean[n]);
+//             int currquiet=quiet[i];
+//             ans[i]=i;
+//             for(int candidate:path){
+//                 if(quiet[candidate]<currquiet){
+//                     ans[i]=candidate;
+//                     currquiet=quiet[candidate];
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+//     public void dfs(int node, List<List<Integer>> adj, List<Integer> path, boolean[] vis){
+//         vis[node]=true;
+//         for(int nbr:adj.get(node)){
+//             if(vis[nbr]==false)
+//                 dfs(nbr,adj,path,vis);
+//         }
+//         path.add(node);
+//     }
+// }
+        
+
+
+//FAIL ATTEMPT 2:TRY USING TOPO SORT USING DFS, WHERE WE MAKE LIST OF LISTS, AND IN EACH LIST ARE TOPO SORTED NODES FOR WHICH WE KNOW THEY COME IN SAME PATH SO THE ORDER DEFINITELY TELLS RIGHT ORDER OF WEALTH. UPDATE: SAME PROBLEM AS KAHN'S ARISING. PROBLEM IS, AGAR NODE=2 SE NODE=3 AUR NODE=4 DONO KI TARAF EDGE HAI, TO TOPO SORT WILL PUT ONE OF THEM AHEAD OF THE OTHER HOWEVER WE CAN'T SAY THAT ONE IS RICHER THAN THE OTHER(CAN'T FORM CORRELATION B/W THE TWO), BUT TOPO SORT KI VAJAH SE EK RICHER DIKHEGA DUSRE SE.
+//         int n=quiet.length; 
+//         List<List<Integer>> adj=new ArrayList<>();
+//         for(int i=0;i<n;i++)
+//             adj.add(new ArrayList<>());
+//         for(int[] edge:richer)
+//             adj.get(edge[1]).add(edge[0]); //poor to rich edges
+//         boolean[] vis=new boolean[n];
+//         List<List<Integer>> sortedpaths=new ArrayList<>();
+//         for(int i=0;i<n;i++){
+//             if(vis[i]==false){
+//                 Stack<Integer> path=new Stack<>();
+//                 dfs(i,adj,path,vis);
+//                 int idx=0;
+//                 List<Integer> pathlist=new ArrayList<>();
+//                 while(!path.empty())
+//                     pathlist.add(path.pop());
+//                 sortedpaths.add(pathlist);
+//             }
+//         }
+//         for(List<Integer> sortedpath:sortedpaths){
+//             System.out.println(sortedpath);
+//         }
+//         int[] ans=new int[n];
+//         for(int i=0;i<n;i++){
+//             int currquiet=quiet[i];
+//             ans[i]=i;
+//             for(List<Integer> sortedpath:sortedpaths){
+//                 if(sortedpath.contains(i)){
+//                     for(int j=sortedpath.indexOf(i);j<sortedpath.size();j++){
+//                         if(quiet[j]<currquiet){
+//                             currquiet=quiet[j];
+//                             ans[i]=j;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+    
+//     public void dfs(int node, List<List<Integer>> adj, Stack<Integer> st, boolean[] vis){
+//         vis[node]=true;
+//         for(int nbr:adj.get(node)){
+//             if(vis[nbr]==false){
+//                 dfs(nbr,adj,st,vis);
+//             }
+//         }
+//         st.push(node);
+//     }
+// }
+        
+        
+//FAIL ATTEMPT 1:I TRIED DOING THIS BY TOPO SORT USING BFS. BUT IT FAILS. THE REASON IS THAT IN TOPO SORT, OFTEN THERE IS ONE NODE AHEAD OF THE OTHER BUT IT'S NOT NECESSARY THAT THE AHEAD ONE LIES IN THE PATH OF THE FORMER ONE. FOR EXAMPLE AGAR NODE=2 SE NODE=3 AUR NODE=4 DONO KI TARAF EDGE HAI, TO TOPO SORT WILL PUT ONE OF THEM AHEAD OF THE OTHER HOWEVER WE CAN'T SAY THAT ONE IS RICHER THAN THE OTHER(CAN'T FORM CORRELATION B/W THE TWO); WHICH GIVES WRONG ANSWERS LIKE ANS[0]=7 IN 1ST TESTCASE DESPITE IT NOT BEING CLEAR IF 7 EVEN HAS MORE MONEY THAN 0 OR NOT. BUT IT LIES AHEAD IN THE TOPO SORTED ARRAY HENCE...
+        
+//         //that the data is logically correct means their graph will be a DAG
+//         //first topo sort the people in order of their wealth
+//         int n=quiet.length; //n people are there
+//         List<List<Integer>> adj=new ArrayList<>();
+//         for(int i=0;i<n;i++)
+//             adj.add(new ArrayList<>());
+//         int[] indegree=new int[n];
+//         for(int[] edge:richer){
+//             adj.get(edge[1]).add(edge[0]);
+//             indegree[edge[0]]++;
+//         }
+//         for(int i=0;i<8;i++)
+//             System.out.println("indegree["+i+"] = "+indegree[i]);
+//         Queue<Integer> q=new ArrayDeque<>();
+//         for(int i=0;i<n;i++){
+//             if(indegree[i]==0)
+//                 q.add(i);
+//         }
+//         List<Integer> richsort=new ArrayList<>();
+//         // Map<Integer,Integer> richrank=new HashMap<>();
+//         int idx=0;
+//         //queue will start from the poorest btw
+//         while(!q.isEmpty()){
+//             int node=q.remove();
+//             // richrank.put(node,idx++);
+//             richsort.add(node);
+//             // System.out.println(node);
+//             for(int nbr:adj.get(node)){
+//                 indegree[nbr]--;
+//                 if(indegree[nbr]==0)
+//                     q.add(nbr);
+//             }
+//         }
+//         for(int ele:richsort)
+//             System.out.print(ele+",");
+//         //update: reason why answer is coming incorrect is because there needs to be very straight evidence that the person is richer. just cuz a person comes later in the queue doesn't mean it is richer. e.g. in the given testcase1, we can't say 7 is richer than 0 cuz no path from 0 even reaches there.
+//         int[] ans=new int[n];
+//         for(int i=0;i<n;i++){
+//             int person=richsort.get(i);
+//             int currquiet=quiet[person];
+//             ans[person]=person; //cuz as told in testcase explanation, same person can be put if it has the least quietness
+//             for(int j=i+1;j<n;j++){
+//                 int candidate=richsort.get(j);
+//                 if(quiet[candidate]<currquiet){
+//                     currquiet=quiet[candidate];
+//                     ans[person]=candidate;
+//                 }
+//             }
+//         }
+//         return ans;
+        
+//     }
+// }

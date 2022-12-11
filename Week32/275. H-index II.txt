@@ -1,0 +1,38 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int n=citations.length;
+        // if(n==1)
+        //     return citations[0]>=1?1:0;
+        int lo=0,hi=n;
+        while(lo<=hi){
+            int h=(lo+hi)/2;
+            if(h==0 && citations[n-1]<=h)
+                return 0;
+            if(h==n && citations[0]>=h)
+                return n;
+            if(h!=0 && citations[n-h]>=h && citations[n-h-1]<=h)
+                return h;
+            
+            if(h==0)
+                lo=h+1;
+            else if(h!=0 && citations[n-h]<h)
+                hi=h-1;
+            else
+                lo=h+1;
+//             if(h==0 && citations[n-1]<=h)
+//                 return h;
+//             if(citations[0]>=h && h>0 && citations[h-1]>=h && citations[n-1]<=h)
+//                 return h;
+// //             int mid=(lo+hi)/2;
+// //             if(citations[mid-1]<=mid && citations[mid]>=mid)
+// //                 return mid;
+            
+// //             if(citations[mid])
+//             if(citations[h-1]<h)
+//                 lo=h+1;
+//             else
+//                 hi=h;
+        }
+        return 0;
+    }
+}

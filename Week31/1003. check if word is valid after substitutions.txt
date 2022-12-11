@@ -1,0 +1,31 @@
+class Solution {
+    public boolean isValid(String s) {
+        char secondlast='a',last='a',curr='a';
+        Stack<Character> st=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            curr=s.charAt(i);
+            // if(i>0)
+            //     last=s.charAt(i-1);
+            // if(i>1)
+            //     secondlast=s.charAt(i-2);
+            if(st.empty())
+                st.push(curr);
+            else{
+                last=st.pop();
+                if(st.empty()){
+                    st.push(last);
+                    st.push(curr);
+                }
+                else{
+                    if(st.peek()=='a' && last=='b' && curr=='c')
+                        st.pop();
+                    else{
+                        st.push(last);
+                        st.push(curr);
+                    }
+                }
+            }
+        }
+        return st.empty();
+    }
+}

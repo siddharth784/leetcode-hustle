@@ -1,0 +1,19 @@
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        boolean breakout=false;
+        while(!breakout){
+            breakout=true;
+            for(int i=0;i<=s.length()-part.length();i++){
+                if(s.substring(i).startsWith(part)){
+                    breakout=false;
+                    s=s.substring(0,i)+s.substring(i+part.length());
+                    break;
+                }
+            }
+            // System.out.println(s);
+            if(breakout)
+                return s;
+        }
+        return "";
+    }
+}

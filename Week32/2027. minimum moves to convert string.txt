@@ -1,0 +1,15 @@
+class Solution {
+    public int minimumMoves(String s) {
+        int j=0,moves=0;
+        while(j<s.length()){
+            if(s.charAt(j)=='X'){
+                moves++;
+                j+=3;
+            }
+            else{
+                j++;
+            }
+        }
+        return moves;
+    }
+}

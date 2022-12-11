@@ -1,0 +1,16 @@
+class Solution {
+    public String thousandSeparator(int n) {
+        int k=(""+n).length()%3;
+        if(k==0)
+            k=3;
+        String ans="";
+        for(int i=0;i<(""+n).length();i++){
+            if(i==k){
+                ans+=".";
+                k+=3;
+            }
+            ans+=(""+n).charAt(i);            
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> ans=new ArrayList<>();
+        int n=graph.length;
+        
+        dfs(0,new ArrayList<>(),graph,ans);
+        return ans;
+    }
+    
+    public void dfs(int node,List<Integer> path, int[][] adj, List<List<Integer>> ans){
+        path.add(node);
+        if(node==adj.length-1){
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        
+        for(int nbr:adj[node]){
+            // if(vis[nbr]==false){
+            //CLONING THE PATH AND THEN PASSING IT INTO THE FUNCTION IS IMPORTANT. MAYBE CUZ PATH WILL GET CARRIED AROUND AND CHANGED HERE N THERE WITHOUT MY CONTROL CUZ I DONT KNOW HOW IT GETS CHANGED THOUGH CODE IN NOTES OF THIS QUES. CONTAINS INFO. ABOUT IT. NONETHELESS BETTER TO JUST CLONE IT SIMPLY
+                // List<Integer> clonepath=new ArrayList<>();
+                // for(Integer k:path)
+                //     clonepath.add(k);
+                dfs(nbr,new ArrayList<>(path),adj,ans);
+            // }
+        }
+    }
+}

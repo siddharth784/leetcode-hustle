@@ -1,0 +1,66 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        //do check the note
+        int m=grid.length,n=grid[0].length;
+        boolean[][] vis=new boolean[m][n];
+        int islands=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(vis[i][j]==false && grid[i][j]=='1'){
+                    islands++;
+                    dfs(grid,i,j,vis);
+                }
+            }
+        }
+        return islands;
+    }
+    
+    public void dfs(char[][] grid, int row, int col, boolean[][] vis){
+        vis[row][col]=true;
+        for(int i=-1;i<=1;i+=2){
+            int nbrrow=row+i;
+            if(nbrrow>=0 && nbrrow<grid.length && vis[nbrrow][col]==false && grid[nbrrow][col]=='1')
+                dfs(grid,nbrrow,col,vis);
+        }
+
+        for(int j=-1;j<=1;j+=2){
+            int nbrcol=col+j;
+            if(nbrcol>=0 && nbrcol<grid[0].length && vis[row][nbrcol]==false && grid[row][nbrcol]=='1')
+                dfs(grid,row,nbrcol,vis);
+        }
+        
+    }
+    //BFS GIVING TLE EVEN WHEN TIME COMPLEXITY OF DFS AND BFS BOTH IS SAME, i.e. O(V+E)
+//     public void bfs(char[][] grid, int row, int col, boolean[][] vis){
+//         Queue<Pair> q=new ArrayDeque<>();
+//         q.add(new Pair(row,col));
+//         while(!q.isEmpty()){
+//             Pair p=q.remove();
+//             int r=p.x,c=p.y;
+//             vis[r][c]=true;
+//             for(int i=-1;i<=1;i+=2){
+//                 int nbrrow=r+i;
+//                 if(nbrrow>=0 && nbrrow<grid.length && vis[nbrrow][c]==false && grid[nbrrow][c]=='1')
+//                     q.add(new Pair(nbrrow,c));
+//             }
+            
+//             for(int j=-1;j<=1;j+=2){
+//                 int nbrcol=c+j;
+//                 if(nbrcol>=0 && nbrcol<grid[0].length && vis[r][nbrcol]==false && grid[r][nbrcol]=='1')
+//                     q.add(new Pair(r,nbrcol));
+//             }
+//         }
+        
+//     }
+    
+    
+    
+    private class Pair{ //to represent a point. x=row,y=col.
+        int x,y;
+        Pair(){}
+        Pair(int a, int b){
+            this.x=a;
+            this.y=b;
+        }
+    }
+}

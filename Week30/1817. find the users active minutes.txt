@@ -1,0 +1,22 @@
+class Solution {
+    public int[] findingUsersActiveMinutes(int[][] logs, int k) {
+        // HashMap<Integer,Integer> users=new HashMap<>(); //store no. of users as value against 'key' minutes
+        HashMap<Integer,List<Integer>> uam=new HashMap<>(); //store userid against the active minutes
+        for(int i=0;i<logs.length;i++){
+            if(!uam.containsKey(logs[i][0])){
+                uam.put(logs[i][0],new ArrayList<>(Arrays.asList(logs[i][1])));
+            }
+            else{
+                if(!uam.get(logs[i][0]).contains(logs[i][1]))
+                    uam.get(logs[i][0]).add(logs[i][1]);
+            }
+        }
+        int[] ans=new int[k];
+        for(List<Integer> al:uam.values()){
+            if(al.size()<=k)
+                ans[al.size()-1]++;
+        }
+        return ans;
+        
+    }
+}

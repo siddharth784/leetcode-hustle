@@ -1,0 +1,48 @@
+class Solution {
+    public String reformat(String s) {
+        List<Character> chars=new ArrayList<>();
+        List<Integer> digits=new ArrayList<>();
+        for(char ch:s.toCharArray()){
+            if(Character.isDigit(ch))
+                digits.add(Character.getNumericValue(ch));
+            else
+                chars.add(ch);
+        }
+        StringBuilder sb=new StringBuilder();
+        if(Math.abs(digits.size()-chars.size())!=1 && digits.size()!=chars.size())
+            return "";
+        // System.out.println(chars.size()+" "+digits.size());
+        
+        int i=0,j=0;
+        if(digits.size()>=chars.size()){
+            boolean toggle=true;
+            while(i<digits.size() || j<chars.size()){
+                if(toggle){
+                    sb.append(digits.get(i));
+                    i++;
+                }
+                else{
+                    sb.append(chars.get(j));
+                    j++;
+                }
+                toggle=toggle?false:true;
+            }
+        }
+        if(digits.size()<chars.size()){
+            boolean toggle=false;
+            while(j<chars.size()){
+                if(toggle){
+                    sb.append(digits.get(i));
+                    i++;
+                }
+                else{
+                    sb.append(chars.get(j));
+                    j++;
+                }
+                toggle=toggle?false:true;
+            }
+        }
+        
+        return sb.toString();
+    }
+}

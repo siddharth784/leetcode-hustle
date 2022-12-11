@@ -1,0 +1,19 @@
+class Solution {
+    public int[] sortEvenOdd(int[] nums) {
+        Queue<Integer> oddidx=new PriorityQueue<>(Collections.reverseOrder());
+        Queue<Integer> evenidx=new PriorityQueue<>();
+        for(int i=0;i<nums.length;i++){
+            if(i%2==0)
+                evenidx.offer(nums[i]);
+            else
+                oddidx.offer(nums[i]);
+        }
+        for(int i=0;i<nums.length;i++){
+            if(i%2==0)
+                nums[i]=evenidx.poll();
+            else
+                nums[i]=oddidx.poll();
+        }
+        return nums;
+    }
+}

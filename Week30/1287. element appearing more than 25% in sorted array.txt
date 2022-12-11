@@ -1,0 +1,16 @@
+class Solution {
+    public int findSpecialInteger(int[] arr) {
+        int curr=arr[0],currfreq=1;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]==curr)
+                currfreq++;
+            else{
+                curr=arr[i];
+                currfreq=1;
+            }
+            if(currfreq>arr.length/4)
+                return curr;
+        }
+        return curr;
+    }
+}

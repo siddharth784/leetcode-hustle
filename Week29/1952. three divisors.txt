@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isThree(int n) {
+        if(n==1||n==2)
+            return false;
+        int count=0;
+        for(int div=1;div<=n/2;div++){
+            count=n%div==0?count+1:count;
+            if(count>2)
+                return false;
+        }
+        count++; //(count the no. itself)
+        return count==3;
+    }
+}

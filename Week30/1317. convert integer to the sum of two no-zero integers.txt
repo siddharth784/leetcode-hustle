@@ -1,0 +1,13 @@
+class Solution {
+    public int[] getNoZeroIntegers(int n) {
+        int[] ans=new int[2];
+        for(int i=n-1;i>=1;i--){
+            if(!(""+i).contains("0") && !(""+(n-i)).contains("0")){
+                ans[0]=i;
+                ans[1]=n-i;
+                return ans;
+            }
+        }
+        return ans;
+    }
+}

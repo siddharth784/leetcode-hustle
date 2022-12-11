@@ -1,0 +1,15 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        //I HAVE SOLVED THE QUES. IN O(n+k) BUT THE OPTIMUM APPROACH IS BINARY SEARCH: https://leetcode.com/problems/kth-missing-positive-number/discuss/780201/Java-O(lgN)-binary-Search
+        int ptr=0;
+        int i=1;
+        for(i=1;k>0;i++){
+            if(ptr<arr.length && i>arr[ptr])
+            ptr++;
+            if(ptr>=arr.length || arr[ptr]!=i)
+                k--;
+        }
+        return i-1;
+    }
+}
+        

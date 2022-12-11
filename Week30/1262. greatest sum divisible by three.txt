@@ -1,0 +1,28 @@
+class Solution {
+    public int maxSumDivThree(int[] nums) {
+        int allsum=0;
+        Queue<Integer> oneleft=new PriorityQueue<>();
+        Queue<Integer> twoleft=new PriorityQueue<>();
+        for(int num:nums){
+            allsum+=num;
+            if(num%3==1)
+                oneleft.offer(num);
+            else if(num%3==2)
+                twoleft.offer(num);
+        }
+        if(allsum%3==0)
+            return allsum;
+        if(allsum%3==1){
+            if(twoleft.size()>1 && !oneleft.isEmpty())
+            return Math.max(allsum-oneleft.peek(),allsum-twoleft.poll()-twoleft.peek());
+            if(!oneleft.isEmpty())
+            return allsum-oneleft.peek();
+            return allsum-twoleft.poll()-twoleft.peek();
+        }
+        if(oneleft.size()>1 && !twoleft.isEmpty())
+            return Math.max(allsum-twoleft.peek(),allsum-oneleft.poll()-oneleft.peek());
+        else if(!twoleft.isEmpty())
+            return allsum-twoleft.peek();
+        return allsum-oneleft.poll()-oneleft.peek();
+    }
+}

@@ -1,0 +1,15 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        //p.s. idk why I named the array dp. it's still not clear to me why this approach is prolly dynamic programming given the fact that it's one of the related topics in this question
+        int n=prices.length;
+        int[] dp=new int[n]; //dp[i] tells the highest price of the stock during day i to last day
+        dp[prices.length-1]=prices[n-1];
+        for(int i=prices.length-2;i>=0;i--)
+            dp[i]=Math.max(prices[i],dp[i+1]);
+        
+        int ans=0;
+        for(int i=0;i<n-1;i++)
+            ans=Math.max(ans,dp[i+1]-prices[i]);
+        return ans;
+    }
+}

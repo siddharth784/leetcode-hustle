@@ -1,0 +1,27 @@
+class Solution {
+    public int[] sortByBits(int[] arr) {
+        Map<Integer,Integer> hm=new HashMap<>();
+        Integer[] clone=new Integer[arr.length];
+        for(int i=0;i<clone.length;i++){
+            clone[i]=arr[i];
+            hm.put(arr[i],countBitOne(arr[i]));
+        }
+        Arrays.sort(clone,(o1,o2)->{
+            if(hm.get(o1)!=hm.get(o2))
+            return hm.get(o1)-hm.get(o2);
+            return o1-o2;
+        });
+        for(int i=0;i<arr.length;i++)
+        arr[i]=clone[i];
+        return arr;         
+    }
+    
+    private int countBitOne(int n) {
+        int res = 0;
+        while (n != 0) {
+            res += (n & 1);
+            n >>= 1;
+        }
+        return res;
+    }
+}
